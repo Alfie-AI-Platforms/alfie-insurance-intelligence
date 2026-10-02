@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture
+
+- Keep the insurance workspace on TanStack file routes with shared semantic tokens in `src/styles.css` so future workflow pages inherit one design system.
