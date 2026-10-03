@@ -19,8 +19,8 @@
  */
 
 @theme inline {
-  --font-sans: "Manrope", sans-serif;
-  --font-display: "Newsreader", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Inter", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -73,6 +73,10 @@
   --color-notification: var(--notification);
   --color-avatar: var(--avatar);
   --color-avatar-foreground: var(--avatar-foreground);
+  --color-status-active: var(--status-active);
+  --color-status-active-foreground: var(--status-active-foreground);
+  --color-status-paused: var(--status-paused);
+  --color-status-paused-foreground: var(--status-paused-foreground);
   --shadow-workspace: var(--shadow-workspace);
 }
 
@@ -122,6 +126,10 @@
   --notification: oklch(0.61 0.22 28);
   --avatar: oklch(0.88 0.035 55);
   --avatar-foreground: oklch(0.28 0.035 55);
+  --status-active: oklch(0.93 0.04 156);
+  --status-active-foreground: oklch(0.38 0.1 156);
+  --status-paused: oklch(0.93 0.05 75);
+  --status-paused-foreground: oklch(0.45 0.11 55);
   --shadow-workspace: 0 12px 32px oklch(0.2 0.01 70 / 8%);
 }
 
