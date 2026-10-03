@@ -12,6 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as AgentsIndexRouteImport } from './routes/agents.index'
+import { Route as AgentsAgentIdRouteImport } from './routes/agents.$agentId'
+import { Route as AgentsNewRouteImport } from './routes/agents.new'
+import { Route as AgentsAgentIdIndexRouteImport } from './routes/agents.$agentId.index'
+import { Route as AgentsAgentIdEditRouteImport } from './routes/agents.$agentId.edit'
+import { Route as AgentsAgentIdTestRouteImport } from './routes/agents.$agentId.test'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,28 +33,90 @@ const AgentsIndexRoute = AgentsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AgentsRoute,
 } as any)
+const AgentsAgentIdRoute = AgentsAgentIdRouteImport.update({
+  id: '/$agentId',
+  path: '/$agentId',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsNewRoute = AgentsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AgentsRoute,
+} as any)
+const AgentsAgentIdIndexRoute = AgentsAgentIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AgentsAgentIdRoute,
+} as any)
+const AgentsAgentIdEditRoute = AgentsAgentIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => AgentsAgentIdRoute,
+} as any)
+const AgentsAgentIdTestRoute = AgentsAgentIdTestRouteImport.update({
+  id: '/test',
+  path: '/test',
+  getParentRoute: () => AgentsAgentIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
+  '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
+  '/agents/new': typeof AgentsNewRoute
   '/agents/': typeof AgentsIndexRoute
+  '/agents/$agentId/edit': typeof AgentsAgentIdEditRoute
+  '/agents/$agentId/test': typeof AgentsAgentIdTestRoute
+  '/agents/$agentId/': typeof AgentsAgentIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agents/new': typeof AgentsNewRoute
   '/agents': typeof AgentsIndexRoute
+  '/agents/$agentId/edit': typeof AgentsAgentIdEditRoute
+  '/agents/$agentId/test': typeof AgentsAgentIdTestRoute
+  '/agents/$agentId': typeof AgentsAgentIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
+  '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
+  '/agents/new': typeof AgentsNewRoute
   '/agents/': typeof AgentsIndexRoute
+  '/agents/$agentId/edit': typeof AgentsAgentIdEditRoute
+  '/agents/$agentId/test': typeof AgentsAgentIdTestRoute
+  '/agents/$agentId/': typeof AgentsAgentIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agents' | '/agents/'
+  fullPaths:
+    | '/'
+    | '/agents'
+    | '/agents/$agentId'
+    | '/agents/new'
+    | '/agents/'
+    | '/agents/$agentId/edit'
+    | '/agents/$agentId/test'
+    | '/agents/$agentId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agents'
-  id: '__root__' | '/' | '/agents' | '/agents/'
+  to:
+    | '/'
+    | '/agents/new'
+    | '/agents'
+    | '/agents/$agentId/edit'
+    | '/agents/$agentId/test'
+    | '/agents/$agentId'
+  id:
+    | '__root__'
+    | '/'
+    | '/agents'
+    | '/agents/$agentId'
+    | '/agents/new'
+    | '/agents/'
+    | '/agents/$agentId/edit'
+    | '/agents/$agentId/test'
+    | '/agents/$agentId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -80,14 +147,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgentsIndexRouteImport
       parentRoute: typeof AgentsRoute
     }
+    '/agents/$agentId': {
+      id: '/agents/$agentId'
+      path: '/$agentId'
+      fullPath: '/agents/$agentId'
+      preLoaderRoute: typeof AgentsAgentIdRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/new': {
+      id: '/agents/new'
+      path: '/new'
+      fullPath: '/agents/new'
+      preLoaderRoute: typeof AgentsNewRouteImport
+      parentRoute: typeof AgentsRoute
+    }
+    '/agents/$agentId/': {
+      id: '/agents/$agentId/'
+      path: '/'
+      fullPath: '/agents/$agentId/'
+      preLoaderRoute: typeof AgentsAgentIdIndexRouteImport
+      parentRoute: typeof AgentsAgentIdRoute
+    }
+    '/agents/$agentId/edit': {
+      id: '/agents/$agentId/edit'
+      path: '/edit'
+      fullPath: '/agents/$agentId/edit'
+      preLoaderRoute: typeof AgentsAgentIdEditRouteImport
+      parentRoute: typeof AgentsAgentIdRoute
+    }
+    '/agents/$agentId/test': {
+      id: '/agents/$agentId/test'
+      path: '/test'
+      fullPath: '/agents/$agentId/test'
+      preLoaderRoute: typeof AgentsAgentIdTestRouteImport
+      parentRoute: typeof AgentsAgentIdRoute
+    }
   }
 }
 
+interface AgentsAgentIdRouteChildren {
+  AgentsAgentIdEditRoute: typeof AgentsAgentIdEditRoute
+  AgentsAgentIdTestRoute: typeof AgentsAgentIdTestRoute
+  AgentsAgentIdIndexRoute: typeof AgentsAgentIdIndexRoute
+}
+
+const AgentsAgentIdRouteChildren: AgentsAgentIdRouteChildren = {
+  AgentsAgentIdEditRoute: AgentsAgentIdEditRoute,
+  AgentsAgentIdTestRoute: AgentsAgentIdTestRoute,
+  AgentsAgentIdIndexRoute: AgentsAgentIdIndexRoute,
+}
+
+const AgentsAgentIdRouteWithChildren = AgentsAgentIdRoute._addFileChildren(
+  AgentsAgentIdRouteChildren,
+)
+
 interface AgentsRouteChildren {
+  AgentsAgentIdRoute: typeof AgentsAgentIdRouteWithChildren
+  AgentsNewRoute: typeof AgentsNewRoute
   AgentsIndexRoute: typeof AgentsIndexRoute
 }
 
 const AgentsRouteChildren: AgentsRouteChildren = {
+  AgentsAgentIdRoute: AgentsAgentIdRouteWithChildren,
+  AgentsNewRoute: AgentsNewRoute,
   AgentsIndexRoute: AgentsIndexRoute,
 }
 
