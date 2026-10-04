@@ -1,13 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardCheck, FileBarChart, FileText, FolderOpen, House, Landmark, Menu, MessageSquareText, Network, Settings, ShieldCheck, User, Users, WandSparkles, X, Zap, LifeBuoy, LogOut, SlidersHorizontal } from "lucide-react";
+import { Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardCheck, FileBarChart, FileText, FolderOpen, House, Landmark, Menu, MessageSquareText, Network, Settings, ShieldCheck, User, Users, WandSparkles, X, Zap, LifeBuoy, LogOut, SlidersHorizontal, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const groups = [
+type NavItem = readonly [string, "/" | "/agents", LucideIcon];
+type NavGroup = { title: string; items: readonly NavItem[] };
+const groups: readonly NavGroup[] = [
   { title: "", items: [["Home", "/", House], ["Claims", "/", ClipboardCheck], ["Underwriting", "/", ShieldCheck], ["Policy", "/", FileText], ["Pricing & Actuarial", "/", CircleDollarSign], ["Finance", "/", Landmark], ["Reports", "/", FileBarChart]] },
   { title: "Workspace", items: [["Chats", "/", MessageSquareText], ["Documents", "/", FolderOpen], ["Data Sources", "/", Network], ["Automations", "/", Zap]] },
   { title: "Administration", items: [["Users & Access", "/", Users], ["Policies & Permissions", "/", ShieldCheck], ["Agents", "/agents", Bot], ["Settings", "/", Settings]] },
-] as const;
+];
+const profileItems: readonly (readonly [string, LucideIcon])[] = [["Profile", User], ["Preferences", SlidersHorizontal], ["Help", LifeBuoy], ["Sign out", LogOut]];
 
 export function AppShell({ children, rightPanel }: { children: ReactNode; rightPanel?: ReactNode }) {
   const path = useRouterState({ select: (state) => state.location.pathname });
@@ -37,7 +40,7 @@ export function AppShell({ children, rightPanel }: { children: ReactNode; rightP
         <div className={`mb-2 rounded-md bg-premium text-premium-foreground ${collapsed ? "flex size-10 items-center justify-center p-0" : "p-3"}`} title="Alfie Pro">
           <div className="flex items-center gap-2 text-xs font-semibold"><WandSparkles className="size-4" />{!collapsed ? "Alfie Pro" : null}</div>{!collapsed ? <p className="mt-1 text-[10px] text-premium-muted">Your AI copilot for insurance</p> : null}
         </div>
-        {profileOpen ? <div className={`absolute bottom-[66px] z-50 w-52 rounded-md border border-border bg-popover p-1 shadow-workspace ${collapsed ? "left-14" : "left-3"}`}>{[["Profile", User], ["Preferences", SlidersHorizontal], ["Help", LifeBuoy], ["Sign out", LogOut]].map(([label, Icon]) => <Button key={label as string} variant="ghost" className="w-full justify-start px-3 text-xs" onClick={() => setProfileOpen(false)}><Icon className="size-4" />{label as string}</Button>)}</div> : null}
+        {profileOpen ? <div className={`absolute bottom-[66px] z-50 w-52 rounded-md border border-border bg-popover p-1 shadow-workspace ${collapsed ? "left-14" : "left-3"}`}>{profileItems.map(([label, Icon]) => <Button key={label} variant="ghost" className="w-full justify-start px-3 text-xs" onClick={() => setProfileOpen(false)}><Icon className="size-4" />{label}</Button>)}</div> : null}
         <Button variant="ghost" onClick={() => setProfileOpen((value) => !value)} className={`h-auto w-full ${collapsed ? "px-0" : "justify-start px-2 py-2"}`} aria-label="Open user menu">
           <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-avatar text-xs font-semibold text-avatar-foreground">JD</div>
           {!collapsed ? <><span className="min-w-0 flex-1 text-left"><span className="block text-xs font-semibold text-foreground">Jane Doe</span><span className="block text-[10px] font-normal text-muted-foreground">Insurance Manager</span></span><ChevronDown className="size-3.5" /></> : null}
