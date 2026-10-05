@@ -12,3 +12,4 @@
 ## Architecture
 
 - Keep the insurance workspace on TanStack file routes with shared semantic tokens in `src/styles.css` so future workflow pages inherit one design system.
+- Keep workspace theme state in the shared app shell and style both modes only through semantic color tokens so every route stays synchronized.

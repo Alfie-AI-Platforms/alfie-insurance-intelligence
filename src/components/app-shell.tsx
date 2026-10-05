@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
-import { Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardCheck, FileBarChart, FileText, FolderOpen, House, Landmark, Menu, MessageSquareText, Network, Settings, ShieldCheck, User, Users, WandSparkles, X, Zap, LifeBuoy, LogOut, SlidersHorizontal, type LucideIcon } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
+import { Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardCheck, FileBarChart, FileText, FolderOpen, House, Landmark, Menu, MessageSquareText, Moon, Network, Settings, ShieldCheck, Sun, User, Users, WandSparkles, X, Zap, LifeBuoy, LogOut, SlidersHorizontal, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type NavItem = readonly [string, "/" | "/agents", LucideIcon];
@@ -17,7 +17,25 @@ export function AppShell({ children, rightPanel }: { children: ReactNode; rightP
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const activeLabel = path.startsWith("/agents") ? "Agents" : "Home";
+
+  useEffect(() => {
+    const storedTheme = window.localStorage.getItem("alfie-theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const shouldUseDark = storedTheme ? storedTheme === "dark" : prefersDark;
+    document.documentElement.classList.toggle("dark", shouldUseDark);
+    setDarkMode(shouldUseDark);
+  }, []);
+
+  const toggleTheme = () => {
+    setDarkMode((current) => {
+      const next = !current;
+      document.documentElement.classList.toggle("dark", next);
+      window.localStorage.setItem("alfie-theme", next ? "dark" : "light");
+      return next;
+    });
+  };
 
   return <div className="flex h-screen overflow-hidden bg-background text-foreground">
     {mobileOpen ? <div className="fixed inset-0 z-30 bg-overlay lg:hidden" onClick={() => setMobileOpen(false)} /> : null}
@@ -51,6 +69,7 @@ export function AppShell({ children, rightPanel }: { children: ReactNode; rightP
       <header className="flex h-16 shrink-0 items-center gap-3 bg-background px-4 lg:px-6">
         <Button variant="ghost" size="icon" onClick={() => setMobileOpen(true)} className="lg:hidden" aria-label="Open navigation"><Menu className="size-5" /></Button>
         <div className="relative mx-auto w-full max-w-2xl"><SearchField /></div>
+        <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"} title={darkMode ? "Light mode" : "Dark mode"}>{darkMode ? <Sun className="size-4" /> : <Moon className="size-4" />}</Button>
         <Button variant="ghost" size="icon" aria-label="Notifications" className="relative"><Bell className="size-4" /><span className="absolute right-2 top-2 size-1.5 rounded-full bg-notification" /></Button>
       </header>
       <div className="flex min-h-0 flex-1"><main className="scrollbar-thin flex-1 overflow-y-auto">{children}</main>{rightPanel}</div>
