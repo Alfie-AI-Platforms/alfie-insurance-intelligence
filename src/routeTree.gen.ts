@@ -15,6 +15,7 @@ import { Route as ClaimsRouteImport } from './routes/claims'
 import { Route as AgentsIndexRouteImport } from './routes/agents.index'
 import { Route as AgentsAgentIdRouteImport } from './routes/agents.$agentId'
 import { Route as AgentsNewRouteImport } from './routes/agents.new'
+import { Route as ClaimsIndexRouteImport } from './routes/claims.index'
 import { Route as AgentsAgentIdIndexRouteImport } from './routes/agents.$agentId.index'
 import { Route as AgentsAgentIdEditRouteImport } from './routes/agents.$agentId.edit'
 import { Route as AgentsAgentIdTestRouteImport } from './routes/agents.$agentId.test'
@@ -49,6 +50,11 @@ const AgentsNewRoute = AgentsNewRouteImport.update({
   path: '/new',
   getParentRoute: () => AgentsRoute,
 } as any)
+const ClaimsIndexRoute = ClaimsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ClaimsRoute,
+} as any)
 const AgentsAgentIdIndexRoute = AgentsAgentIdIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -68,19 +74,20 @@ const AgentsAgentIdTestRoute = AgentsAgentIdTestRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
-  '/claims': typeof ClaimsRoute
+  '/claims': typeof ClaimsRouteWithChildren
   '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
   '/agents/new': typeof AgentsNewRoute
   '/agents/': typeof AgentsIndexRoute
+  '/claims/': typeof ClaimsIndexRoute
   '/agents/$agentId/edit': typeof AgentsAgentIdEditRoute
   '/agents/$agentId/test': typeof AgentsAgentIdTestRoute
   '/agents/$agentId/': typeof AgentsAgentIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/claims': typeof ClaimsRoute
   '/agents/new': typeof AgentsNewRoute
   '/agents': typeof AgentsIndexRoute
+  '/claims': typeof ClaimsIndexRoute
   '/agents/$agentId/edit': typeof AgentsAgentIdEditRoute
   '/agents/$agentId/test': typeof AgentsAgentIdTestRoute
   '/agents/$agentId': typeof AgentsAgentIdIndexRoute
@@ -89,10 +96,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
-  '/claims': typeof ClaimsRoute
+  '/claims': typeof ClaimsRouteWithChildren
   '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
   '/agents/new': typeof AgentsNewRoute
   '/agents/': typeof AgentsIndexRoute
+  '/claims/': typeof ClaimsIndexRoute
   '/agents/$agentId/edit': typeof AgentsAgentIdEditRoute
   '/agents/$agentId/test': typeof AgentsAgentIdTestRoute
   '/agents/$agentId/': typeof AgentsAgentIdIndexRoute
@@ -106,15 +114,16 @@ export interface FileRouteTypes {
     | '/agents/$agentId'
     | '/agents/new'
     | '/agents/'
+    | '/claims/'
     | '/agents/$agentId/edit'
     | '/agents/$agentId/test'
     | '/agents/$agentId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/claims'
     | '/agents/new'
     | '/agents'
+    | '/claims'
     | '/agents/$agentId/edit'
     | '/agents/$agentId/test'
     | '/agents/$agentId'
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/agents/$agentId'
     | '/agents/new'
     | '/agents/'
+    | '/claims/'
     | '/agents/$agentId/edit'
     | '/agents/$agentId/test'
     | '/agents/$agentId/'
@@ -134,7 +144,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentsRoute: typeof AgentsRouteWithChildren
-  ClaimsRoute: typeof ClaimsRoute
+  ClaimsRoute: typeof ClaimsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -180,6 +190,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/agents/new'
       preLoaderRoute: typeof AgentsNewRouteImport
       parentRoute: typeof AgentsRoute
+    }
+    '/claims/': {
+      id: '/claims/'
+      path: '/'
+      fullPath: '/claims/'
+      preLoaderRoute: typeof ClaimsIndexRouteImport
+      parentRoute: typeof ClaimsRoute
     }
     '/agents/$agentId/': {
       id: '/agents/$agentId/'
@@ -236,10 +253,21 @@ const AgentsRouteChildren: AgentsRouteChildren = {
 const AgentsRouteWithChildren =
   AgentsRoute._addFileChildren(AgentsRouteChildren)
 
+interface ClaimsRouteChildren {
+  ClaimsIndexRoute: typeof ClaimsIndexRoute
+}
+
+const ClaimsRouteChildren: ClaimsRouteChildren = {
+  ClaimsIndexRoute: ClaimsIndexRoute,
+}
+
+const ClaimsRouteWithChildren =
+  ClaimsRoute._addFileChildren(ClaimsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentsRoute: AgentsRouteWithChildren,
-  ClaimsRoute: ClaimsRoute,
+  ClaimsRoute: ClaimsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
