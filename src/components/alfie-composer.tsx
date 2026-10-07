@@ -2,7 +2,7 @@ import { useRef, useState, type DragEvent } from "react";
 import { FileSpreadsheet, FileText, ImagePlus, Paperclip, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export type Attachment = { id: string; name: string; size: number; type: string; isImage: boolean; url?: string };
+export type Attachment = { id: string; name: string; size: number; type: string; isImage: boolean; url?: string | undefined };
 
 const ACCEPT = ".pdf,.docx,.xlsx,.csv,.txt,.jpg,.jpeg,.png";
 const IMAGE_ACCEPT = ".jpg,.jpeg,.png";
@@ -14,7 +14,7 @@ export function FileGlyph({ name, className = "size-4" }: { name: string; classN
   return ext === "XLSX" || ext === "CSV" ? <FileSpreadsheet className={className} /> : <FileText className={className} />;
 }
 
-export function AttachmentChip({ file, onRemove }: { file: Attachment; onRemove?: () => void }) {
+export function AttachmentChip({ file, onRemove }: { file: Attachment; onRemove?: (() => void) | undefined }) {
   return <div className="relative flex items-center gap-2 rounded-lg border border-border bg-background p-1.5 pr-3">
     {file.isImage && file.url ? <img src={file.url} alt={file.name} className="size-10 rounded-md object-cover" /> : <div className="flex size-10 items-center justify-center rounded-md bg-secondary text-muted-foreground"><FileGlyph name={file.name} /></div>}
     <div className="min-w-0"><p className="max-w-[140px] truncate text-xs font-medium">{file.name}</p><p className="text-[10px] text-muted-foreground">{fileExt(file.name)} · {formatSize(file.size)}</p></div>

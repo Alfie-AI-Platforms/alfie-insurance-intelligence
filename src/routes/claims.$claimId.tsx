@@ -18,8 +18,8 @@ export const Route = createFileRoute("/claims/$claimId")({
   notFoundComponent: () => <div className="p-10">Claim not found.</div>,
 });
 
-type Evidence = { id: string; name: string; label: string; isImage: boolean; url?: string; size: string; summary: string };
-type Reply = { intro: string; items?: string[]; fields?: [string, string][]; next?: string; confidence?: string; sources?: string[]; note?: string };
+type Evidence = { id: string; name: string; label: string; isImage: boolean; url?: string | undefined; size: string; summary: string };
+type Reply = { intro: string; items?: string[]; fields?: [string, string][]; next?: string; confidence?: string; sources?: string[] | undefined; note?: string };
 type Msg = { id: string; role: "user" | "alfie"; text?: string; files?: Attachment[]; reply?: Reply; actions?: string[]; attached?: boolean };
 
 const seedEvidence: Evidence[] = [
@@ -93,7 +93,7 @@ function ClaimWorkspace() {
   };
 
   const runAction = (a: string) => {
-    if (a === "Review Evidence" || a === "View Source") { setPreview(evidence[3]); return; }
+    if (a === "Review Evidence" || a === "View Source") { setPreview(evidence[3] ?? null); return; }
     if (a === "Ask Follow-up" || a === "Ask Alfie") { document.querySelector<HTMLTextAreaElement>("textarea")?.focus(); return; }
     if (a === "Compare with Estimate") { send("Compare the repair estimate with the damage photos."); return; }
     if (a === "Add to Claim") { const last = [...messages].reverse().find((m) => m.role === "user" && m.files?.length && !m.attached); if (last) setConfirm(last); else flash("No conversation uploads to attach."); return; }
