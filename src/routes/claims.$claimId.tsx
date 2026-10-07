@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowLeft, Bot, Check, ChevronDown, Circle, Download, Eye, FileText, Lock, MoreHorizontal, Paperclip, Share2, ShieldAlert, Sparkle, Upload } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { AlfieComposer, AttachmentChip, FileGlyph, fileExt, type Attachment } from "@/components/alfie-composer";
-import { ClaimStatusBadge, PriorityBadge } from "@/routes/claims.index";
+import { ClaimStatusBadge, PriorityBadge } from "@/components/claim-badges";
 import { getClaim, money, seedAudit, type AuditEvent } from "@/lib/claims-data";
 import damage1 from "@/assets/damage-1.jpg";
 import damage2 from "@/assets/damage-2.jpg";
@@ -194,7 +194,7 @@ function ClaimWorkspace() {
   </div></AppShell>;
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, children }: { title: string; children: ReactNode }) {
   return <section className="mt-6 border-t border-border pt-5"><h3 className="mb-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{title}</h3>{children}</section>;
 }
 

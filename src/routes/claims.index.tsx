@@ -5,6 +5,7 @@ import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AlfieComposer, AttachmentChip, type Attachment } from "@/components/alfie-composer";
+import { ClaimStatusBadge, PriorityBadge } from "@/components/claim-badges";
 import { claims as seedClaims, claimStatuses, money, type Claim, type ClaimStatus, type Priority } from "@/lib/claims-data";
 
 export const Route = createFileRoute("/claims/")({
@@ -14,15 +15,6 @@ export const Route = createFileRoute("/claims/")({
 
 const metrics: readonly (readonly [string, string, string, boolean])[] = [["Open Claims", "247", "+4.2% wk", true], ["Needs Review", "32", "+6 today", true], ["High Priority", "8", "−2 vs last wk", false], ["Awaiting Information", "19", "−3 vs last wk", false], ["Total Incurred YTD", "$18.7M", "+3.1% YoY", true]];
 const examples = ["Show me the claims that need my attention today.", "Which claims have unusual activity?", "Show me high-value claims opened this month.", "Analyze the highest-risk open claims."];
-
-export function PriorityBadge({ priority }: { priority: Priority }) {
-  const tone = priority === "High" ? "bg-destructive/10 text-destructive" : priority === "Medium" ? "bg-status-paused text-status-paused-foreground" : "bg-secondary text-muted-foreground";
-  return <span className={`inline-flex rounded-full px-2 py-0.5 text-[11px] font-medium ${tone}`}>{priority}</span>;
-}
-export function ClaimStatusBadge({ status }: { status: ClaimStatus }) {
-  const tone = status === "Needs Review" ? "bg-status-paused text-status-paused-foreground" : status === "Approved" ? "bg-status-active text-status-active-foreground" : status === "Investigating" ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground";
-  return <span className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-medium ${tone}`}><span className="size-1.5 rounded-full bg-current" />{status}</span>;
-}
 
 type Answer = { prompt: string; files: Attachment[]; intro: string; rows: Claim[]; note: string };
 
