@@ -71,7 +71,7 @@ function ClaimWorkspace() {
   const [audit, setAudit] = useState<AuditEvent[]>(seedAudit);
   const [notice, setNotice] = useState("");
   const endRef = useRef<HTMLDivElement>(null);
-  useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), [messages, thinking]);
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }); }, [messages, thinking]);
 
   const now = () => new Date().toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false });
   const log = (e: Omit<AuditEvent, "time">) => setAudit((a) => [{ time: now(), ...e }, ...a]);
