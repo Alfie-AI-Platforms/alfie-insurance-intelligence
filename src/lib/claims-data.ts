@@ -32,7 +32,7 @@ export const claims: Claim[] = [
 ];
 
 export const getClaim = (id: string) => claims.find((claim) => claim.id === id);
-export const money = (value: number) => value.toLocaleString("en-CA", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+export const money = (value: number) => value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 export type AuditEvent = { time: string; actor: string; actorType: "User" | "Alfie" | "System"; action: string; source: string; result: string };
 
