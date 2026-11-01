@@ -25,7 +25,7 @@ function Index() {
   const [submitted, setSubmitted] = useState("");
   const [rightPanel, setRightPanel] = useState(true);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => inputRef.current?.focus(), []);
+  useEffect(() => { inputRef.current?.focus(); }, []);
   const submit = () => { if (!prompt.trim()) return; setSubmitted(prompt.trim()); setPrompt(""); window.setTimeout(() => inputRef.current?.focus(), 0); };
 
   const contextPanel = <aside className={`${rightPanel ? "flex" : "hidden"} absolute inset-y-16 right-0 z-20 w-[300px] flex-col border-l border-border bg-panel p-5 shadow-workspace xl:relative xl:inset-auto xl:flex xl:shadow-none`}>
