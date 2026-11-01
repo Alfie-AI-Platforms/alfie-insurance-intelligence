@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as ClaimsRouteImport } from './routes/claims'
+import { Route as UnderwritingRouteImport } from './routes/underwriting'
 import { Route as AgentsIndexRouteImport } from './routes/agents.index'
 import { Route as AgentsAgentIdRouteImport } from './routes/agents.$agentId'
 import { Route as AgentsNewRouteImport } from './routes/agents.new'
@@ -34,6 +35,11 @@ const AgentsRoute = AgentsRouteImport.update({
 const ClaimsRoute = ClaimsRouteImport.update({
   id: '/claims',
   path: '/claims',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnderwritingRoute = UnderwritingRouteImport.update({
+  id: '/underwriting',
+  path: '/underwriting',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgentsIndexRoute = AgentsIndexRouteImport.update({
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
   '/claims': typeof ClaimsRouteWithChildren
+  '/underwriting': typeof UnderwritingRoute
   '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
@@ -92,6 +99,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/underwriting': typeof UnderwritingRoute
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
   '/agents': typeof AgentsIndexRoute
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
   '/claims': typeof ClaimsRouteWithChildren
+  '/underwriting': typeof UnderwritingRoute
   '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
@@ -120,6 +129,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agents'
     | '/claims'
+    | '/underwriting'
     | '/agents/$agentId'
     | '/agents/new'
     | '/claims/$claimId'
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/underwriting'
     | '/agents/new'
     | '/claims/$claimId'
     | '/agents'
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agents'
     | '/claims'
+    | '/underwriting'
     | '/agents/$agentId'
     | '/agents/new'
     | '/claims/$claimId'
@@ -157,6 +169,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentsRoute: typeof AgentsRouteWithChildren
   ClaimsRoute: typeof ClaimsRouteWithChildren
+  UnderwritingRoute: typeof UnderwritingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -180,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/claims'
       fullPath: '/claims'
       preLoaderRoute: typeof ClaimsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/underwriting': {
+      id: '/underwriting'
+      path: '/underwriting'
+      fullPath: '/underwriting'
+      preLoaderRoute: typeof UnderwritingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agents/': {
@@ -289,6 +309,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentsRoute: AgentsRouteWithChildren,
   ClaimsRoute: ClaimsRouteWithChildren,
+  UnderwritingRoute: UnderwritingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
