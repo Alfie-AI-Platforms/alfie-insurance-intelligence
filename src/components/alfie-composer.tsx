@@ -50,7 +50,7 @@ export function AlfieComposer({ placeholder, onSend, value, onChange, pending }:
   return <div onDragOver={(e) => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)} onDrop={onDrop} className={`relative rounded-2xl border bg-card p-2 shadow-workspace transition-colors focus-within:border-ring ${dragging ? "border-primary bg-secondary" : "border-border"}`}>
     {dragging ? <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-2xl text-sm font-medium text-primary">Drop files to use in this conversation</div> : null}
     {all.length ? <div className="flex flex-wrap gap-2 px-2 pb-2 pt-2">{all.map((f) => <AttachmentChip key={f.id} file={f} onRemove={files.some((x) => x.id === f.id) ? () => setFiles((c) => c.filter((x) => x.id !== f.id)) : undefined} />)}</div> : null}
-    {all.length ? <p className="px-3 text-[10px] text-muted-foreground">{all.length} attachment{all.length > 1 ? "s" : ""} for this conversation only — not added to the claim record.</p> : null}
+    {all.length ? <p className="px-3 text-[10px] text-muted-foreground">{all.length} attachment{all.length > 1 ? "s" : ""} for this conversation only — not added to any permanent record.</p> : null}
     <textarea ref={textRef} value={value} onChange={(e) => onChange(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); submit(); } }} rows={2} placeholder={placeholder} className="w-full resize-none bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground" />
     <div className="flex items-center gap-1 px-1">
       <input ref={fileRef} type="file" multiple accept={ACCEPT} className="hidden" onChange={(e) => { add(e.target.files); e.target.value = ""; }} />
