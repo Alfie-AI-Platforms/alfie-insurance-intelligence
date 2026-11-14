@@ -11,7 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentsRouteImport } from './routes/agents'
+import { Route as AutomationsRouteImport } from './routes/automations'
+import { Route as ChatsRouteImport } from './routes/chats'
 import { Route as ClaimsRouteImport } from './routes/claims'
+import { Route as DataSourcesRouteImport } from './routes/data-sources'
+import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as PolicyRouteImport } from './routes/policy'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -51,9 +55,29 @@ const AgentsRoute = AgentsRouteImport.update({
   path: '/agents',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AutomationsRoute = AutomationsRouteImport.update({
+  id: '/automations',
+  path: '/automations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatsRoute = ChatsRouteImport.update({
+  id: '/chats',
+  path: '/chats',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ClaimsRoute = ClaimsRouteImport.update({
   id: '/claims',
   path: '/claims',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataSourcesRoute = DataSourcesRouteImport.update({
+  id: '/data-sources',
+  path: '/data-sources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FinanceRoute = FinanceRouteImport.update({
@@ -201,7 +225,11 @@ const AgentsAgentIdTestRoute = AgentsAgentIdTestRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
+  '/automations': typeof AutomationsRoute
+  '/chats': typeof ChatsRoute
   '/claims': typeof ClaimsRouteWithChildren
+  '/data-sources': typeof DataSourcesRoute
+  '/documents': typeof DocumentsRoute
   '/finance': typeof FinanceRouteWithChildren
   '/policy': typeof PolicyRouteWithChildren
   '/pricing': typeof PricingRouteWithChildren
@@ -233,6 +261,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/automations': typeof AutomationsRoute
+  '/chats': typeof ChatsRoute
+  '/data-sources': typeof DataSourcesRoute
+  '/documents': typeof DocumentsRoute
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
   '/finance/accounting': typeof FinanceAccountingRoute
@@ -261,7 +293,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
+  '/automations': typeof AutomationsRoute
+  '/chats': typeof ChatsRoute
   '/claims': typeof ClaimsRouteWithChildren
+  '/data-sources': typeof DataSourcesRoute
+  '/documents': typeof DocumentsRoute
   '/finance': typeof FinanceRouteWithChildren
   '/policy': typeof PolicyRouteWithChildren
   '/pricing': typeof PricingRouteWithChildren
@@ -296,7 +332,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agents'
+    | '/automations'
+    | '/chats'
     | '/claims'
+    | '/data-sources'
+    | '/documents'
     | '/finance'
     | '/policy'
     | '/pricing'
@@ -328,6 +368,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/automations'
+    | '/chats'
+    | '/data-sources'
+    | '/documents'
     | '/agents/new'
     | '/claims/$claimId'
     | '/finance/accounting'
@@ -355,7 +399,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/agents'
+    | '/automations'
+    | '/chats'
     | '/claims'
+    | '/data-sources'
+    | '/documents'
     | '/finance'
     | '/policy'
     | '/pricing'
@@ -389,7 +437,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentsRoute: typeof AgentsRouteWithChildren
+  AutomationsRoute: typeof AutomationsRoute
+  ChatsRoute: typeof ChatsRoute
   ClaimsRoute: typeof ClaimsRouteWithChildren
+  DataSourcesRoute: typeof DataSourcesRoute
+  DocumentsRoute: typeof DocumentsRoute
   FinanceRoute: typeof FinanceRouteWithChildren
   PolicyRoute: typeof PolicyRouteWithChildren
   PricingRoute: typeof PricingRouteWithChildren
@@ -412,11 +464,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/automations': {
+      id: '/automations'
+      path: '/automations'
+      fullPath: '/automations'
+      preLoaderRoute: typeof AutomationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chats': {
+      id: '/chats'
+      path: '/chats'
+      fullPath: '/chats'
+      preLoaderRoute: typeof ChatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/claims': {
       id: '/claims'
       path: '/claims'
       fullPath: '/claims'
       preLoaderRoute: typeof ClaimsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-sources': {
+      id: '/data-sources'
+      path: '/data-sources'
+      fullPath: '/data-sources'
+      preLoaderRoute: typeof DataSourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/finance': {
@@ -734,7 +814,11 @@ const UnderwritingRouteWithChildren = UnderwritingRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentsRoute: AgentsRouteWithChildren,
+  AutomationsRoute: AutomationsRoute,
+  ChatsRoute: ChatsRoute,
   ClaimsRoute: ClaimsRouteWithChildren,
+  DataSourcesRoute: DataSourcesRoute,
+  DocumentsRoute: DocumentsRoute,
   FinanceRoute: FinanceRouteWithChildren,
   PolicyRoute: PolicyRouteWithChildren,
   PricingRoute: PricingRouteWithChildren,

@@ -9,3 +9,4 @@
 - [x] Build Underwriting queue, submission workspace, appetite, pricing, and audit trail
 - [x] Build Policy portfolio, policy workspace, operations, permissions, and versioned history
 - [x] Build Finance overview, financial analysis workspace, premium receivables, claims payments, commissions, reinsurance, accounting and reconciliation, cash flow forecasting, financial reports, and financial close
+- [x] Build Workspace modules: Chat with agent coordination, Documents repository with ingestion and versions, Data Sources with access configuration and sync monitoring, Automations with builder, executions and templates

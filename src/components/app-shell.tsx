@@ -3,11 +3,11 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardCheck, FileBarChart, FileText, FolderOpen, House, Landmark, Menu, MessageSquareText, Moon, Network, Settings, ShieldCheck, Sun, User, Users, WandSparkles, X, Zap, LifeBuoy, LogOut, SlidersHorizontal, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-type NavItem = readonly [string, "/" | "/agents" | "/claims" | "/underwriting" | "/policy" | "/pricing" | "/finance", LucideIcon];
+type NavItem = readonly [string, "/" | "/agents" | "/claims" | "/underwriting" | "/policy" | "/pricing" | "/finance" | "/chats" | "/documents" | "/data-sources" | "/automations", LucideIcon];
 type NavGroup = { title: string; items: readonly NavItem[] };
 const groups: readonly NavGroup[] = [
   { title: "", items: [["Home", "/", House], ["Claims", "/claims", ClipboardCheck], ["Underwriting", "/underwriting", ShieldCheck], ["Policy", "/policy", FileText], ["Pricing & Actuarial", "/pricing", CircleDollarSign], ["Finance", "/finance", Landmark], ["Reports", "/", FileBarChart]] },
-  { title: "Workspace", items: [["Chats", "/", MessageSquareText], ["Documents", "/", FolderOpen], ["Data Sources", "/", Network], ["Automations", "/", Zap]] },
+  { title: "Workspace", items: [["Chats", "/chats", MessageSquareText], ["Documents", "/documents", FolderOpen], ["Data Sources", "/data-sources", Network], ["Automations", "/automations", Zap]] },
   { title: "Administration", items: [["Users & Access", "/", Users], ["Policies & Permissions", "/", ShieldCheck], ["Agents", "/agents", Bot], ["Settings", "/", Settings]] },
 ];
 const profileItems: readonly (readonly [string, LucideIcon])[] = [["Profile", User], ["Preferences", SlidersHorizontal], ["Help", LifeBuoy], ["Sign out", LogOut]];
@@ -18,7 +18,7 @@ export function AppShell({ children, rightPanel }: { children: ReactNode; rightP
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const activeLabel = path.startsWith("/agents") ? "Agents" : path.startsWith("/claims") ? "Claims" : path.startsWith("/underwriting") ? "Underwriting" : path.startsWith("/policy") ? "Policy" : path.startsWith("/pricing") ? "Pricing & Actuarial" : path.startsWith("/finance") ? "Finance" : "Home";
+  const activeLabel = path.startsWith("/agents") ? "Agents" : path.startsWith("/claims") ? "Claims" : path.startsWith("/underwriting") ? "Underwriting" : path.startsWith("/policy") ? "Policy" : path.startsWith("/pricing") ? "Pricing & Actuarial" : path.startsWith("/finance") ? "Finance" : path.startsWith("/chats") ? "Chats" : path.startsWith("/documents") ? "Documents" : path.startsWith("/data-sources") ? "Data Sources" : path.startsWith("/automations") ? "Automations" : "Home";
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem("alfie-theme");
