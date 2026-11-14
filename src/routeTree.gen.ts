@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as ClaimsRouteImport } from './routes/claims'
+import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as PolicyRouteImport } from './routes/policy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as UnderwritingRouteImport } from './routes/underwriting'
@@ -20,6 +21,16 @@ import { Route as AgentsAgentIdRouteImport } from './routes/agents.$agentId'
 import { Route as AgentsNewRouteImport } from './routes/agents.new'
 import { Route as ClaimsIndexRouteImport } from './routes/claims.index'
 import { Route as ClaimsClaimIdRouteImport } from './routes/claims.$claimId'
+import { Route as FinanceIndexRouteImport } from './routes/finance.index'
+import { Route as FinanceAccountingRouteImport } from './routes/finance.accounting'
+import { Route as FinanceAnalysisRouteImport } from './routes/finance.analysis'
+import { Route as FinanceCashFlowRouteImport } from './routes/finance.cash-flow'
+import { Route as FinanceClaimsPaymentsRouteImport } from './routes/finance.claims-payments'
+import { Route as FinanceCloseRouteImport } from './routes/finance.close'
+import { Route as FinanceCommissionsRouteImport } from './routes/finance.commissions'
+import { Route as FinanceReceivablesRouteImport } from './routes/finance.receivables'
+import { Route as FinanceReinsuranceRouteImport } from './routes/finance.reinsurance'
+import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
 import { Route as PolicyIndexRouteImport } from './routes/policy.index'
 import { Route as PolicyPolicyIdRouteImport } from './routes/policy.$policyId'
 import { Route as PricingIndexRouteImport } from './routes/pricing.index'
@@ -43,6 +54,11 @@ const AgentsRoute = AgentsRouteImport.update({
 const ClaimsRoute = ClaimsRouteImport.update({
   id: '/claims',
   path: '/claims',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PolicyRoute = PolicyRouteImport.update({
@@ -84,6 +100,56 @@ const ClaimsClaimIdRoute = ClaimsClaimIdRouteImport.update({
   id: '/$claimId',
   path: '/$claimId',
   getParentRoute: () => ClaimsRoute,
+} as any)
+const FinanceIndexRoute = FinanceIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceAccountingRoute = FinanceAccountingRouteImport.update({
+  id: '/accounting',
+  path: '/accounting',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceAnalysisRoute = FinanceAnalysisRouteImport.update({
+  id: '/analysis',
+  path: '/analysis',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceCashFlowRoute = FinanceCashFlowRouteImport.update({
+  id: '/cash-flow',
+  path: '/cash-flow',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceClaimsPaymentsRoute = FinanceClaimsPaymentsRouteImport.update({
+  id: '/claims-payments',
+  path: '/claims-payments',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceCloseRoute = FinanceCloseRouteImport.update({
+  id: '/close',
+  path: '/close',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceCommissionsRoute = FinanceCommissionsRouteImport.update({
+  id: '/commissions',
+  path: '/commissions',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceReceivablesRoute = FinanceReceivablesRouteImport.update({
+  id: '/receivables',
+  path: '/receivables',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceReinsuranceRoute = FinanceReinsuranceRouteImport.update({
+  id: '/reinsurance',
+  path: '/reinsurance',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceReportsRoute = FinanceReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => FinanceRoute,
 } as any)
 const PolicyIndexRoute = PolicyIndexRouteImport.update({
   id: '/',
@@ -136,17 +202,28 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
   '/claims': typeof ClaimsRouteWithChildren
+  '/finance': typeof FinanceRouteWithChildren
   '/policy': typeof PolicyRouteWithChildren
   '/pricing': typeof PricingRouteWithChildren
   '/underwriting': typeof UnderwritingRouteWithChildren
   '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
+  '/finance/accounting': typeof FinanceAccountingRoute
+  '/finance/analysis': typeof FinanceAnalysisRoute
+  '/finance/cash-flow': typeof FinanceCashFlowRoute
+  '/finance/claims-payments': typeof FinanceClaimsPaymentsRoute
+  '/finance/close': typeof FinanceCloseRoute
+  '/finance/commissions': typeof FinanceCommissionsRoute
+  '/finance/receivables': typeof FinanceReceivablesRoute
+  '/finance/reinsurance': typeof FinanceReinsuranceRoute
+  '/finance/reports': typeof FinanceReportsRoute
   '/policy/$policyId': typeof PolicyPolicyIdRoute
   '/pricing/analysis': typeof PricingAnalysisRoute
   '/underwriting/$submissionId': typeof UnderwritingSubmissionIdRoute
   '/agents/': typeof AgentsIndexRoute
   '/claims/': typeof ClaimsIndexRoute
+  '/finance/': typeof FinanceIndexRoute
   '/policy/': typeof PolicyIndexRoute
   '/pricing/': typeof PricingIndexRoute
   '/underwriting/': typeof UnderwritingIndexRoute
@@ -158,11 +235,21 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
+  '/finance/accounting': typeof FinanceAccountingRoute
+  '/finance/analysis': typeof FinanceAnalysisRoute
+  '/finance/cash-flow': typeof FinanceCashFlowRoute
+  '/finance/claims-payments': typeof FinanceClaimsPaymentsRoute
+  '/finance/close': typeof FinanceCloseRoute
+  '/finance/commissions': typeof FinanceCommissionsRoute
+  '/finance/receivables': typeof FinanceReceivablesRoute
+  '/finance/reinsurance': typeof FinanceReinsuranceRoute
+  '/finance/reports': typeof FinanceReportsRoute
   '/policy/$policyId': typeof PolicyPolicyIdRoute
   '/pricing/analysis': typeof PricingAnalysisRoute
   '/underwriting/$submissionId': typeof UnderwritingSubmissionIdRoute
   '/agents': typeof AgentsIndexRoute
   '/claims': typeof ClaimsIndexRoute
+  '/finance': typeof FinanceIndexRoute
   '/policy': typeof PolicyIndexRoute
   '/pricing': typeof PricingIndexRoute
   '/underwriting': typeof UnderwritingIndexRoute
@@ -175,17 +262,28 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
   '/claims': typeof ClaimsRouteWithChildren
+  '/finance': typeof FinanceRouteWithChildren
   '/policy': typeof PolicyRouteWithChildren
   '/pricing': typeof PricingRouteWithChildren
   '/underwriting': typeof UnderwritingRouteWithChildren
   '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
+  '/finance/accounting': typeof FinanceAccountingRoute
+  '/finance/analysis': typeof FinanceAnalysisRoute
+  '/finance/cash-flow': typeof FinanceCashFlowRoute
+  '/finance/claims-payments': typeof FinanceClaimsPaymentsRoute
+  '/finance/close': typeof FinanceCloseRoute
+  '/finance/commissions': typeof FinanceCommissionsRoute
+  '/finance/receivables': typeof FinanceReceivablesRoute
+  '/finance/reinsurance': typeof FinanceReinsuranceRoute
+  '/finance/reports': typeof FinanceReportsRoute
   '/policy/$policyId': typeof PolicyPolicyIdRoute
   '/pricing/analysis': typeof PricingAnalysisRoute
   '/underwriting/$submissionId': typeof UnderwritingSubmissionIdRoute
   '/agents/': typeof AgentsIndexRoute
   '/claims/': typeof ClaimsIndexRoute
+  '/finance/': typeof FinanceIndexRoute
   '/policy/': typeof PolicyIndexRoute
   '/pricing/': typeof PricingIndexRoute
   '/underwriting/': typeof UnderwritingIndexRoute
@@ -199,17 +297,28 @@ export interface FileRouteTypes {
     | '/'
     | '/agents'
     | '/claims'
+    | '/finance'
     | '/policy'
     | '/pricing'
     | '/underwriting'
     | '/agents/$agentId'
     | '/agents/new'
     | '/claims/$claimId'
+    | '/finance/accounting'
+    | '/finance/analysis'
+    | '/finance/cash-flow'
+    | '/finance/claims-payments'
+    | '/finance/close'
+    | '/finance/commissions'
+    | '/finance/receivables'
+    | '/finance/reinsurance'
+    | '/finance/reports'
     | '/policy/$policyId'
     | '/pricing/analysis'
     | '/underwriting/$submissionId'
     | '/agents/'
     | '/claims/'
+    | '/finance/'
     | '/policy/'
     | '/pricing/'
     | '/underwriting/'
@@ -221,11 +330,21 @@ export interface FileRouteTypes {
     | '/'
     | '/agents/new'
     | '/claims/$claimId'
+    | '/finance/accounting'
+    | '/finance/analysis'
+    | '/finance/cash-flow'
+    | '/finance/claims-payments'
+    | '/finance/close'
+    | '/finance/commissions'
+    | '/finance/receivables'
+    | '/finance/reinsurance'
+    | '/finance/reports'
     | '/policy/$policyId'
     | '/pricing/analysis'
     | '/underwriting/$submissionId'
     | '/agents'
     | '/claims'
+    | '/finance'
     | '/policy'
     | '/pricing'
     | '/underwriting'
@@ -237,17 +356,28 @@ export interface FileRouteTypes {
     | '/'
     | '/agents'
     | '/claims'
+    | '/finance'
     | '/policy'
     | '/pricing'
     | '/underwriting'
     | '/agents/$agentId'
     | '/agents/new'
     | '/claims/$claimId'
+    | '/finance/accounting'
+    | '/finance/analysis'
+    | '/finance/cash-flow'
+    | '/finance/claims-payments'
+    | '/finance/close'
+    | '/finance/commissions'
+    | '/finance/receivables'
+    | '/finance/reinsurance'
+    | '/finance/reports'
     | '/policy/$policyId'
     | '/pricing/analysis'
     | '/underwriting/$submissionId'
     | '/agents/'
     | '/claims/'
+    | '/finance/'
     | '/policy/'
     | '/pricing/'
     | '/underwriting/'
@@ -260,6 +390,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentsRoute: typeof AgentsRouteWithChildren
   ClaimsRoute: typeof ClaimsRouteWithChildren
+  FinanceRoute: typeof FinanceRouteWithChildren
   PolicyRoute: typeof PolicyRouteWithChildren
   PricingRoute: typeof PricingRouteWithChildren
   UnderwritingRoute: typeof UnderwritingRouteWithChildren
@@ -286,6 +417,13 @@ declare module '@tanstack/react-router' {
       path: '/claims'
       fullPath: '/claims'
       preLoaderRoute: typeof ClaimsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/policy': {
@@ -343,6 +481,76 @@ declare module '@tanstack/react-router' {
       fullPath: '/claims/$claimId'
       preLoaderRoute: typeof ClaimsClaimIdRouteImport
       parentRoute: typeof ClaimsRoute
+    }
+    '/finance/': {
+      id: '/finance/'
+      path: '/'
+      fullPath: '/finance/'
+      preLoaderRoute: typeof FinanceIndexRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/accounting': {
+      id: '/finance/accounting'
+      path: '/accounting'
+      fullPath: '/finance/accounting'
+      preLoaderRoute: typeof FinanceAccountingRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/analysis': {
+      id: '/finance/analysis'
+      path: '/analysis'
+      fullPath: '/finance/analysis'
+      preLoaderRoute: typeof FinanceAnalysisRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/cash-flow': {
+      id: '/finance/cash-flow'
+      path: '/cash-flow'
+      fullPath: '/finance/cash-flow'
+      preLoaderRoute: typeof FinanceCashFlowRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/claims-payments': {
+      id: '/finance/claims-payments'
+      path: '/claims-payments'
+      fullPath: '/finance/claims-payments'
+      preLoaderRoute: typeof FinanceClaimsPaymentsRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/close': {
+      id: '/finance/close'
+      path: '/close'
+      fullPath: '/finance/close'
+      preLoaderRoute: typeof FinanceCloseRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/commissions': {
+      id: '/finance/commissions'
+      path: '/commissions'
+      fullPath: '/finance/commissions'
+      preLoaderRoute: typeof FinanceCommissionsRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/receivables': {
+      id: '/finance/receivables'
+      path: '/receivables'
+      fullPath: '/finance/receivables'
+      preLoaderRoute: typeof FinanceReceivablesRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/reinsurance': {
+      id: '/finance/reinsurance'
+      path: '/reinsurance'
+      fullPath: '/finance/reinsurance'
+      preLoaderRoute: typeof FinanceReinsuranceRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/reports': {
+      id: '/finance/reports'
+      path: '/reports'
+      fullPath: '/finance/reports'
+      preLoaderRoute: typeof FinanceReportsRouteImport
+      parentRoute: typeof FinanceRoute
     }
     '/policy/': {
       id: '/policy/'
@@ -454,6 +662,35 @@ const ClaimsRouteChildren: ClaimsRouteChildren = {
 const ClaimsRouteWithChildren =
   ClaimsRoute._addFileChildren(ClaimsRouteChildren)
 
+interface FinanceRouteChildren {
+  FinanceAccountingRoute: typeof FinanceAccountingRoute
+  FinanceAnalysisRoute: typeof FinanceAnalysisRoute
+  FinanceCashFlowRoute: typeof FinanceCashFlowRoute
+  FinanceClaimsPaymentsRoute: typeof FinanceClaimsPaymentsRoute
+  FinanceCloseRoute: typeof FinanceCloseRoute
+  FinanceCommissionsRoute: typeof FinanceCommissionsRoute
+  FinanceReceivablesRoute: typeof FinanceReceivablesRoute
+  FinanceReinsuranceRoute: typeof FinanceReinsuranceRoute
+  FinanceReportsRoute: typeof FinanceReportsRoute
+  FinanceIndexRoute: typeof FinanceIndexRoute
+}
+
+const FinanceRouteChildren: FinanceRouteChildren = {
+  FinanceAccountingRoute: FinanceAccountingRoute,
+  FinanceAnalysisRoute: FinanceAnalysisRoute,
+  FinanceCashFlowRoute: FinanceCashFlowRoute,
+  FinanceClaimsPaymentsRoute: FinanceClaimsPaymentsRoute,
+  FinanceCloseRoute: FinanceCloseRoute,
+  FinanceCommissionsRoute: FinanceCommissionsRoute,
+  FinanceReceivablesRoute: FinanceReceivablesRoute,
+  FinanceReinsuranceRoute: FinanceReinsuranceRoute,
+  FinanceReportsRoute: FinanceReportsRoute,
+  FinanceIndexRoute: FinanceIndexRoute,
+}
+
+const FinanceRouteWithChildren =
+  FinanceRoute._addFileChildren(FinanceRouteChildren)
+
 interface PolicyRouteChildren {
   PolicyPolicyIdRoute: typeof PolicyPolicyIdRoute
   PolicyIndexRoute: typeof PolicyIndexRoute
@@ -498,6 +735,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentsRoute: AgentsRouteWithChildren,
   ClaimsRoute: ClaimsRouteWithChildren,
+  FinanceRoute: FinanceRouteWithChildren,
   PolicyRoute: PolicyRouteWithChildren,
   PricingRoute: PricingRouteWithChildren,
   UnderwritingRoute: UnderwritingRouteWithChildren,
