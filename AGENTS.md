@@ -47,8 +47,14 @@ directly on the `main` branch.
 - Page pattern: module pages use the shared scaffolding in
   `src/components/alfie-ui.tsx` (`PageHeader`, `SectionLabel`), page titles
   are text-2xl semibold tracking-tight, and file workspaces (a claim, a
-  submission, a policy) pair a centre canvas with an Alfie rail and a
-  context rail. Home is a queue first, composer at the centre.
+  submission, a policy) put the file itself in the centre canvas with a
+  `ReviewBar` stating what needs a human decision, and the Alfie
+  conversation in a right rail tied to that file. Home is a queue first,
+  composer at the centre.
+- Type: Inter for interface chrome, tables, and controls. Source Serif 4
+  (`--font-display`) for headings and for Alfie's drafted output, so
+  anything that reads like a document looks like one. Tabular numerals are
+  on globally so figures align like a ledger.
 
 ## Conventions
 
