@@ -18,9 +18,14 @@ import { Route as ClaimsRouteImport } from './routes/claims'
 import { Route as DataSourcesRouteImport } from './routes/data-sources'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as MigrationRouteImport } from './routes/migration'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as PermissionsRouteImport } from './routes/permissions'
 import { Route as PolicyRouteImport } from './routes/policy'
+import { Route as PreferencesRouteImport } from './routes/preferences'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as UnderwritingRouteImport } from './routes/underwriting'
@@ -100,6 +105,21 @@ const FinanceRoute = FinanceRouteImport.update({
   path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MigrationRoute = MigrationRouteImport.update({
+  id: '/migration',
+  path: '/migration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PermissionsRoute = PermissionsRouteImport.update({
   id: '/permissions',
   path: '/permissions',
@@ -110,9 +130,19 @@ const PolicyRoute = PolicyRouteImport.update({
   path: '/policy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PreferencesRoute = PreferencesRouteImport.update({
+  id: '/preferences',
+  path: '/preferences',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReportsRoute = ReportsRouteImport.update({
@@ -292,9 +322,14 @@ export interface FileRoutesByFullPath {
   '/data-sources': typeof DataSourcesRoute
   '/documents': typeof DocumentsRoute
   '/finance': typeof FinanceRouteWithChildren
+  '/help': typeof HelpRoute
+  '/migration': typeof MigrationRoute
+  '/onboarding': typeof OnboardingRoute
   '/permissions': typeof PermissionsRoute
   '/policy': typeof PolicyRouteWithChildren
+  '/preferences': typeof PreferencesRoute
   '/pricing': typeof PricingRouteWithChildren
+  '/profile': typeof ProfileRoute
   '/reports': typeof ReportsRoute
   '/settings': typeof SettingsRoute
   '/underwriting': typeof UnderwritingRouteWithChildren
@@ -336,7 +371,12 @@ export interface FileRoutesByTo {
   '/chats': typeof ChatsRoute
   '/data-sources': typeof DataSourcesRoute
   '/documents': typeof DocumentsRoute
+  '/help': typeof HelpRoute
+  '/migration': typeof MigrationRoute
+  '/onboarding': typeof OnboardingRoute
   '/permissions': typeof PermissionsRoute
+  '/preferences': typeof PreferencesRoute
+  '/profile': typeof ProfileRoute
   '/reports': typeof ReportsRoute
   '/settings': typeof SettingsRoute
   '/users': typeof UsersRoute
@@ -380,9 +420,14 @@ export interface FileRoutesById {
   '/data-sources': typeof DataSourcesRoute
   '/documents': typeof DocumentsRoute
   '/finance': typeof FinanceRouteWithChildren
+  '/help': typeof HelpRoute
+  '/migration': typeof MigrationRoute
+  '/onboarding': typeof OnboardingRoute
   '/permissions': typeof PermissionsRoute
   '/policy': typeof PolicyRouteWithChildren
+  '/preferences': typeof PreferencesRoute
   '/pricing': typeof PricingRouteWithChildren
+  '/profile': typeof ProfileRoute
   '/reports': typeof ReportsRoute
   '/settings': typeof SettingsRoute
   '/underwriting': typeof UnderwritingRouteWithChildren
@@ -429,9 +474,14 @@ export interface FileRouteTypes {
     | '/data-sources'
     | '/documents'
     | '/finance'
+    | '/help'
+    | '/migration'
+    | '/onboarding'
     | '/permissions'
     | '/policy'
+    | '/preferences'
     | '/pricing'
+    | '/profile'
     | '/reports'
     | '/settings'
     | '/underwriting'
@@ -473,7 +523,12 @@ export interface FileRouteTypes {
     | '/chats'
     | '/data-sources'
     | '/documents'
+    | '/help'
+    | '/migration'
+    | '/onboarding'
     | '/permissions'
+    | '/preferences'
+    | '/profile'
     | '/reports'
     | '/settings'
     | '/users'
@@ -516,9 +571,14 @@ export interface FileRouteTypes {
     | '/data-sources'
     | '/documents'
     | '/finance'
+    | '/help'
+    | '/migration'
+    | '/onboarding'
     | '/permissions'
     | '/policy'
+    | '/preferences'
     | '/pricing'
+    | '/profile'
     | '/reports'
     | '/settings'
     | '/underwriting'
@@ -564,9 +624,14 @@ export interface RootRouteChildren {
   DataSourcesRoute: typeof DataSourcesRoute
   DocumentsRoute: typeof DocumentsRoute
   FinanceRoute: typeof FinanceRouteWithChildren
+  HelpRoute: typeof HelpRoute
+  MigrationRoute: typeof MigrationRoute
+  OnboardingRoute: typeof OnboardingRoute
   PermissionsRoute: typeof PermissionsRoute
   PolicyRoute: typeof PolicyRouteWithChildren
+  PreferencesRoute: typeof PreferencesRoute
   PricingRoute: typeof PricingRouteWithChildren
+  ProfileRoute: typeof ProfileRoute
   ReportsRoute: typeof ReportsRoute
   SettingsRoute: typeof SettingsRoute
   UnderwritingRoute: typeof UnderwritingRouteWithChildren
@@ -638,6 +703,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/migration': {
+      id: '/migration'
+      path: '/migration'
+      fullPath: '/migration'
+      preLoaderRoute: typeof MigrationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/permissions': {
       id: '/permissions'
       path: '/permissions'
@@ -652,11 +738,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/preferences': {
+      id: '/preferences'
+      path: '/preferences'
+      fullPath: '/preferences'
+      preLoaderRoute: typeof PreferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reports': {
@@ -1026,9 +1126,14 @@ const rootRouteChildren: RootRouteChildren = {
   DataSourcesRoute: DataSourcesRoute,
   DocumentsRoute: DocumentsRoute,
   FinanceRoute: FinanceRouteWithChildren,
+  HelpRoute: HelpRoute,
+  MigrationRoute: MigrationRoute,
+  OnboardingRoute: OnboardingRoute,
   PermissionsRoute: PermissionsRoute,
   PolicyRoute: PolicyRouteWithChildren,
+  PreferencesRoute: PreferencesRoute,
   PricingRoute: PricingRouteWithChildren,
+  ProfileRoute: ProfileRoute,
   ReportsRoute: ReportsRoute,
   SettingsRoute: SettingsRoute,
   UnderwritingRoute: UnderwritingRouteWithChildren,

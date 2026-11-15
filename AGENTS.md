@@ -80,6 +80,12 @@ directly on the `main` branch.
 
 ## Conventions
 
+- Frontend only (decided by the user, 2026-11-15): build pages, flows and
+  interactions with local state and sample data. Do NOT build backend
+  services, APIs, databases or connectors; critical backend work is
+  reserved for the engineering team. Where a flow would need a backend,
+  set up the full frontend experience and label it plainly in the UI as
+  sample or browser-local state.
 - No em dashes in user-facing copy.
 - Sample data is illustrative and labelled as such in the UI until real
   systems are connected through Data Sources.
