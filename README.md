@@ -39,6 +39,7 @@ Alfie Pro
 TOP BAR
 
 Include:
+
 - Global search / “Search across claims, policies, customers, or ask Alfie…”
 - Notifications
 - User profile
@@ -53,6 +54,7 @@ Header:
 “Here’s what’s happening in your insurance operations today.”
 
 Show four simple insurance metrics:
+
 - Open Claims
 - Policies in Force
 - Written Premium
@@ -69,6 +71,7 @@ Create Report
 Take Action
 
 Below that, show Suggested Prompts such as:
+
 - “Show me the highest-risk open claims.”
 - “Which policies are approaching renewal?”
 - “Analyze our underwriting performance.”
@@ -114,16 +117,6 @@ IMPORTANT PRODUCT PRINCIPLES
 Use the image as a base.
 
 We will be similar to the image, the chat section at the bottom.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/23baaaea-2d0a-47da-9269-0179a9cccebe).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
