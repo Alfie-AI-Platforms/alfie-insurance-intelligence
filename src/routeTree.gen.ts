@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as AutomationsRouteImport } from './routes/automations'
+import { Route as BillingRouteImport } from './routes/billing'
 import { Route as ChatsRouteImport } from './routes/chats'
 import { Route as ClaimsRouteImport } from './routes/claims'
 import { Route as DataSourcesRouteImport } from './routes/data-sources'
@@ -67,6 +68,11 @@ const AgentsRoute = AgentsRouteImport.update({
 const AutomationsRoute = AutomationsRouteImport.update({
   id: '/automations',
   path: '/automations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BillingRoute = BillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatsRoute = ChatsRouteImport.update({
@@ -280,6 +286,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
   '/automations': typeof AutomationsRoute
+  '/billing': typeof BillingRoute
   '/chats': typeof ChatsRoute
   '/claims': typeof ClaimsRouteWithChildren
   '/data-sources': typeof DataSourcesRoute
@@ -325,6 +332,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/automations': typeof AutomationsRoute
+  '/billing': typeof BillingRoute
   '/chats': typeof ChatsRoute
   '/data-sources': typeof DataSourcesRoute
   '/documents': typeof DocumentsRoute
@@ -366,6 +374,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agents': typeof AgentsRouteWithChildren
   '/automations': typeof AutomationsRoute
+  '/billing': typeof BillingRoute
   '/chats': typeof ChatsRoute
   '/claims': typeof ClaimsRouteWithChildren
   '/data-sources': typeof DataSourcesRoute
@@ -414,6 +423,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agents'
     | '/automations'
+    | '/billing'
     | '/chats'
     | '/claims'
     | '/data-sources'
@@ -459,6 +469,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/automations'
+    | '/billing'
     | '/chats'
     | '/data-sources'
     | '/documents'
@@ -499,6 +510,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agents'
     | '/automations'
+    | '/billing'
     | '/chats'
     | '/claims'
     | '/data-sources'
@@ -546,6 +558,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentsRoute: typeof AgentsRouteWithChildren
   AutomationsRoute: typeof AutomationsRoute
+  BillingRoute: typeof BillingRoute
   ChatsRoute: typeof ChatsRoute
   ClaimsRoute: typeof ClaimsRouteWithChildren
   DataSourcesRoute: typeof DataSourcesRoute
@@ -581,6 +594,13 @@ declare module '@tanstack/react-router' {
       path: '/automations'
       fullPath: '/automations'
       preLoaderRoute: typeof AutomationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/billing': {
+      id: '/billing'
+      path: '/billing'
+      fullPath: '/billing'
+      preLoaderRoute: typeof BillingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chats': {
@@ -1000,6 +1020,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentsRoute: AgentsRouteWithChildren,
   AutomationsRoute: AutomationsRoute,
+  BillingRoute: BillingRoute,
   ChatsRoute: ChatsRoute,
   ClaimsRoute: ClaimsRouteWithChildren,
   DataSourcesRoute: DataSourcesRoute,

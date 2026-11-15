@@ -1,16 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardCheck, FileBarChart, FileText, FolderOpen, House, Landmark, Menu, MessageSquareText, Moon, Network, Settings, ShieldCheck, Sparkles, Sun, User, Users, WandSparkles, X, Zap, LifeBuoy, LogOut, SlidersHorizontal, type LucideIcon } from "lucide-react";
+import { Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardCheck, CreditCard, FileBarChart, FileText, FolderOpen, House, Landmark, Menu, MessageSquareText, Moon, Network, Settings, ShieldCheck, Sparkles, Sun, User, Users, WandSparkles, X, Zap, LifeBuoy, LogOut, SlidersHorizontal, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-type NavItem = readonly [string, "/" | "/agents" | "/claims" | "/underwriting" | "/policy" | "/pricing" | "/finance" | "/chats" | "/documents" | "/data-sources" | "/automations" | "/users" | "/permissions" | "/settings" | "/reports", LucideIcon];
+type NavItem = readonly [string, "/" | "/agents" | "/claims" | "/underwriting" | "/policy" | "/pricing" | "/finance" | "/chats" | "/documents" | "/data-sources" | "/automations" | "/users" | "/permissions" | "/billing" | "/settings" | "/reports", LucideIcon];
 type NavGroup = { title: string; items: readonly NavItem[] };
 const groups: readonly NavGroup[] = [
   { title: "", items: [["Home", "/", House]] },
   { title: "Work", items: [["Claims", "/claims", ClipboardCheck], ["Underwriting", "/underwriting", ShieldCheck], ["Policy", "/policy", FileText]] },
   { title: "Intelligence", items: [["Pricing & Actuarial", "/pricing", CircleDollarSign], ["Finance", "/finance", Landmark], ["Reports", "/reports", FileBarChart]] },
   { title: "Library", items: [["Chats", "/chats", MessageSquareText], ["Documents", "/documents", FolderOpen], ["Data Sources", "/data-sources", Network], ["Automations", "/automations", Zap], ["Agents", "/agents", Bot]] },
-  { title: "Administration", items: [["Users & Access", "/users", Users], ["Policies & Permissions", "/permissions", ShieldCheck], ["Settings", "/settings", Settings]] },
+  { title: "Administration", items: [["Users & Access", "/users", Users], ["Policies & Permissions", "/permissions", ShieldCheck], ["Billing", "/billing", CreditCard], ["Settings", "/settings", Settings]] },
 ];
 const profileItems: readonly (readonly [string, LucideIcon])[] = [["Profile", User], ["Preferences", SlidersHorizontal], ["Help", LifeBuoy], ["Sign out", LogOut]];
 
@@ -20,7 +20,7 @@ export function AppShell({ children, rightPanel }: { children: ReactNode; rightP
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const activeLabel = path.startsWith("/agents") ? "Agents" : path.startsWith("/claims") ? "Claims" : path.startsWith("/underwriting") ? "Underwriting" : path.startsWith("/policy") ? "Policy" : path.startsWith("/pricing") ? "Pricing & Actuarial" : path.startsWith("/finance") ? "Finance" : path.startsWith("/chats") ? "Chats" : path.startsWith("/documents") ? "Documents" : path.startsWith("/data-sources") ? "Data Sources" : path.startsWith("/automations") ? "Automations" : path.startsWith("/users") ? "Users & Access" : path.startsWith("/permissions") ? "Policies & Permissions" : path.startsWith("/settings") ? "Settings" : path.startsWith("/reports") ? "Reports" : "Home";
+  const activeLabel = path.startsWith("/agents") ? "Agents" : path.startsWith("/claims") ? "Claims" : path.startsWith("/underwriting") ? "Underwriting" : path.startsWith("/policy") ? "Policy" : path.startsWith("/pricing") ? "Pricing & Actuarial" : path.startsWith("/finance") ? "Finance" : path.startsWith("/chats") ? "Chats" : path.startsWith("/documents") ? "Documents" : path.startsWith("/data-sources") ? "Data Sources" : path.startsWith("/automations") ? "Automations" : path.startsWith("/users") ? "Users & Access" : path.startsWith("/permissions") ? "Policies & Permissions" : path.startsWith("/billing") ? "Billing" : path.startsWith("/settings") ? "Settings" : path.startsWith("/reports") ? "Reports" : "Home";
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem("alfie-theme");
