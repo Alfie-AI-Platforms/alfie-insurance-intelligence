@@ -10,3 +10,4 @@
 - [x] Build Policy portfolio, policy workspace, operations, permissions, and versioned history
 - [x] Build Finance overview, financial analysis workspace, premium receivables, claims payments, commissions, reinsurance, accounting and reconciliation, cash flow forecasting, financial reports, and financial close
 - [x] Build Workspace modules: Chat with agent coordination, Documents repository with ingestion and versions, Data Sources with access configuration and sync monitoring, Automations with builder, executions and templates
+- [x] Build Administration modules: Users & Access directory with invites, offboarding, groups and access reviews, Policies & Permissions with module matrix, approval authority, segregation of duties and agent profiles, Settings with organization profile, Alfie configuration, security, retention, audit logs and platform health

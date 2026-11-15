@@ -17,9 +17,12 @@ import { Route as ClaimsRouteImport } from './routes/claims'
 import { Route as DataSourcesRouteImport } from './routes/data-sources'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as PermissionsRouteImport } from './routes/permissions'
 import { Route as PolicyRouteImport } from './routes/policy'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as UnderwritingRouteImport } from './routes/underwriting'
+import { Route as UsersRouteImport } from './routes/users'
 import { Route as AgentsIndexRouteImport } from './routes/agents.index'
 import { Route as AgentsAgentIdRouteImport } from './routes/agents.$agentId'
 import { Route as AgentsNewRouteImport } from './routes/agents.new'
@@ -85,6 +88,11 @@ const FinanceRoute = FinanceRouteImport.update({
   path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PermissionsRoute = PermissionsRouteImport.update({
+  id: '/permissions',
+  path: '/permissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PolicyRoute = PolicyRouteImport.update({
   id: '/policy',
   path: '/policy',
@@ -95,9 +103,19 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UnderwritingRoute = UnderwritingRouteImport.update({
   id: '/underwriting',
   path: '/underwriting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsersRoute = UsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgentsIndexRoute = AgentsIndexRouteImport.update({
@@ -231,9 +249,12 @@ export interface FileRoutesByFullPath {
   '/data-sources': typeof DataSourcesRoute
   '/documents': typeof DocumentsRoute
   '/finance': typeof FinanceRouteWithChildren
+  '/permissions': typeof PermissionsRoute
   '/policy': typeof PolicyRouteWithChildren
   '/pricing': typeof PricingRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/underwriting': typeof UnderwritingRouteWithChildren
+  '/users': typeof UsersRoute
   '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
@@ -265,6 +286,9 @@ export interface FileRoutesByTo {
   '/chats': typeof ChatsRoute
   '/data-sources': typeof DataSourcesRoute
   '/documents': typeof DocumentsRoute
+  '/permissions': typeof PermissionsRoute
+  '/settings': typeof SettingsRoute
+  '/users': typeof UsersRoute
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
   '/finance/accounting': typeof FinanceAccountingRoute
@@ -299,9 +323,12 @@ export interface FileRoutesById {
   '/data-sources': typeof DataSourcesRoute
   '/documents': typeof DocumentsRoute
   '/finance': typeof FinanceRouteWithChildren
+  '/permissions': typeof PermissionsRoute
   '/policy': typeof PolicyRouteWithChildren
   '/pricing': typeof PricingRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/underwriting': typeof UnderwritingRouteWithChildren
+  '/users': typeof UsersRoute
   '/agents/$agentId': typeof AgentsAgentIdRouteWithChildren
   '/agents/new': typeof AgentsNewRoute
   '/claims/$claimId': typeof ClaimsClaimIdRoute
@@ -338,9 +365,12 @@ export interface FileRouteTypes {
     | '/data-sources'
     | '/documents'
     | '/finance'
+    | '/permissions'
     | '/policy'
     | '/pricing'
+    | '/settings'
     | '/underwriting'
+    | '/users'
     | '/agents/$agentId'
     | '/agents/new'
     | '/claims/$claimId'
@@ -372,6 +402,9 @@ export interface FileRouteTypes {
     | '/chats'
     | '/data-sources'
     | '/documents'
+    | '/permissions'
+    | '/settings'
+    | '/users'
     | '/agents/new'
     | '/claims/$claimId'
     | '/finance/accounting'
@@ -405,9 +438,12 @@ export interface FileRouteTypes {
     | '/data-sources'
     | '/documents'
     | '/finance'
+    | '/permissions'
     | '/policy'
     | '/pricing'
+    | '/settings'
     | '/underwriting'
+    | '/users'
     | '/agents/$agentId'
     | '/agents/new'
     | '/claims/$claimId'
@@ -443,9 +479,12 @@ export interface RootRouteChildren {
   DataSourcesRoute: typeof DataSourcesRoute
   DocumentsRoute: typeof DocumentsRoute
   FinanceRoute: typeof FinanceRouteWithChildren
+  PermissionsRoute: typeof PermissionsRoute
   PolicyRoute: typeof PolicyRouteWithChildren
   PricingRoute: typeof PricingRouteWithChildren
+  SettingsRoute: typeof SettingsRoute
   UnderwritingRoute: typeof UnderwritingRouteWithChildren
+  UsersRoute: typeof UsersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -506,6 +545,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/permissions': {
+      id: '/permissions'
+      path: '/permissions'
+      fullPath: '/permissions'
+      preLoaderRoute: typeof PermissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/policy': {
       id: '/policy'
       path: '/policy'
@@ -520,11 +566,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/underwriting': {
       id: '/underwriting'
       path: '/underwriting'
       fullPath: '/underwriting'
       preLoaderRoute: typeof UnderwritingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/users': {
+      id: '/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agents/': {
@@ -820,9 +880,12 @@ const rootRouteChildren: RootRouteChildren = {
   DataSourcesRoute: DataSourcesRoute,
   DocumentsRoute: DocumentsRoute,
   FinanceRoute: FinanceRouteWithChildren,
+  PermissionsRoute: PermissionsRoute,
   PolicyRoute: PolicyRouteWithChildren,
   PricingRoute: PricingRouteWithChildren,
+  SettingsRoute: SettingsRoute,
   UnderwritingRoute: UnderwritingRouteWithChildren,
+  UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
