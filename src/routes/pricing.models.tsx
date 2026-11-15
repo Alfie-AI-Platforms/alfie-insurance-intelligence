@@ -122,14 +122,14 @@ function ModelsPage() {
           {lifecycle.map((stage, i) => (
             <span key={stage} className="flex items-center gap-1.5">
               <span
-                className={`rounded-full px-2.5 py-1 text-[10px] font-medium ${i === stageIndex[selected.status] ? "bg-primary text-primary-foreground" : i < stageIndex[selected.status] ? "bg-positive/15 text-positive" : "bg-secondary text-muted-foreground"}`}
+                className={`rounded-full px-2.5 py-1 text-[12px] font-medium ${i === stageIndex[selected.status] ? "bg-primary text-primary-foreground" : i < stageIndex[selected.status] ? "bg-positive/15 text-positive" : "bg-secondary text-muted-foreground"}`}
               >
                 {stage}
               </span>
               {i < lifecycle.length - 1 ? <span className="text-muted-foreground">→</span> : null}
             </span>
           ))}
-          <span className="ml-2 text-[11px] text-muted-foreground">
+          <span className="ml-2 text-[13px] text-muted-foreground">
             {selected.id} is at the {lifecycle[stageIndex[selected.status]]} stage.
           </span>
         </div>
@@ -167,7 +167,7 @@ function ModelsPage() {
                 ))}
               </tbody>
             </table>
-            <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
               Variables are documented with their effect on the final premium and must comply with
               legal, regulatory and fairness requirements. Prohibited characteristics are never
               rating variables.
@@ -251,7 +251,7 @@ function ModelsPage() {
                   ? "All validation checks pass. This version is eligible to be considered for production approval through the review workflow."
                   : `Not eligible for production approval: ${failing.map((f) => f.metric).join(", ")} failed. A model with a failing required check cannot be promoted until it is recalibrated and revalidated.`}
               </p>
-              <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                 Validation covers backtesting, predicted vs actual losses, frequency and severity,
                 discrimination, calibration, stability and data quality. Results, limitations and
                 reviewer comments are kept with the version.
@@ -276,7 +276,7 @@ function ModelsPage() {
                     <button
                       type="button"
                       onClick={() => toggleCompare(v.version)}
-                      className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-medium ${compare.includes(v.version) ? "bg-primary text-primary-foreground" : "bg-card"}`}
+                      className={`shrink-0 rounded-full px-2.5 py-1 text-[12px] font-medium ${compare.includes(v.version) ? "bg-primary text-primary-foreground" : "bg-card"}`}
                     >
                       Compare
                     </button>
@@ -295,7 +295,7 @@ function ModelsPage() {
                   ))}
                 </div>
               ) : (
-                <p className="mt-2 text-[11px] text-muted-foreground">
+                <p className="mt-2 text-[13px] text-muted-foreground">
                   Select two versions to compare their change notes and approvals. Versions used for
                   production pricing are never overwritten, only superseded.
                 </p>
@@ -311,7 +311,7 @@ function ModelsPage() {
                   <li key={a.model} className="rounded-xl bg-secondary/50 p-3 text-xs leading-5">
                     <p className="font-semibold">
                       {a.model}{" "}
-                      <span className="ml-1 rounded-full bg-card px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                      <span className="ml-1 rounded-full bg-card px-2 py-0.5 text-[12px] font-medium text-muted-foreground">
                         {a.severity}
                       </span>
                     </p>
@@ -321,7 +321,7 @@ function ModelsPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                 Alfie can explain a model's behavior, compare versions and summarize validation. It
                 never alters an active production model. Select a model above and ask in{" "}
                 <span className="font-medium text-foreground">Pricing Analysis</span> why a

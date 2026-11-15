@@ -73,7 +73,7 @@ function AccountingPage() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h3 className="text-sm font-semibold">General Ledger overview</h3>
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-[13px] text-muted-foreground">
                 From the connected accounting system, October 2026
               </p>
             </div>
@@ -81,7 +81,7 @@ function AccountingPage() {
               {ledgerLinks.map((l) => (
                 <span
                   key={l}
-                  className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground"
+                  className="rounded-full border border-border px-2.5 py-1 text-[13px] text-muted-foreground"
                 >
                   {l}
                 </span>
@@ -91,7 +91,7 @@ function AccountingPage() {
           <div className="mt-3 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-6">
             {ledgerSummary.map((s) => (
               <div key={s.label} className="bg-card p-3.5">
-                <p className="text-[10px] font-medium text-muted-foreground">{s.label}</p>
+                <p className="text-[12px] font-medium text-muted-foreground">{s.label}</p>
                 <p className="mt-1 text-base font-semibold">{s.value}</p>
               </div>
             ))}
@@ -101,7 +101,7 @@ function AccountingPage() {
         <div className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-5">
           {summary.map(([label, value]) => (
             <div key={label} className="bg-card p-4">
-              <p className="text-[11px] font-medium text-muted-foreground">{label}</p>
+              <p className="text-[13px] font-medium text-muted-foreground">{label}</p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
             </div>
           ))}
@@ -125,7 +125,7 @@ function AccountingPage() {
               </Button>
             ))}
           </div>
-          <p className="mt-3 text-[11px] leading-5 text-muted-foreground">
+          <p className="mt-3 text-[13px] leading-5 text-muted-foreground">
             How Alfie reconciles: retrieve the relevant transactions, identify possible matches,
             explain discrepancies, propose reconciliation entries, present a review screen, then
             request authorization. Alfie never silently posts journal entries or alters reconciled
@@ -155,7 +155,7 @@ function AccountingPage() {
               ))}
             </select>
           </div>
-          <p className="px-4 pb-2 text-[11px] text-muted-foreground">
+          <p className="px-4 pb-2 text-[13px] text-muted-foreground">
             Matching bank transactions to ledger entries, premium receipts to invoices, claims
             payments to approved settlements, commissions to payment records, and reinsurance
             recoveries to expected recoverables.
@@ -163,7 +163,7 @@ function AccountingPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-t border-border text-left text-[11px] text-muted-foreground">
+                <tr className="border-t border-border text-left text-[13px] text-muted-foreground">
                   {[
                     "Transaction",
                     "Source",
@@ -230,7 +230,7 @@ function AccountingPage() {
                   ["Prepared by", "Jane Doe"],
                   ["Supporting documents", "None attached yet"],
                 ].map(([label, val]) => (
-                  <label key={label} className="block text-[11px] text-muted-foreground">
+                  <label key={label} className="block text-[13px] text-muted-foreground">
                     {label}
                     <input
                       defaultValue={val}
@@ -238,7 +238,7 @@ function AccountingPage() {
                     />
                   </label>
                 ))}
-                <label className="block text-[11px] text-muted-foreground sm:col-span-2 lg:col-span-4">
+                <label className="block text-[13px] text-muted-foreground sm:col-span-2 lg:col-span-4">
                   Description
                   <input
                     placeholder="What this entry records, and why"
@@ -246,7 +246,7 @@ function AccountingPage() {
                   />
                 </label>
               </div>
-              <p className="mt-3 text-[11px] leading-5 text-muted-foreground">
+              <p className="mt-3 text-[13px] leading-5 text-muted-foreground">
                 Validation: debits must equal credits, accounts must exist in the chart of accounts,
                 and the period must be open. Alfie can prepare a suggested entry and explain its
                 rationale. Posting needs the appropriate permission and approval.
@@ -277,7 +277,7 @@ function AccountingPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-t border-border text-left text-[11px] text-muted-foreground">
+                <tr className="border-t border-border text-left text-[13px] text-muted-foreground">
                   {[
                     "Reference",
                     "Date",

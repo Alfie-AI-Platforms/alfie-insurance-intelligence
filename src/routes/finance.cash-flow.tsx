@@ -93,7 +93,7 @@ function CashFlowPage() {
         <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-4">
           {monitoring.map(([label, value]) => (
             <div key={label} className="bg-card p-4">
-              <p className="text-[11px] font-medium text-muted-foreground">{label}</p>
+              <p className="text-[13px] font-medium text-muted-foreground">{label}</p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
             </div>
           ))}
@@ -103,7 +103,7 @@ function CashFlowPage() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h3 className="text-sm font-semibold">Cash position forecast</h3>
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-[13px] text-muted-foreground">
                 Closing cash balance by month, $M, base case
               </p>
             </div>
@@ -112,7 +112,7 @@ function CashFlowPage() {
                 <button
                   key={h}
                   onClick={() => setHorizon(h)}
-                  className={`rounded-md px-2 py-1 text-[11px] ${horizon === h ? "bg-card font-medium shadow-sm" : "text-muted-foreground"}`}
+                  className={`rounded-md px-2 py-1 text-[13px] ${horizon === h ? "bg-card font-medium shadow-sm" : "text-muted-foreground"}`}
                 >
                   {h}
                 </button>
@@ -166,7 +166,7 @@ function CashFlowPage() {
             <span className="inline-flex items-center">
               <FinanceStatusBadge status="In review" />
             </span>
-            <span className="self-center text-[11px] text-muted-foreground">
+            <span className="self-center text-[13px] text-muted-foreground">
               Assumptions and source data are shown with every forecast in the analysis workspace.
             </span>
           </div>
@@ -174,7 +174,7 @@ function CashFlowPage() {
 
         <section className="mt-4">
           <h3 className="text-sm font-semibold">Scenario analysis</h3>
-          <p className="mt-1 text-[11px] text-muted-foreground">
+          <p className="mt-1 text-[13px] text-muted-foreground">
             Select scenarios to compare their effect on cash position, liquidity and net cash flow
             over the forecast period.
           </p>
@@ -190,7 +190,7 @@ function CashFlowPage() {
                 >
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-sm font-semibold">{s.name}</span>
-                    <span className="text-[10px] font-medium text-primary">
+                    <span className="text-[12px] font-medium text-primary">
                       {active ? "Selected" : "Select to compare"}
                     </span>
                   </div>
@@ -207,7 +207,7 @@ function CashFlowPage() {
                       <strong className="text-sm">{s.net}</strong>
                     </span>
                   </div>
-                  <p className="mt-2 text-[11px] leading-5">{s.impact}</p>
+                  <p className="mt-2 text-[13px] leading-5">{s.impact}</p>
                 </button>
               );
             })}

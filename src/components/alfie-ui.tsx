@@ -20,7 +20,7 @@ export function AlfieMark({ className = "size-7 rounded-lg" }: { className?: str
 
 export function AlfieChip({ label = "Alfie" }: { label?: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background py-0.5 pl-1 pr-2 text-[11px] font-medium">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background py-0.5 pl-1 pr-2 text-[13px] font-medium">
       <span className="alfie-gradient flex size-4 items-center justify-center rounded-full text-white" aria-hidden="true">
         <Sparkles className="size-2.5" />
       </span>
@@ -33,7 +33,7 @@ export function PageHeader({ eyebrow, title, description, actions }: { eyebrow?:
   return (
     <div className="flex flex-wrap items-start justify-between gap-3">
       <div>
-        {eyebrow ? <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{eyebrow}</p> : null}
+        {eyebrow ? <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{eyebrow}</p> : null}
         <h1 className={`${eyebrow ? "mt-1 " : ""}text-2xl font-semibold tracking-tight`}>{title}</h1>
         {description ? <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{description}</p> : null}
       </div>
@@ -43,7 +43,7 @@ export function PageHeader({ eyebrow, title, description, actions }: { eyebrow?:
 }
 
 export function SectionLabel({ children }: { children: ReactNode }) {
-  return <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{children}</p>;
+  return <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{children}</p>;
 }
 
 export function AlfiePanelHeader({ context, title = "Alfie" }: { context: string; title?: string }) {
@@ -52,7 +52,7 @@ export function AlfiePanelHeader({ context, title = "Alfie" }: { context: string
       <AlfieMark className="size-8 rounded-lg" />
       <div>
         <p className="text-sm font-semibold leading-5">{title}</p>
-        <p className="text-[11px] leading-4 text-muted-foreground">{context}</p>
+        <p className="text-[13px] leading-4 text-muted-foreground">{context}</p>
       </div>
     </div>
   );
@@ -66,7 +66,7 @@ const chipTones = {
 } as const;
 
 export function StatusChip({ tone = "neutral", children }: { tone?: keyof typeof chipTones; children: ReactNode }) {
-  return <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium ${chipTones[tone]}`}>{children}</span>;
+  return <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[12px] font-medium ${chipTones[tone]}`}>{children}</span>;
 }
 
 /*

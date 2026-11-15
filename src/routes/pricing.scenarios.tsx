@@ -143,7 +143,7 @@ function ScenariosPage() {
         onChange={(e) => set(key, Number(e.target.value))}
         className="mt-1.5 w-full accent-primary"
       />
-      <span className="mt-0.5 block text-[10px] leading-4 text-muted-foreground">{hint}</span>
+      <span className="mt-0.5 block text-[12px] leading-4 text-muted-foreground">{hint}</span>
     </label>
   );
 
@@ -176,7 +176,7 @@ function ScenariosPage() {
                 ))}
               </select>
             </div>
-            <p className="mt-1 text-[11px] text-muted-foreground">
+            <p className="mt-1 text-[13px] text-muted-foreground">
               Baseline: premium ${inputs.premium.toFixed(1)}M, incurred losses $
               {inputs.losses.toFixed(1)}M, {line}.
             </p>
@@ -250,7 +250,7 @@ function ScenariosPage() {
                 Severe stress
               </Button>
             </div>
-            <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
               Stress presets change risk assumptions only. Results under stress are hypothetical
               estimates and are labelled as such in reports.
             </p>
@@ -331,7 +331,7 @@ function ScenariosPage() {
                   ))}
                 </tbody>
               </table>
-              <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                 Key driver: at a {inputs.ratePct}% rate change with severity trending{" "}
                 {inputs.sevTrendPct}%, the loss ratio{" "}
                 {result.lossRatio <= baseline.lossRatio ? "improves" : "worsens"} because premium
@@ -350,18 +350,18 @@ function ScenariosPage() {
                     key={sev}
                     className={`rounded-xl p-3 text-center ${sev === inputs.sevTrendPct ? "bg-primary/10 ring-1 ring-primary" : "bg-secondary/50"}`}
                   >
-                    <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-[12px] font-medium uppercase tracking-wide text-muted-foreground">
                       Severity {sev >= 0 ? "+" : ""}
                       {sev}%
                     </p>
                     <p className="mt-1 text-sm font-semibold">{pct(r.lossRatio)}</p>
-                    <p className="text-[10px] text-muted-foreground">
+                    <p className="text-[12px] text-muted-foreground">
                       combined {pct(r.combinedRatio)}
                     </p>
                   </div>
                 ))}
               </div>
-              <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                 One variable at a time, everything else held at the builder values. To reach the 60%
                 target loss ratio at a {inputs.sevTrendPct}% severity trend, the required rate
                 change is materially higher than at trend levels below it, which is the sensitivity
@@ -438,7 +438,7 @@ function ScenariosPage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+          <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
             All scenarios share the Commercial Property baseline unless saved from another line in
             the builder. Under the stated assumptions, the most favorable projected combined ratio
             comes from the highest rate scenario, at the cost of the weakest retention assumption.

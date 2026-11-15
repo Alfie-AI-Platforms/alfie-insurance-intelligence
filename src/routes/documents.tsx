@@ -229,11 +229,11 @@ function DocumentsPage() {
             ],
           ].map(([label, value, note]) => (
             <div key={label} className="rounded-2xl border border-border bg-card p-4">
-              <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+              <p className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground">
                 {label}
               </p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
-              <p className="mt-1 text-[11px] text-muted-foreground">{note}</p>
+              <p className="mt-1 text-[13px] text-muted-foreground">{note}</p>
             </div>
           ))}
         </section>
@@ -402,7 +402,7 @@ function DocumentsPage() {
           <aside className="space-y-4">
             <section className={card}>
               <h2 className="text-sm font-semibold">{selected.name}</h2>
-              <p className="mt-0.5 text-[11px] text-muted-foreground">
+              <p className="mt-0.5 text-[13px] text-muted-foreground">
                 {selected.id} · Uploaded {selected.uploaded} by {selected.owner}
               </p>
               <dl className="mt-3 space-y-1.5 text-xs">
@@ -441,7 +441,7 @@ function DocumentsPage() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+                <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                   Updates never silently overwrite an approved document. A new version is created
                   and the previous one is preserved and restorable by authorized users.
                 </p>
@@ -460,7 +460,7 @@ function DocumentsPage() {
                   {workflowStages.map((s, i) => (
                     <span key={s} className="flex items-center gap-1">
                       <span
-                        className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${i < stageIndex(selected.status) ? "bg-positive/10 text-positive" : i === stageIndex(selected.status) ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground"}`}
+                        className={`rounded-full px-2 py-0.5 text-[12px] font-semibold ${i < stageIndex(selected.status) ? "bg-positive/10 text-positive" : i === stageIndex(selected.status) ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground"}`}
                       >
                         {s}
                       </span>
@@ -582,7 +582,7 @@ function DocumentsPage() {
                     <p className="mt-1 text-sm leading-6 text-muted-foreground">{s.body}</p>
                   </div>
                 ))}
-                <p className="mt-6 border-t border-border pt-3 text-[11px] leading-4 text-muted-foreground">
+                <p className="mt-6 border-t border-border pt-3 text-[13px] leading-4 text-muted-foreground">
                   Preview shows the opening sections of the document. The full text, versions and
                   approval record stay on the governed record in this repository. Sample document
                   content, shown until your systems are connected.
@@ -600,7 +600,7 @@ function DocumentsPage() {
             </div>
           )}
           <DialogFooter>
-            <span className="mr-auto text-[11px] text-muted-foreground">
+            <span className="mr-auto text-[13px] text-muted-foreground">
               Classification: {selected.classification}. Access: {selected.access}.
             </span>
             <Button variant="outline" onClick={() => setViewOpen(false)}>

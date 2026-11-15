@@ -128,7 +128,7 @@ function ClaimWorkspace() {
     <div className="border-b border-border p-4"><AlfiePanelHeader context={`Claim ${claim.id} · ${claim.type}`} /></div>
     <div className="min-h-0 flex-1 space-y-5 overflow-y-auto p-4">
       {messages.map((m) => m.role === "user" ? <div key={m.id} className="flex flex-col items-end gap-2">
-          {m.files?.length ? <><div className="flex flex-wrap justify-end gap-2">{m.files.map((f) => <AttachmentChip key={f.id} file={f} />)}</div><div className="flex items-center gap-2 text-[10px] text-muted-foreground"><Paperclip className="size-3" />{m.files.length} attachment{m.files.length > 1 ? "s" : ""} ready for analysis · Use in this conversation{m.attached ? <span className="text-positive">· Attached to claim</span> : <Button size="sm" variant="ghost" className="h-6 px-2 text-[10px]" onClick={() => setConfirm(m)}><Upload className="size-3" />Attach to Claim</Button>}</div></> : null}
+          {m.files?.length ? <><div className="flex flex-wrap justify-end gap-2">{m.files.map((f) => <AttachmentChip key={f.id} file={f} />)}</div><div className="flex items-center gap-2 text-[12px] text-muted-foreground"><Paperclip className="size-3" />{m.files.length} attachment{m.files.length > 1 ? "s" : ""} ready for analysis · Use in this conversation{m.attached ? <span className="text-positive">· Attached to claim</span> : <Button size="sm" variant="ghost" className="h-6 px-2 text-[12px]" onClick={() => setConfirm(m)}><Upload className="size-3" />Attach to Claim</Button>}</div></> : null}
           <div className="max-w-[80%] rounded-2xl bg-ink px-4 py-2.5 text-sm text-ink-foreground">{m.text}</div>
         </div> : <div key={m.id} className="flex gap-3"><AlfieMark /><div className="min-w-0 flex-1 text-sm leading-6">
           {m.reply ? <ReplyView reply={m.reply} /> : null}
@@ -138,22 +138,22 @@ function ClaimWorkspace() {
         {thinking ? <div className="flex items-center gap-3 text-xs text-muted-foreground"><AlfieMark /><span className="animate-pulse">Reviewing claim evidence and policy…</span></div> : null}
         <div ref={endRef} />
     </div>
-    <div className="border-t border-border p-4"><AlfieComposer value={input} onChange={setInput} onSend={send} pending={pending} placeholder="Ask Alfie about this claim…" /><p className="mt-2 text-[10px] leading-4 text-muted-foreground">Alfie prepares analysis and drafts. Coverage, liability, and settlement decisions remain with authorized adjusters.</p></div>
+    <div className="border-t border-border p-4"><AlfieComposer value={input} onChange={setInput} onSend={send} pending={pending} placeholder="Ask Alfie about this claim…" /><p className="mt-2 text-[12px] leading-4 text-muted-foreground">Alfie prepares analysis and drafts. Coverage, liability, and settlement decisions remain with authorized adjusters.</p></div>
   </aside>;
 
   return <AppShell rightPanel={alfieRail}><div className="flex h-full flex-col">
     <div className="border-b border-border px-5 py-4 lg:px-8">
       <Link to="/claims" className="mb-2 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><ArrowLeft className="size-3" />Claims</Link>
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div><h1 className="text-xl font-semibold">Claim {claim.id}</h1><p className="mt-1 text-sm text-muted-foreground">{claim.type} · {claim.claimant}</p><div className="mt-2 flex items-center gap-3 text-[11px] text-muted-foreground"><span className="flex items-center gap-1.5">Status <ClaimStatusBadge status={claim.status} /></span><span className="flex items-center gap-1.5">Priority <PriorityBadge priority={claim.priority} /></span></div></div>
+        <div><h1 className="text-xl font-semibold">Claim {claim.id}</h1><p className="mt-1 text-sm text-muted-foreground">{claim.type} · {claim.claimant}</p><div className="mt-2 flex items-center gap-3 text-[13px] text-muted-foreground"><span className="flex items-center gap-1.5">Status <ClaimStatusBadge status={claim.status} /></span><span className="flex items-center gap-1.5">Priority <PriorityBadge priority={claim.priority} /></span></div></div>
         <div className="flex items-center gap-1">
           <DropdownMenu><DropdownMenuTrigger asChild><Button variant="secondary" size="sm">Actions<ChevronDown className="size-3.5" /></Button></DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-72">
-              <DropdownMenuLabel className="text-[10px] uppercase tracking-wider text-muted-foreground">Claim actions</DropdownMenuLabel>
+              <DropdownMenuLabel className="text-[12px] uppercase tracking-wider text-muted-foreground">Claim actions</DropdownMenuLabel>
               {standardActions.map((a) => <DropdownMenuItem key={a} onSelect={() => a === "Add Evidence" ? document.querySelector<HTMLButtonElement>('[aria-label="Add attachment"]')?.click() : runAction(a)}>{a}</DropdownMenuItem>)}
-              <DropdownMenuSeparator /><DropdownMenuLabel className="text-[10px] uppercase tracking-wider text-muted-foreground">Governed actions</DropdownMenuLabel>
-              <DropdownMenuItem onSelect={() => runAction("Prepare Recommendation")} className="flex-col items-start gap-0.5"><span>Prepare Settlement Recommendation</span><span className="flex items-center gap-1 text-[10px] text-warning"><ShieldAlert className="size-3" />Human approval required</span></DropdownMenuItem>
-              <DropdownMenuItem disabled className="flex-col items-start gap-0.5"><span>Approve Settlement</span><span className="flex items-center gap-1 text-[10px]"><Lock className="size-3" />Permission required · Claims Manager</span></DropdownMenuItem>
+              <DropdownMenuSeparator /><DropdownMenuLabel className="text-[12px] uppercase tracking-wider text-muted-foreground">Governed actions</DropdownMenuLabel>
+              <DropdownMenuItem onSelect={() => runAction("Prepare Recommendation")} className="flex-col items-start gap-0.5"><span>Prepare Settlement Recommendation</span><span className="flex items-center gap-1 text-[12px] text-warning"><ShieldAlert className="size-3" />Human approval required</span></DropdownMenuItem>
+              <DropdownMenuItem disabled className="flex-col items-start gap-0.5"><span>Approve Settlement</span><span className="flex items-center gap-1 text-[12px]"><Lock className="size-3" />Permission required · Claims Manager</span></DropdownMenuItem>
             </DropdownMenuContent></DropdownMenu>
           <Button variant="ghost" size="sm" onClick={() => { void navigator.clipboard?.writeText(window.location.href); flash("Link copied to clipboard."); }}><Share2 className="size-3.5" />Share</Button>
           <Button variant="ghost" size="sm" onClick={() => { download({ id: "x", name: `${claim.id}-summary`, label: `Claim ${claim.id}`, isImage: false, size: "", summary: `${claim.type} · ${claim.claimant}\nPolicy ${claim.policy}\nEstimated loss ${money(claim.estimatedLoss)}` }); log({ actor: "Jane Doe", actorType: "User", action: "Exported claim", source: "Claim workspace", result: "Summary downloaded" }); }}><Download className="size-3.5" />Export</Button>
@@ -165,7 +165,7 @@ function ClaimWorkspace() {
     </div>
     {notice ? <div className="mx-5 mt-3 rounded-lg border border-border bg-secondary px-3 py-2 text-xs lg:mx-8">{notice}</div> : null}
 
-    {tab === "activity" ? <div className="flex-1 px-5 py-5 lg:px-8"><p className="mb-3 text-xs text-muted-foreground">Complete audit trail of user, Alfie, and system activity on this claim.</p><div className="overflow-x-auto rounded-xl border border-border bg-card"><table className="w-full min-w-[680px] text-left text-xs"><thead><tr className="border-b border-border text-[10px] uppercase tracking-wider text-muted-foreground">{["Timestamp", "Actor", "Action", "Source", "Result"].map((h) => <th key={h} className="px-3 py-2.5 font-medium">{h}</th>)}</tr></thead><tbody>{audit.map((e, i) => <tr key={i} className="border-b border-border last:border-0"><td className="whitespace-nowrap px-3 py-2.5 text-muted-foreground">{e.time}</td><td className="px-3 py-2.5"><span className="flex items-center gap-1.5 font-medium">{e.actorType === "Alfie" ? <Bot className="size-3.5 text-primary" /> : null}{e.actor}</span></td><td className="px-3 py-2.5">{e.action}</td><td className="px-3 py-2.5 text-muted-foreground">{e.source}</td><td className="px-3 py-2.5">{e.result}</td></tr>)}</tbody></table></div></div> :
+    {tab === "activity" ? <div className="flex-1 px-5 py-5 lg:px-8"><p className="mb-3 text-xs text-muted-foreground">Complete audit trail of user, Alfie, and system activity on this claim.</p><div className="overflow-x-auto rounded-xl border border-border bg-card"><table className="w-full min-w-[680px] text-left text-xs"><thead><tr className="border-b border-border text-[12px] uppercase tracking-wider text-muted-foreground">{["Timestamp", "Actor", "Action", "Source", "Result"].map((h) => <th key={h} className="px-3 py-2.5 font-medium">{h}</th>)}</tr></thead><tbody>{audit.map((e, i) => <tr key={i} className="border-b border-border last:border-0"><td className="whitespace-nowrap px-3 py-2.5 text-muted-foreground">{e.time}</td><td className="px-3 py-2.5"><span className="flex items-center gap-1.5 font-medium">{e.actorType === "Alfie" ? <Bot className="size-3.5 text-primary" /> : null}{e.actor}</span></td><td className="px-3 py-2.5">{e.action}</td><td className="px-3 py-2.5 text-muted-foreground">{e.source}</td><td className="px-3 py-2.5">{e.result}</td></tr>)}</tbody></table></div></div> :
     <div className="px-5 py-5 lg:px-8"><div className="mx-auto max-w-3xl">
       <ReviewBar status={`Adjuster review · step ${CURRENT + 1} of ${workflow.length}`} title="Estimate $12,400 is above your $5,000 authority" detail="Alfie has compared the estimate with the damage photos and drafted a recommendation below. A supervisor must approve any settlement.">
         <Button size="sm" variant="secondary" onClick={() => runAction("Escalate Claim")}>Escalate</Button>
@@ -179,21 +179,21 @@ function ClaimWorkspace() {
       </section>
       <Section title="Claim details">
         <dl className="grid grid-cols-2 gap-x-3 gap-y-3 text-xs md:grid-cols-4">
-          {([["Claim", claim.id], ["Policy", claim.policy], ["Claimant", claim.claimant], ["Loss Type", claim.type], ["Date of Loss", claim.dateOfLoss], ["Estimated Loss", money(claim.estimatedLoss)]] as const).map(([k, v]) => <div key={k}><dt className="text-[10px] text-muted-foreground">{k}</dt><dd className="mt-0.5 font-medium">{v}</dd></div>)}
-          <div><dt className="text-[10px] text-muted-foreground">Status</dt><dd className="mt-1"><ClaimStatusBadge status={claim.status} /></dd></div>
-          <div><dt className="text-[10px] text-muted-foreground">Priority</dt><dd className="mt-1"><PriorityBadge priority={claim.priority} /></dd></div>
+          {([["Claim", claim.id], ["Policy", claim.policy], ["Claimant", claim.claimant], ["Loss Type", claim.type], ["Date of Loss", claim.dateOfLoss], ["Estimated Loss", money(claim.estimatedLoss)]] as const).map(([k, v]) => <div key={k}><dt className="text-[12px] text-muted-foreground">{k}</dt><dd className="mt-0.5 font-medium">{v}</dd></div>)}
+          <div><dt className="text-[12px] text-muted-foreground">Status</dt><dd className="mt-1"><ClaimStatusBadge status={claim.status} /></dd></div>
+          <div><dt className="text-[12px] text-muted-foreground">Priority</dt><dd className="mt-1"><PriorityBadge priority={claim.priority} /></dd></div>
         </dl>
       </Section>
       <Section title={`Evidence · ${evidence.length}`}>
         <div className="grid grid-cols-4 gap-2">{evidence.filter((e) => e.isImage).map((e) => <button key={e.id} onClick={() => setPreview(e)} className="overflow-hidden rounded-lg border border-border hover:ring-2 hover:ring-ring/30" aria-label={`Open ${e.label}`}><img src={e.url} alt={e.label} loading="lazy" width={944} height={704} className="aspect-square w-full object-cover" /></button>)}</div>
-        <div className="mt-2 space-y-1.5">{evidence.filter((e) => !e.isImage).map((e) => <button key={e.id} onClick={() => setPreview(e)} className="flex w-full items-center gap-2.5 rounded-lg border border-border bg-card p-2 text-left hover:bg-secondary"><div className="flex size-8 items-center justify-center rounded-md bg-secondary text-muted-foreground"><FileGlyph name={e.name} /></div><div className="min-w-0"><p className="text-xs font-medium">{e.label}</p><p className="truncate text-[10px] text-muted-foreground">{fileExt(e.name)} · {e.name}</p></div></button>)}</div>
+        <div className="mt-2 space-y-1.5">{evidence.filter((e) => !e.isImage).map((e) => <button key={e.id} onClick={() => setPreview(e)} className="flex w-full items-center gap-2.5 rounded-lg border border-border bg-card p-2 text-left hover:bg-secondary"><div className="flex size-8 items-center justify-center rounded-md bg-secondary text-muted-foreground"><FileGlyph name={e.name} /></div><div className="min-w-0"><p className="text-xs font-medium">{e.label}</p><p className="truncate text-[12px] text-muted-foreground">{fileExt(e.name)} · {e.name}</p></div></button>)}</div>
       </Section>
       <Section title="Analysis">
         {([["Damage Analysis", "Available", "text-positive"], ["Coverage Review", "Needs Review", "text-warning"], ["Missing Information", "2 Items", "text-warning"], ["Risk Indicators", "1 Flag", "text-destructive"]] as const).map(([k, v, tone]) => <button key={k} onClick={() => send(k === "Damage Analysis" ? "Compare the repair estimate with the damage photos." : k === "Coverage Review" ? "Check the policy information." : k === "Missing Information" ? "What information is missing?" : "Show me potential risk or fraud indicators.")} className="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-xs hover:bg-secondary"><span>{k}</span><span className={`font-medium ${tone}`}>{v}</span></button>)}
-        <p className="mt-2 px-2 text-[10px] leading-4 text-muted-foreground">Analysis opens in the Alfie rail. AI analysis supports adjuster judgment. It is not a coverage, liability, or settlement decision.</p>
+        <p className="mt-2 px-2 text-[12px] leading-4 text-muted-foreground">Analysis opens in the Alfie rail. AI analysis supports adjuster judgment. It is not a coverage, liability, or settlement decision.</p>
       </Section>
       <Section title="Workflow">
-        <ol className="space-y-0.5">{workflow.map((step, i) => <li key={step} className={`flex items-center gap-2.5 rounded-md px-2 py-1.5 text-xs ${i === CURRENT ? "bg-primary/10 font-semibold text-primary" : i < CURRENT ? "text-foreground" : "text-muted-foreground"}`}>{i < CURRENT ? <Check className="size-3.5 text-positive" /> : i === CURRENT ? <ChevronDown className="size-3.5 -rotate-90" /> : <Circle className="size-3" />}{step}{i === CURRENT ? <span className="ml-auto text-[10px] font-medium">Current</span> : null}</li>)}</ol>
+        <ol className="space-y-0.5">{workflow.map((step, i) => <li key={step} className={`flex items-center gap-2.5 rounded-md px-2 py-1.5 text-xs ${i === CURRENT ? "bg-primary/10 font-semibold text-primary" : i < CURRENT ? "text-foreground" : "text-muted-foreground"}`}>{i < CURRENT ? <Check className="size-3.5 text-positive" /> : i === CURRENT ? <ChevronDown className="size-3.5 -rotate-90" /> : <Circle className="size-3" />}{step}{i === CURRENT ? <span className="ml-auto text-[12px] font-medium">Current</span> : null}</li>)}</ol>
       </Section>
     </div></div>}
     <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}><DialogContent className="max-w-xl">{preview ? <><DialogHeader><DialogTitle>{preview.label}</DialogTitle><DialogDescription>{fileExt(preview.name)} · {preview.name} · {preview.size}</DialogDescription></DialogHeader>
@@ -207,7 +207,7 @@ function ClaimWorkspace() {
 }
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
-  return <section className="mt-6 border-t border-border pt-5"><h3 className="mb-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{title}</h3>{children}</section>;
+  return <section className="mt-6 border-t border-border pt-5"><h3 className="mb-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{title}</h3>{children}</section>;
 }
 
 function ReplyView({ reply }: { reply: Reply }) {
@@ -217,6 +217,6 @@ function ReplyView({ reply }: { reply: Reply }) {
     {reply.fields ? <dl className="divide-y divide-border rounded-xl border border-border">{reply.fields.map(([k, v]) => <div key={k} className="grid grid-cols-[150px_1fr] gap-3 px-3 py-2 text-xs"><dt className="text-muted-foreground">{k}</dt><dd className="font-medium">{v}</dd></div>)}</dl> : null}
     {reply.note ? <p className="text-xs text-muted-foreground">{reply.note}</p> : null}
     {reply.next || reply.confidence ? <div className="flex flex-wrap gap-4 text-xs">{reply.next ? <p><span className="text-muted-foreground">Recommended next step: </span><span className="font-semibold">{reply.next}</span></p> : null}{reply.confidence ? <p><span className="text-muted-foreground">Confidence: </span><span className="font-semibold">{reply.confidence}</span></p> : null}</div> : null}
-    {reply.sources ? <div className="flex flex-wrap items-center gap-1.5"><span className="text-[10px] uppercase tracking-wider text-muted-foreground">Sources</span>{reply.sources.map((s) => <span key={s} className="rounded-full border border-border bg-background px-2 py-0.5 text-[11px]">{s}</span>)}</div> : null}
+    {reply.sources ? <div className="flex flex-wrap items-center gap-1.5"><span className="text-[12px] uppercase tracking-wider text-muted-foreground">Sources</span>{reply.sources.map((s) => <span key={s} className="rounded-full border border-border bg-background px-2 py-0.5 text-[13px]">{s}</span>)}</div> : null}
   </div>;
 }

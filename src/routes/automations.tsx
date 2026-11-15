@@ -143,11 +143,11 @@ function AutomationsPage() {
             ["Failed, last 30 days", "6", "Each with an error log and an owner notified"],
           ].map(([label, value, note]) => (
             <div key={label} className="rounded-2xl border border-border bg-card p-4">
-              <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+              <p className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground">
                 {label}
               </p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
-              <p className="mt-1 text-[11px] text-muted-foreground">{note}</p>
+              <p className="mt-1 text-[13px] text-muted-foreground">{note}</p>
             </div>
           ))}
         </section>
@@ -196,7 +196,7 @@ function AutomationsPage() {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h3 className="text-sm font-semibold">{a.name}</h3>
-                    <p className="mt-0.5 text-[11px] text-muted-foreground">
+                    <p className="mt-0.5 text-[13px] text-muted-foreground">
                       {a.id} · {a.category} · {a.runs} runs · Last run {a.lastRun}
                     </p>
                   </div>
@@ -250,7 +250,7 @@ function AutomationsPage() {
         <div className="mt-4 grid gap-4 xl:grid-cols-[minmax(0,1fr)_400px]">
           <section className={card}>
             <h2 className="text-sm font-semibold">Execution history</h2>
-            <p className="mt-0.5 text-[11px] text-muted-foreground">
+            <p className="mt-0.5 text-[13px] text-muted-foreground">
               Select an execution to inspect it. Failures are shown with their reason, and an
               automation never silently proceeds on incomplete data.
             </p>
@@ -299,14 +299,14 @@ function AutomationsPage() {
             <h2 className="flex items-center gap-2 text-sm font-semibold">
               <Workflow className="size-4" /> Inside an execution: EXE-8841
             </h2>
-            <p className="mt-0.5 text-[11px] text-muted-foreground">
+            <p className="mt-0.5 text-[13px] text-muted-foreground">
               New Submission Processing, including the conditional branch and the approval pause.
             </p>
             <ol className="mt-3 space-y-2">
               {submissionWorkflowSteps.map((s, i) => (
                 <li key={s.step} className="flex gap-2.5 text-xs leading-5">
                   <span
-                    className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold ${s.state === "Completed" ? "bg-positive/10 text-positive" : s.state === "Awaiting Approval" ? "bg-warning/15 text-warning-foreground" : "bg-secondary text-muted-foreground"}`}
+                    className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold ${s.state === "Completed" ? "bg-positive/10 text-positive" : s.state === "Awaiting Approval" ? "bg-warning/15 text-warning-foreground" : "bg-secondary text-muted-foreground"}`}
                   >
                     {i + 1}
                   </span>
@@ -330,7 +330,7 @@ function AutomationsPage() {
           <h2 className="flex items-center gap-2 text-sm font-semibold">
             <Bot className="size-4 text-primary" /> Automation builder
           </h2>
-          <p className="mt-0.5 text-[11px] text-muted-foreground">
+          <p className="mt-0.5 text-[13px] text-muted-foreground">
             Create from scratch or from a template. The lifecycle is controlled: nothing activates
             until configuration, testing and any required approval are complete.
           </p>
@@ -338,7 +338,7 @@ function AutomationsPage() {
             {lifecycle.map((s, i) => (
               <span key={s} className="flex items-center gap-1">
                 <span
-                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${i === 0 ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground"}`}
+                  className={`rounded-full px-2 py-0.5 text-[12px] font-semibold ${i === 0 ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground"}`}
                 >
                   {s}
                 </span>
@@ -347,7 +347,7 @@ function AutomationsPage() {
             ))}
           </div>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Automation name
               <input
                 value={bName}
@@ -356,7 +356,7 @@ function AutomationsPage() {
                 className={`${inputCls} mt-1`}
               />
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Department or process
               <select
                 value={bCategory}
@@ -368,7 +368,7 @@ function AutomationsPage() {
                 ))}
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground md:col-span-2">
+            <label className="block text-[13px] text-muted-foreground md:col-span-2">
               Purpose
               <input
                 value={bPurpose}
@@ -377,7 +377,7 @@ function AutomationsPage() {
                 className={`${inputCls} mt-1`}
               />
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Trigger type
               <select
                 value={bTrigger}
@@ -389,7 +389,7 @@ function AutomationsPage() {
                 ))}
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Human approval
               <select
                 value={bApproval}
@@ -407,14 +407,14 @@ function AutomationsPage() {
               </select>
             </label>
             <div>
-              <p className="text-[11px] text-muted-foreground">Specialist agents</p>
+              <p className="text-[13px] text-muted-foreground">Specialist agents</p>
               <div className="mt-1.5 flex flex-wrap gap-1.5">
                 {agentChoices.map((a) => (
                   <button
                     key={a}
                     type="button"
                     onClick={() => toggle(bAgents, a, setBAgents)}
-                    className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${bAgents.includes(a) ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}
+                    className={`rounded-full px-2.5 py-1 text-[13px] font-medium ${bAgents.includes(a) ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}
                   >
                     {a}
                   </button>
@@ -422,21 +422,21 @@ function AutomationsPage() {
               </div>
             </div>
             <div>
-              <p className="text-[11px] text-muted-foreground">Authorized data sources</p>
+              <p className="text-[13px] text-muted-foreground">Authorized data sources</p>
               <div className="mt-1.5 flex flex-wrap gap-1.5">
                 {sourceChoices.map((s) => (
                   <button
                     key={s}
                     type="button"
                     onClick={() => toggle(bSources, s, setBSources)}
-                    className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${bSources.includes(s) ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}
+                    className={`rounded-full px-2.5 py-1 text-[13px] font-medium ${bSources.includes(s) ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}
                   >
                     {s}
                   </button>
                 ))}
               </div>
             </div>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Error handling and retries
               <select
                 className={`${selectCls} mt-1`}
@@ -447,7 +447,7 @@ function AutomationsPage() {
                 <option>Retry up to 5 times, idempotency checks on every consequential step</option>
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Notifications
               <select
                 className={`${selectCls} mt-1`}
@@ -487,10 +487,10 @@ function AutomationsPage() {
               {automationTemplates.map((t) => (
                 <div key={t.name} className="rounded-xl bg-secondary/50 p-3.5">
                   <p className="text-xs font-semibold">{t.name}</p>
-                  <p className="mt-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                  <p className="mt-0.5 text-[12px] font-medium uppercase tracking-wide text-muted-foreground">
                     {t.category}
                   </p>
-                  <p className="mt-1.5 text-[11px] leading-4 text-muted-foreground">{t.steps}</p>
+                  <p className="mt-1.5 text-[13px] leading-4 text-muted-foreground">{t.steps}</p>
                   <Button
                     variant="outline"
                     size="sm"
@@ -508,7 +508,7 @@ function AutomationsPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-3 flex items-start gap-1.5 text-[13px] leading-4 text-muted-foreground">
               <ShieldCheck className="mt-0.5 size-3.5 shrink-0" /> Templates are configurable before
               activation and never assume your business rules or thresholds. Automations run under
               an approved service identity with defined permissions, not the creator's personal

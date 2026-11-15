@@ -45,25 +45,25 @@ export function AppShell({ children, rightPanel }: { children: ReactNode; rightP
       <div className={`flex h-16 shrink-0 items-center ${collapsed ? "justify-center" : "justify-between px-3"}`}>
         <div className={`flex min-w-0 items-center ${collapsed ? "hidden" : "gap-2.5"}`}>
           <div className="flex size-9 shrink-0 items-center justify-center rounded-md bg-ink text-ink-foreground"><Building2 className="size-4" /></div>
-          <div className="min-w-0"><p className="truncate text-sm font-semibold">Northstar Mutual</p><p className="text-[10px] text-muted-foreground">Insurance workspace</p></div>
+          <div className="min-w-0"><p className="truncate text-sm font-semibold">Northstar Mutual</p><p className="text-[12px] text-muted-foreground">Insurance workspace</p></div>
         </div>
         <Button variant="ghost" size="icon" onClick={() => setCollapsed((value) => !value)} className="hidden lg:inline-flex" aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}>{collapsed ? <ChevronRight className="size-4" /> : <ChevronLeft className="size-4" />}</Button>
         <Button variant="ghost" size="icon" onClick={() => setMobileOpen(false)} className="lg:hidden" aria-label="Close navigation"><X className="size-4" /></Button>
       </div>
       <nav className="scrollbar-none flex-1 space-y-4 overflow-y-auto p-3">
         {groups.map((group) => <div key={group.title || "primary"} className="space-y-1">
-          {group.title && !collapsed ? <p className="px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{group.title}</p> : null}
+          {group.title && !collapsed ? <p className="px-3 pb-1 pt-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{group.title}</p> : null}
           {group.items.map(([label, to, Icon]) => <Button key={label} asChild variant="ghost" title={collapsed ? label : undefined} className={`w-full ${collapsed ? "px-0" : "justify-start px-3"} ${activeLabel === label ? "bg-secondary text-foreground" : ""}`}><Link to={to} onClick={() => setMobileOpen(false)}><Icon className="size-4" strokeWidth={1.7} />{!collapsed ? <span className="truncate">{label}</span> : null}</Link></Button>)}
         </div>)}
       </nav>
       <div className="relative p-3">
         <div className={`alfie-surface mb-2 rounded-md text-white ${collapsed ? "flex size-10 items-center justify-center p-0" : "p-3"}`} title="Alfie Pro">
-          <div className="flex items-center gap-2 text-xs font-semibold"><WandSparkles className="size-4 text-brand-cyan" />{!collapsed ? "Alfie Pro" : null}</div>{!collapsed ? <p className="mt-1 text-[10px] text-white/70">Your AI copilot for insurance</p> : null}
+          <div className="flex items-center gap-2 text-xs font-semibold"><WandSparkles className="size-4 text-brand-cyan" />{!collapsed ? "Alfie Pro" : null}</div>{!collapsed ? <p className="mt-1 text-[12px] text-white/70">Your AI copilot for insurance</p> : null}
         </div>
         {profileOpen ? <div className={`absolute bottom-[66px] z-50 w-52 rounded-md border border-border bg-popover p-1 shadow-workspace ${collapsed ? "left-14" : "left-3"}`}>{profileItems.map(([label, Icon]) => <Button key={label} variant="ghost" className="w-full justify-start px-3 text-xs" onClick={() => setProfileOpen(false)}><Icon className="size-4" />{label}</Button>)}</div> : null}
         <Button variant="ghost" onClick={() => setProfileOpen((value) => !value)} className={`h-auto w-full ${collapsed ? "px-0" : "justify-start px-2 py-2"}`} aria-label="Open user menu">
           <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-avatar text-xs font-semibold text-avatar-foreground">JD</div>
-          {!collapsed ? <><span className="min-w-0 flex-1 text-left"><span className="block text-xs font-semibold text-foreground">Jane Doe</span><span className="block text-[10px] font-normal text-muted-foreground">Insurance Manager</span></span><ChevronDown className="size-3.5" /></> : null}
+          {!collapsed ? <><span className="min-w-0 flex-1 text-left"><span className="block text-xs font-semibold text-foreground">Jane Doe</span><span className="block text-[12px] font-normal text-muted-foreground">Insurance Manager</span></span><ChevronDown className="size-3.5" /></> : null}
         </Button>
       </div>
     </aside>

@@ -489,7 +489,7 @@ function FinanceAnalysis() {
         </Button>
       </div>
 
-      <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+      <p className="mb-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         Analysis details
       </p>
       <dl className="space-y-2 text-xs">
@@ -511,7 +511,7 @@ function FinanceAnalysis() {
         ))}
       </dl>
 
-      <p className="mb-2 mt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+      <p className="mb-2 mt-6 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         Financial summary
       </p>
       <dl className="space-y-2 text-xs">
@@ -532,7 +532,7 @@ function FinanceAnalysis() {
         ))}
       </dl>
 
-      <p className="mb-2 mt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+      <p className="mb-2 mt-6 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         Data sources
       </p>
       <div className="space-y-2">
@@ -541,7 +541,7 @@ function FinanceAnalysis() {
             <Database className="mt-0.5 size-3.5 shrink-0 text-primary" />
             <span>
               <span className="block font-medium">{s.name}</span>
-              <span className="text-[10px] text-muted-foreground">
+              <span className="text-[12px] text-muted-foreground">
                 {s.status}, synced {s.sync}
               </span>
             </span>
@@ -549,7 +549,7 @@ function FinanceAnalysis() {
         ))}
       </div>
 
-      <p className="mb-2 mt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+      <p className="mb-2 mt-6 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         Key findings
       </p>
       <ul className="list-disc space-y-1.5 pl-4 text-xs leading-5">
@@ -559,7 +559,7 @@ function FinanceAnalysis() {
         <li>One possible duplicate payment needs review.</li>
       </ul>
 
-      <p className="mb-2 mt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+      <p className="mb-2 mt-6 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         Analysis workflow
       </p>
       <ol className="space-y-2">
@@ -586,7 +586,7 @@ function FinanceAnalysis() {
               {step}
             </span>
             {i === currentStage ? (
-              <span className="ml-auto text-[10px] text-primary">Current</span>
+              <span className="ml-auto text-[12px] text-primary">Current</span>
             ) : null}
           </li>
         ))}
@@ -598,7 +598,7 @@ function FinanceAnalysis() {
         </summary>
         <div className="mt-3 space-y-3">
           {financeAudit.map((e) => (
-            <div key={`${e.time}-${e.action}`} className="text-[11px]">
+            <div key={`${e.time}-${e.action}`} className="text-[13px]">
               <p className="font-medium">{e.action}</p>
               <p className="text-muted-foreground">
                 {e.actor}, {e.type} · {e.time}
@@ -608,7 +608,7 @@ function FinanceAnalysis() {
           ))}
         </div>
       </details>
-      <p className="mt-auto border-t border-border pt-4 text-[10px] leading-4 text-muted-foreground">
+      <p className="mt-auto border-t border-border pt-4 text-[12px] leading-4 text-muted-foreground">
         Alfie prepares and recommends. Payments, postings and period closures need the configured
         permissions and approvals, and are never done silently.
       </p>
@@ -699,7 +699,7 @@ function FinanceAnalysis() {
                   <AlfieMark className="size-6 rounded-md" />
                   <span className="text-xs font-semibold">Alfie</span>
                   {m.reply.agents ? (
-                    <span className="text-[10px] text-muted-foreground">
+                    <span className="text-[12px] text-muted-foreground">
                       via {m.reply.agents.join(", ")}
                     </span>
                   ) : null}
@@ -743,22 +743,22 @@ function FinanceAnalysis() {
                     </div>
                   ))}
                   {m.reply.confidence ? (
-                    <p className="mt-4 border-t border-border pt-3 text-[11px] text-muted-foreground">
+                    <p className="mt-4 border-t border-border pt-3 text-[13px] text-muted-foreground">
                       Confidence: {m.reply.confidence}
                     </p>
                   ) : null}
                   {m.reply.limitations?.length ? (
-                    <p className="mt-1 text-[11px] text-muted-foreground">
+                    <p className="mt-1 text-[13px] text-muted-foreground">
                       Limitations: {m.reply.limitations.join(" ")}
                     </p>
                   ) : null}
                   {m.reply.sources?.length ? (
-                    <p className="mt-1 text-[11px] text-muted-foreground">
+                    <p className="mt-1 text-[13px] text-muted-foreground">
                       Sources: {m.reply.sources.join(", ")}
                     </p>
                   ) : null}
                   {repoDone.length && m.reply.actions?.includes("Add to repository") ? (
-                    <p className="mt-2 text-[11px] text-positive">
+                    <p className="mt-2 text-[13px] text-positive">
                       Added to the organizational repository: {repoDone.join(", ")}
                     </p>
                   ) : null}
@@ -812,7 +812,7 @@ function FinanceAnalysis() {
               <button
                 key={f}
                 onClick={() => ask(f)}
-                className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground hover:bg-secondary hover:text-foreground"
+                className="rounded-full border border-border px-2.5 py-1 text-[13px] text-muted-foreground hover:bg-secondary hover:text-foreground"
               >
                 {f}
               </button>
@@ -824,7 +824,7 @@ function FinanceAnalysis() {
             onSend={ask}
             placeholder="Ask a follow-up, or attach financial statements, receivables, payment reports or ledger exports..."
           />
-          <p className="mt-1.5 text-center text-[10px] text-muted-foreground">
+          <p className="mt-1.5 text-center text-[12px] text-muted-foreground">
             Example attachments: Q3 Financial Statements.xlsx, Premium Receivables.csv, Claims
             Payments Report.xlsx, Broker Commission Schedule.pdf, Bank Reconciliation.xlsx, General
             Ledger Export.csv

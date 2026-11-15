@@ -63,7 +63,7 @@ function ClosePage() {
             ["Pending Approvals", `${pendingApprovals}`],
           ].map(([label, value]) => (
             <div key={label} className="bg-card p-4">
-              <p className="text-[11px] font-medium text-muted-foreground">{label}</p>
+              <p className="text-[13px] font-medium text-muted-foreground">{label}</p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
             </div>
           ))}
@@ -74,7 +74,7 @@ function ClosePage() {
             style={{ width: `${Math.round((complete / tasks.length) * 100)}%` }}
           />
         </div>
-        <p className="mt-2 text-[11px] text-muted-foreground">
+        <p className="mt-2 text-[13px] text-muted-foreground">
           Reconciliation status: 7 transactions still need review in Accounting and Reconciliation,
           which is why Complete Financial Reconciliations is blocked.
         </p>
@@ -121,7 +121,7 @@ function ClosePage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-t border-border text-left text-[11px] text-muted-foreground">
+                <tr className="border-t border-border text-left text-[13px] text-muted-foreground">
                   {["#", "Task", "Responsible", "Due date", "Status", "Approval", "Action"].map(
                     (h) => (
                       <th key={h} className="px-4 py-2 font-medium">
@@ -148,11 +148,11 @@ function ClosePage() {
                           {t.status === "Not Started" ? "Start" : "Mark complete"}
                         </Button>
                       ) : t.status === "Blocked" ? (
-                        <span className="text-[11px] text-muted-foreground">
+                        <span className="text-[13px] text-muted-foreground">
                           Resolve reconciliations first
                         </span>
                       ) : (
-                        <span className="text-[11px] text-muted-foreground">Done</span>
+                        <span className="text-[13px] text-muted-foreground">Done</span>
                       )}
                     </td>
                   </tr>
@@ -162,7 +162,7 @@ function ClosePage() {
           </div>
           <div className="flex flex-wrap items-center gap-3 border-t border-border p-4">
             <Button disabled={complete < tasks.length}>Close Reporting Period</Button>
-            <p className="text-[11px] text-muted-foreground">
+            <p className="text-[13px] text-muted-foreground">
               {complete < tasks.length
                 ? `Available after all ${tasks.length} tasks are complete and sign-off is recorded. ${tasks.length - complete} tasks remain.`
                 : "All tasks complete. Closing still requires Finance Manager authorization."}
@@ -201,11 +201,11 @@ function ClosePage() {
             ].map(([role, desc]) => (
               <div key={role} className="rounded-xl border border-border p-3.5">
                 <h4 className="text-xs font-semibold">{role}</h4>
-                <p className="mt-1.5 text-[11px] leading-5 text-muted-foreground">{desc}</p>
+                <p className="mt-1.5 text-[13px] leading-5 text-muted-foreground">{desc}</p>
               </div>
             ))}
           </div>
-          <p className="mt-3 text-[11px] leading-5 text-muted-foreground">
+          <p className="mt-3 text-[13px] leading-5 text-muted-foreground">
             Audit trail: every material Finance action records the user or agent responsible, the
             action, date and time, the financial record affected, original and proposed values, data
             source, approval status and final result. The history is immutable or appropriately

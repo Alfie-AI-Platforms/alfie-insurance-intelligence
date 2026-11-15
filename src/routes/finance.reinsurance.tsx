@@ -69,7 +69,7 @@ function ReinsurancePage() {
         <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-4">
           {overview.map(([label, value]) => (
             <div key={label} className="bg-card p-4">
-              <p className="text-[11px] font-medium text-muted-foreground">{label}</p>
+              <p className="text-[13px] font-medium text-muted-foreground">{label}</p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
             </div>
           ))}
@@ -87,7 +87,7 @@ function ReinsurancePage() {
                       {money(r.recoverable - r.recovered)} outstanding
                     </span>
                   </div>
-                  <p className="mt-1 text-[11px] text-muted-foreground">{r.treaties}</p>
+                  <p className="mt-1 text-[13px] text-muted-foreground">{r.treaties}</p>
                   <div className="mt-2 h-1.5 rounded-full bg-secondary">
                     <div
                       className="h-1.5 rounded-full bg-primary"
@@ -96,7 +96,7 @@ function ReinsurancePage() {
                       }}
                     />
                   </div>
-                  <p className="mt-1 text-[10px] text-muted-foreground">
+                  <p className="mt-1 text-[12px] text-muted-foreground">
                     {money(r.recovered)} received of {money(r.recoverable)} recoverable
                   </p>
                 </div>
@@ -114,12 +114,12 @@ function ReinsurancePage() {
                     {i < 3 ? (
                       <Check className="size-2.5" />
                     ) : (
-                      <span className="text-[9px]">{i + 1}</span>
+                      <span className="text-[12px]">{i + 1}</span>
                     )}
                   </span>
                   <span className={i === 3 ? "font-semibold" : ""}>{step}</span>
                   {i === 3 ? (
-                    <span className="ml-auto text-[10px] text-primary">
+                    <span className="ml-auto text-[12px] text-primary">
                       Where most open recoveries sit
                     </span>
                   ) : null}
@@ -146,7 +146,7 @@ function ReinsurancePage() {
                 Prepare recovery report
               </Button>
             </div>
-            <p className="mt-3 text-[11px] leading-5 text-muted-foreground">
+            <p className="mt-3 text-[13px] leading-5 text-muted-foreground">
               One record below shows a recovery of $0 with the note Below retention. That is a
               treaty assessment result, not a missing recovery: the claim sits under the Casualty
               XOL retention, so nothing is recoverable on it.
@@ -161,7 +161,7 @@ function ReinsurancePage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-t border-border text-left text-[11px] text-muted-foreground">
+                <tr className="border-t border-border text-left text-[13px] text-muted-foreground">
                   {[
                     "Reinsurer",
                     "Treaty",

@@ -67,7 +67,7 @@ function ClaimsPage() {
 
     <div className="relative mt-6"><Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><input value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => e.key === "Enter" && searchSubmit()} placeholder="Search claims, policies, claimants, or ask Alfie…" aria-label="Search claims" className="h-11 w-full rounded-xl border border-border bg-secondary/50 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus:border-ring" /></div>
 
-    <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3 lg:grid-cols-5">{metrics.map(([label, value, trend, up]) => <div key={label} className="bg-card p-4"><p className="text-[11px] font-medium text-muted-foreground">{label}</p><p className="mt-1.5 text-2xl font-semibold">{value}</p><p className="mt-1 flex items-center gap-0.5 text-[10px] text-muted-foreground">{up ? <ArrowUpRight className="size-3" /> : <ArrowDownRight className="size-3" />}{trend}</p></div>)}</div>
+    <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3 lg:grid-cols-5">{metrics.map(([label, value, trend, up]) => <div key={label} className="bg-card p-4"><p className="text-[13px] font-medium text-muted-foreground">{label}</p><p className="mt-1.5 text-2xl font-semibold">{value}</p><p className="mt-1 flex items-center gap-0.5 text-[12px] text-muted-foreground">{up ? <ArrowUpRight className="size-3" /> : <ArrowDownRight className="size-3" />}{trend}</p></div>)}</div>
 
     <section className="mt-6 rounded-2xl border border-border bg-panel p-4">
       <div className="mb-3 flex items-center gap-2"><AlfieMark /><h2 className="text-sm font-semibold">Ask Alfie about your claims</h2></div>
@@ -95,7 +95,7 @@ function ClaimsPage() {
         {priority || type || assignee || date || tab !== "All" || search ? <Button size="sm" variant="ghost" onClick={() => { setPriority(""); setType(""); setAssignee(""); setDate(""); setTab("All"); setSearch(""); }}>Clear filters</Button> : null}
       </div>
       <div className="mt-3 overflow-x-auto rounded-xl border border-border bg-card"><table className="w-full min-w-[760px] text-left text-sm">
-        <thead><tr className="border-b border-border text-[11px] uppercase tracking-wider text-muted-foreground">{["Claim", "Claimant", "Type", "Status", "Priority", "Assigned To", "Last Updated"].map((h) => <th key={h} className="px-4 py-3 font-medium">{h}</th>)}</tr></thead>
+        <thead><tr className="border-b border-border text-[13px] uppercase tracking-wider text-muted-foreground">{["Claim", "Claimant", "Type", "Status", "Priority", "Assigned To", "Last Updated"].map((h) => <th key={h} className="px-4 py-3 font-medium">{h}</th>)}</tr></thead>
         <tbody>{filtered.map((c) => <tr key={c.id} onClick={() => navigate({ to: "/claims/$claimId", params: { claimId: c.id } })} className="cursor-pointer border-b border-border last:border-0 hover:bg-secondary/60">
           <td className="px-4 py-3"><Link to="/claims/$claimId" params={{ claimId: c.id }} className="font-semibold hover:text-primary" onClick={(e) => e.stopPropagation()}>{c.id}</Link></td>
           <td className="px-4 py-3">{c.claimant}</td><td className="px-4 py-3 text-muted-foreground">{c.type}</td><td className="px-4 py-3"><ClaimStatusBadge status={c.status} /></td><td className="px-4 py-3"><PriorityBadge priority={c.priority} /></td>

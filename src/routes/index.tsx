@@ -55,15 +55,15 @@ function Index() {
 
   const contextPanel = <aside className={`${rightPanel ? "flex" : "hidden"} absolute inset-y-16 right-0 z-20 w-[300px] flex-col border-l border-border bg-panel p-5 shadow-workspace xl:relative xl:inset-auto xl:flex xl:shadow-none`}>
     <div className="mb-6 flex items-center justify-between"><h2 className="text-sm font-semibold">Workspace context</h2><Button variant="ghost" size="icon" onClick={() => setRightPanel(false)} className="xl:hidden" aria-label="Close context panel"><X className="size-4" /></Button></div>
-    <div className="grid grid-cols-2 gap-2">{contextItems.map(([label, value, Icon]) => <div key={label} className="rounded-md border border-border bg-background p-3"><p className="text-[10px] text-muted-foreground">{label}</p><div className="mt-2 flex items-center gap-2 text-xs font-semibold"><Icon className="size-3.5 text-primary" />{value}</div></div>)}</div>
+    <div className="grid grid-cols-2 gap-2">{contextItems.map(([label, value, Icon]) => <div key={label} className="rounded-md border border-border bg-background p-3"><p className="text-[12px] text-muted-foreground">{label}</p><div className="mt-2 flex items-center gap-2 text-xs font-semibold"><Icon className="size-3.5 text-primary" />{value}</div></div>)}</div>
     <div className="mt-7"><SectionLabel>Quick actions</SectionLabel>{["Create New Claim", "Underwrite a Policy", "Run Pricing Analysis", "Generate Report", "View Policy Details"].map((item) => <Button key={item} variant="ghost" onClick={() => setPrompt(item)} className="mt-1 w-full justify-start px-2 text-xs"><Plus className="size-3.5" />{item}</Button>)}</div>
-    <div className="mt-auto border-t border-border pt-4"><div className="flex items-start gap-2"><AlfieMark className="size-5 rounded-md" /><p className="text-[10px] leading-4 text-muted-foreground">Alfie uses approved enterprise data sources and respects your access permissions.</p></div></div>
+    <div className="mt-auto border-t border-border pt-4"><div className="flex items-start gap-2"><AlfieMark className="size-5 rounded-md" /><p className="text-[12px] leading-4 text-muted-foreground">Alfie uses approved enterprise data sources and respects your access permissions.</p></div></div>
   </aside>;
 
   return <AppShell rightPanel={contextPanel}><div className="mx-auto flex min-h-full max-w-5xl flex-col px-5 pb-10 pt-8 lg:px-10 lg:pt-10">
     <section>
       <div className="flex items-end justify-between gap-4"><div><p className="mb-1 text-xs font-medium text-muted-foreground">{dateLabel}</p><h1 className="text-3xl font-semibold tracking-tight">{greeting}, Jane</h1><p className="mt-2 text-sm text-muted-foreground">Your queue is first. Alfie has already done the analysis behind each item.</p></div><Button variant="secondary" size="sm" className="hidden sm:inline-flex"><FileBarChart className="size-3.5" />Daily briefing</Button></div>
-      <div className="mt-8 grid grid-cols-2 border-y border-border lg:grid-cols-4">{metrics.map(([label, value, note, tone], index) => <div key={label} className={`py-4 ${index % 2 === 0 ? "pr-4" : "pl-4"} ${index > 1 ? "border-t border-border lg:border-t-0" : ""} lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0`}><p className="text-[11px] font-medium text-muted-foreground">{label}</p><p className="mt-2 text-2xl font-semibold">{value}</p><p className={`mt-1 text-[10px] font-medium ${tone}`}>{note}</p></div>)}</div>
+      <div className="mt-8 grid grid-cols-2 border-y border-border lg:grid-cols-4">{metrics.map(([label, value, note, tone], index) => <div key={label} className={`py-4 ${index % 2 === 0 ? "pr-4" : "pl-4"} ${index > 1 ? "border-t border-border lg:border-t-0" : ""} lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0`}><p className="text-[13px] font-medium text-muted-foreground">{label}</p><p className="mt-2 text-2xl font-semibold">{value}</p><p className={`mt-1 text-[12px] font-medium ${tone}`}>{note}</p></div>)}</div>
     </section>
 
     <section className="mt-10">
@@ -73,17 +73,17 @@ function Index() {
         <AlfieComposer value={prompt} onChange={setPrompt} onSend={(text) => submit(text)} placeholder="Ask Alfie anything about your insurance operations…" />
         <div className="mt-3 flex flex-wrap items-center gap-1">{promptActions.map(([action, Icon]) => <Button key={action} variant="ghost" size="sm" onClick={() => setPrompt(`${action}: `)}><Icon className="size-3.5" />{action}</Button>)}</div>
       </div>
-      <div className="mx-auto mt-6 w-full max-w-3xl"><div className="mb-2 flex items-center justify-between"><SectionLabel>Suggested prompts</SectionLabel><span className="text-[10px] text-muted-foreground">Tailored to your role</span></div><div className="grid gap-2 sm:grid-cols-2">{prompts.map((item) => <Button key={item} variant="secondary" onClick={() => setPrompt(item)} className="h-auto min-h-10 justify-start whitespace-normal px-3 py-2 text-left text-xs font-normal"><Sparkle className="size-3.5 shrink-0 text-primary" />{item}</Button>)}</div></div>
+      <div className="mx-auto mt-6 w-full max-w-3xl"><div className="mb-2 flex items-center justify-between"><SectionLabel>Suggested prompts</SectionLabel><span className="text-[12px] text-muted-foreground">Tailored to your role</span></div><div className="grid gap-2 sm:grid-cols-2">{prompts.map((item) => <Button key={item} variant="secondary" onClick={() => setPrompt(item)} className="h-auto min-h-10 justify-start whitespace-normal px-3 py-2 text-left text-xs font-normal"><Sparkle className="size-3.5 shrink-0 text-primary" />{item}</Button>)}</div></div>
     </section>
 
     <section className="mt-12 grid gap-8 lg:grid-cols-[1fr_300px]">
       <div>
-        <div className="mb-3 flex items-center justify-between"><h3 className="text-sm font-semibold">Your queue</h3><span className="text-[11px] text-muted-foreground">{queue.length} items need you</span></div>
+        <div className="mb-3 flex items-center justify-between"><h3 className="text-sm font-semibold">Your queue</h3><span className="text-[13px] text-muted-foreground">{queue.length} items need you</span></div>
         <div className="divide-y divide-border rounded-xl border border-border bg-card">
           {queue.map((item) => <div key={item.title} className="flex items-start gap-3 p-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground"><item.icon className="size-4" strokeWidth={1.7} /></div>
             <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-center gap-2"><p className="text-sm font-medium leading-5">{item.title}</p><span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${item.chipTone}`}>{item.chip}</span></div>
+              <div className="flex flex-wrap items-center gap-2"><p className="text-sm font-medium leading-5">{item.title}</p><span className={`rounded-full px-2 py-0.5 text-[12px] font-medium ${item.chipTone}`}>{item.chip}</span></div>
               <p className="mt-1 text-xs leading-5 text-muted-foreground">{item.detail}</p>
               <NavLink link={item.link} className="mt-1.5 inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-xs font-medium hover:bg-secondary">{item.linkLabel}<ArrowRight className="size-3.5" /></NavLink>
             </div>
@@ -93,7 +93,7 @@ function Index() {
       <div>
         <div className="mb-3 flex items-center justify-between"><h3 className="text-sm font-semibold">Recent files</h3></div>
         <div className="space-y-1">
-          {recentFiles.map((file) => <NavLink key={file.title} link={file.link} className="flex w-full items-center gap-3 rounded-md px-2 py-2.5 hover:bg-secondary"><span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-border bg-card"><file.icon className="size-4 text-muted-foreground" strokeWidth={1.7} /></span><span className="min-w-0 flex-1 text-left"><span className="block truncate text-xs font-medium">{file.title}</span><span className="block truncate text-[10px] text-muted-foreground">{file.meta}</span></span><ChevronRight className="size-3.5 text-muted-foreground" /></NavLink>)}
+          {recentFiles.map((file) => <NavLink key={file.title} link={file.link} className="flex w-full items-center gap-3 rounded-md px-2 py-2.5 hover:bg-secondary"><span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-border bg-card"><file.icon className="size-4 text-muted-foreground" strokeWidth={1.7} /></span><span className="min-w-0 flex-1 text-left"><span className="block truncate text-xs font-medium">{file.title}</span><span className="block truncate text-[12px] text-muted-foreground">{file.meta}</span></span><ChevronRight className="size-3.5 text-muted-foreground" /></NavLink>)}
         </div>
         <div className="mt-6 rounded-xl border border-border bg-card p-4">
           <div className="flex items-center gap-2"><AlfieChip /><span className="text-xs font-semibold">Working on your queue</span></div>
@@ -102,6 +102,6 @@ function Index() {
       </div>
     </section>
 
-    <section className="mt-10 border-t border-border pt-5"><div className="mb-3 flex items-center justify-between"><h3 className="text-xs font-semibold">Recent activity</h3><Button variant="ghost" size="sm">View all</Button></div><div className="grid gap-2 md:grid-cols-3">{activities.map(([Icon, title, meta]) => <Button key={title} variant="secondary" className="h-auto min-h-20 items-start justify-start gap-3 whitespace-normal p-3 text-left font-normal"><div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded bg-secondary"><Icon className="size-3.5" /></div><span><span className="block text-xs font-medium leading-5">{title}</span><span className="mt-1 block text-[10px] text-muted-foreground">{meta}</span></span></Button>)}</div></section>
+    <section className="mt-10 border-t border-border pt-5"><div className="mb-3 flex items-center justify-between"><h3 className="text-xs font-semibold">Recent activity</h3><Button variant="ghost" size="sm">View all</Button></div><div className="grid gap-2 md:grid-cols-3">{activities.map(([Icon, title, meta]) => <Button key={title} variant="secondary" className="h-auto min-h-20 items-start justify-start gap-3 whitespace-normal p-3 text-left font-normal"><div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded bg-secondary"><Icon className="size-3.5" /></div><span><span className="block text-xs font-medium leading-5">{title}</span><span className="mt-1 block text-[12px] text-muted-foreground">{meta}</span></span></Button>)}</div></section>
   </div></AppShell>;
 }

@@ -41,7 +41,7 @@ export function FinanceNav() {
 
 export function SampleDataNote({ children }: { children?: ReactNode }) {
   return (
-    <p className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+    <p className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
       <Info className="size-3 shrink-0" />
       {children ??
         "Illustrative sample data, not verified financial records until connected to your systems."}

@@ -176,11 +176,11 @@ function DataSourcesPage() {
             ],
           ].map(([label, value, note]) => (
             <div key={label} className="rounded-2xl border border-border bg-card p-4">
-              <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+              <p className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground">
                 {label}
               </p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
-              <p className="mt-1 text-[11px] text-muted-foreground">{note}</p>
+              <p className="mt-1 text-[13px] text-muted-foreground">{note}</p>
             </div>
           ))}
         </section>
@@ -222,17 +222,17 @@ function DataSourcesPage() {
                     <Database className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                     <span>
                       <span className="block text-xs font-semibold">{s.name}</span>
-                      <span className="block text-[11px] text-muted-foreground">
+                      <span className="block text-[13px] text-muted-foreground">
                         {s.vendor} · {s.category} · {s.records}
                       </span>
-                      <span className="block text-[11px] text-muted-foreground">
+                      <span className="block text-[13px] text-muted-foreground">
                         Last sync {s.lastSync} · {s.freshness}
                       </span>
                     </span>
                   </span>
                   <span className="flex flex-col items-end gap-1">
                     <WorkspaceStatusBadge status={s.status} />
-                    <span className="text-[10px] text-muted-foreground">{s.access}</span>
+                    <span className="text-[12px] text-muted-foreground">{s.access}</span>
                   </span>
                 </button>
               ))}
@@ -243,7 +243,7 @@ function DataSourcesPage() {
 
             <div className="mt-5">
               <h3 className="text-sm font-semibold">Which agents can use which sources</h3>
-              <p className="mt-0.5 text-[11px] text-muted-foreground">
+              <p className="mt-0.5 text-[13px] text-muted-foreground">
                 Agents retrieve data only through sources they are authorized for. Alfie coordinates
                 access through the agent, never around it.
               </p>
@@ -280,7 +280,7 @@ function DataSourcesPage() {
               <div className="flex items-start justify-between gap-2">
                 <div>
                   <h2 className="text-sm font-semibold">{selected.name}</h2>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground">
+                  <p className="mt-0.5 text-[13px] text-muted-foreground">
                     {selected.vendor} · {selected.category}
                   </p>
                 </div>
@@ -312,13 +312,13 @@ function DataSourcesPage() {
                   {selected.datasets.map((d) => (
                     <span
                       key={d}
-                      className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium"
+                      className="rounded-full bg-secondary px-2 py-0.5 text-[12px] font-medium"
                     >
                       {d}
                     </span>
                   ))}
                 </div>
-                <p className="mt-1.5 text-[11px] text-muted-foreground">
+                <p className="mt-1.5 text-[13px] text-muted-foreground">
                   Field level access is configured per dataset. Anything not listed here is out of
                   scope for every agent.
                 </p>
@@ -379,7 +379,7 @@ function DataSourcesPage() {
 
             <section className={card}>
               <h2 className="text-sm font-semibold">Field mapping</h2>
-              <p className="mt-1 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-1 text-[13px] leading-4 text-muted-foreground">
                 Source fields are mapped to common definitions so agents can reconcile records
                 across systems. Original source identifiers and the source of record are always
                 preserved, and similar records are never assumed to be identical.
@@ -388,7 +388,7 @@ function DataSourcesPage() {
                 {commonFields.map((f) => (
                   <span
                     key={f}
-                    className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium"
+                    className="rounded-full bg-secondary px-2 py-0.5 text-[12px] font-medium"
                   >
                     {f}
                   </span>
@@ -415,7 +415,7 @@ function DataSourcesPage() {
                   <li key={a.time + a.action} className="text-xs leading-5">
                     <span className="font-medium">{a.action}</span>{" "}
                     <span className="text-muted-foreground">· {a.detail}</span>
-                    <span className="block text-[10px] text-muted-foreground">
+                    <span className="block text-[12px] text-muted-foreground">
                       {a.time} · {a.actor}
                     </span>
                   </li>
@@ -450,7 +450,7 @@ function DataSourcesPage() {
               {connectSteps.map((s, i) => (
                 <li key={s} className="flex items-center gap-2 text-xs">
                   <span
-                    className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold ${tested || i < 2 ? "bg-positive/10 text-positive" : "bg-secondary text-muted-foreground"}`}
+                    className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold ${tested || i < 2 ? "bg-positive/10 text-positive" : "bg-secondary text-muted-foreground"}`}
                   >
                     {i + 1}
                   </span>

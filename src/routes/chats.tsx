@@ -333,7 +333,7 @@ function ChatsPage() {
                   <option key={f}>{f}</option>
                 ))}
               </select>
-              <label className="flex items-center gap-2 text-[11px] text-muted-foreground">
+              <label className="flex items-center gap-2 text-[13px] text-muted-foreground">
                 <input
                   type="checkbox"
                   checked={showArchived}
@@ -377,15 +377,15 @@ function ChatsPage() {
                       <span className="flex items-center justify-between gap-2">
                         <span className="truncate text-xs font-semibold">{c.title}</span>
                         {c.archived ? (
-                          <span className="shrink-0 text-[9px] font-semibold uppercase tracking-wide text-muted-foreground">
+                          <span className="shrink-0 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
                             Archived
                           </span>
                         ) : null}
                       </span>
-                      <span className="mt-0.5 block truncate text-[11px] text-muted-foreground">
+                      <span className="mt-0.5 block truncate text-[13px] text-muted-foreground">
                         {c.preview}
                       </span>
-                      <span className="mt-1 flex items-center gap-1 text-[10px] text-muted-foreground">
+                      <span className="mt-1 flex items-center gap-1 text-[12px] text-muted-foreground">
                         <FolderOpen className="size-3" /> {c.folder} · {c.updated}
                       </span>
                     </button>
@@ -398,7 +398,7 @@ function ChatsPage() {
                           setRenaming(c.id);
                           setRenameText(c.title);
                         }}
-                        className="flex items-center gap-1 rounded-md px-1.5 py-1 text-[10px] text-muted-foreground hover:bg-secondary"
+                        className="flex items-center gap-1 rounded-md px-1.5 py-1 text-[12px] text-muted-foreground hover:bg-secondary"
                       >
                         <Pencil className="size-3" /> Rename
                       </button>
@@ -409,14 +409,14 @@ function ChatsPage() {
                             prev.map((x) => (x.id === c.id ? { ...x, archived: !x.archived } : x)),
                           )
                         }
-                        className="flex items-center gap-1 rounded-md px-1.5 py-1 text-[10px] text-muted-foreground hover:bg-secondary"
+                        className="flex items-center gap-1 rounded-md px-1.5 py-1 text-[12px] text-muted-foreground hover:bg-secondary"
                       >
                         <Archive className="size-3" /> {c.archived ? "Unarchive" : "Archive"}
                       </button>
                       <button
                         type="button"
                         onClick={() => setDeleteTarget(c)}
-                        className="flex items-center gap-1 rounded-md px-1.5 py-1 text-[10px] text-destructive hover:bg-destructive/10"
+                        className="flex items-center gap-1 rounded-md px-1.5 py-1 text-[12px] text-destructive hover:bg-destructive/10"
                       >
                         <Trash2 className="size-3" /> Delete
                       </button>
@@ -437,11 +437,11 @@ function ChatsPage() {
             <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-3">
               <div>
                 <p className="text-sm font-semibold">{active?.title}</p>
-                <p className="text-[11px] text-muted-foreground">
+                <p className="text-[13px] text-muted-foreground">
                   {active?.folder} · Context is kept inside this conversation only
                 </p>
               </div>
-              <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+              <span className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
                 <ShieldCheck className="size-3.5 text-positive" /> Permissions checked on every
                 request
               </span>
@@ -477,26 +477,26 @@ function ChatsPage() {
                     <div className="mb-2 flex flex-wrap items-center gap-2">
                       <AlfieMark className="size-6 rounded-md" />
                       <span className="text-xs font-semibold">Alfie</span>
-                      <span className="text-[10px] text-muted-foreground">
+                      <span className="text-[12px] text-muted-foreground">
                         via {m.reply.agents.join(", ")}
                       </span>
                     </div>
                     <div className="space-y-3 rounded-2xl rounded-bl-md border border-border bg-background px-4 py-3.5 text-sm leading-6">
                       <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        <p className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
                           Retrieved
                         </p>
                         <p className="mt-0.5">{m.reply.retrieved}</p>
                       </div>
                       <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        <p className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
                           Analysis
                         </p>
                         <p className="mt-0.5">{m.reply.analysis}</p>
                       </div>
                       {m.reply.recommendation ? (
                         <div>
-                          <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                          <p className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
                             Recommendation
                           </p>
                           <p className="mt-0.5">{m.reply.recommendation}</p>
@@ -506,7 +506,7 @@ function ChatsPage() {
                         {m.reply.sources.map((s) => (
                           <span
                             key={s}
-                            className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium text-muted-foreground"
+                            className="rounded-full bg-secondary px-2 py-0.5 text-[12px] font-medium text-muted-foreground"
                           >
                             Source: {s}
                           </span>
@@ -514,7 +514,7 @@ function ChatsPage() {
                       </div>
                       {m.reply.action ? (
                         <div className="rounded-xl border border-border bg-card p-3">
-                          <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                          <p className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
                             Proposed action, not executed
                           </p>
                           <p className="mt-1 text-sm font-semibold">{m.reply.action.label}</p>
@@ -525,7 +525,7 @@ function ChatsPage() {
                               : "This stays inside your workspace."}
                           </p>
                           <div className="mt-2 flex flex-wrap items-center gap-2">
-                            <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[10px] font-semibold text-warning-foreground">
+                            <span className="rounded-full bg-warning/15 px-2 py-0.5 text-[12px] font-semibold text-warning-foreground">
                               State: {m.actionState}
                             </span>
                             {m.actionState === "Awaiting Confirmation" ? (
@@ -570,7 +570,7 @@ function ChatsPage() {
                     key={s}
                     type="button"
                     onClick={() => send(s, [])}
-                    className="rounded-full border border-border px-3 py-1.5 text-[11px] font-medium hover:bg-secondary"
+                    className="rounded-full border border-border px-3 py-1.5 text-[13px] font-medium hover:bg-secondary"
                   >
                     {s}
                   </button>
@@ -584,7 +584,7 @@ function ChatsPage() {
                 onChange={setDraft}
                 placeholder="Ask Alfie anything across claims, underwriting, policy, pricing, finance or documents"
               />
-              <p className="mt-2 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+              <p className="mt-2 flex items-center gap-1.5 text-[13px] text-muted-foreground">
                 <FilePlus2 className="size-3.5" /> Files you attach stay in this conversation. Alfie
                 will offer Add to Documents separately if a file should become a permanent record.
               </p>

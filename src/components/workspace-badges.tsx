@@ -37,7 +37,7 @@ const tones: Record<string, string> = {
 export function WorkspaceStatusBadge({ status }: { status: string }) {
   return (
     <span
-      className={`inline-flex shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${tones[status] ?? "bg-secondary text-muted-foreground"}`}
+      className={`inline-flex shrink-0 rounded-full px-2 py-0.5 text-[12px] font-semibold ${tones[status] ?? "bg-secondary text-muted-foreground"}`}
     >
       {status}
     </span>

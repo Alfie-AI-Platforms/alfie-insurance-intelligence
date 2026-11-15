@@ -51,7 +51,7 @@ function ClaimsPaymentsPage() {
         <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-5">
           {summary.map(([label, value]) => (
             <div key={label} className="bg-card p-4">
-              <p className="text-[11px] font-medium text-muted-foreground">{label}</p>
+              <p className="text-[13px] font-medium text-muted-foreground">{label}</p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
             </div>
           ))}
@@ -110,7 +110,7 @@ function ClaimsPaymentsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-t border-border text-left text-[11px] text-muted-foreground">
+                <tr className="border-t border-border text-left text-[13px] text-muted-foreground">
                   {[
                     "Claim",
                     "Claimant",
@@ -258,7 +258,7 @@ function ClaimsPaymentsPage() {
             </div>
           </section>
         ) : (
-          <p className="mt-3 text-[11px] text-muted-foreground">
+          <p className="mt-3 text-[13px] text-muted-foreground">
             Select a payment row to open its payment workspace, with claim information, approvals,
             ledger entries and reconciliation status.
           </p>

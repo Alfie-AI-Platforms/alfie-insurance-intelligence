@@ -73,7 +73,7 @@ function ReportsPage() {
         <section className={`${card} mt-5 p-5`}>
           <h3 className="text-sm font-semibold">Report builder</h3>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Report type
               <select
                 value={type}
@@ -85,7 +85,7 @@ function ReportsPage() {
                 ))}
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Reporting period
               <select
                 value={period}
@@ -97,7 +97,7 @@ function ReportsPage() {
                 ))}
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Financial entity
               <select
                 className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring"
@@ -107,7 +107,7 @@ function ReportsPage() {
                 <option>Consolidated group</option>
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Currency
               <select
                 className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring"
@@ -117,7 +117,7 @@ function ReportsPage() {
                 <option>CAD</option>
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Line of business
               <select
                 value={line}
@@ -130,14 +130,14 @@ function ReportsPage() {
                 ))}
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Products
               <select className={`${selectCls} mt-1 h-9 w-full`} defaultValue="All products">
                 <option>All products</option>
                 <option>Core products</option>
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Regions
               <select className={`${selectCls} mt-1 h-9 w-full`} defaultValue="All regions">
                 <option>All regions</option>
@@ -145,7 +145,7 @@ function ReportsPage() {
                 <option>National</option>
               </select>
             </label>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Data sources
               <select
                 className={`${selectCls} mt-1 h-9 w-full`}
@@ -185,7 +185,7 @@ function ReportsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-t border-border text-left text-[11px] text-muted-foreground">
+                <tr className="border-t border-border text-left text-[13px] text-muted-foreground">
                   {["Report", "Type", "Period", "Status", "Actions"].map((h) => (
                     <th key={h} className="px-4 py-2 font-medium">
                       {h}
@@ -220,7 +220,7 @@ function ReportsPage() {
               </tbody>
             </table>
           </div>
-          <p className="border-t border-border p-4 text-[11px] leading-5 text-muted-foreground">
+          <p className="border-t border-border p-4 text-[13px] leading-5 text-muted-foreground">
             Every report carries an executive summary, financial tables, charts, period comparisons,
             variance analysis, key findings, supporting notes, data sources, and assumptions and
             limitations. Exports are PDF and Excel. Request Review sends a draft through Finance

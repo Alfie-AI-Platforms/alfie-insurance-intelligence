@@ -84,7 +84,7 @@ function ActuarialPage() {
                 <h2 className="text-sm font-semibold">
                   Loss development triangle, Commercial Property
                 </h2>
-                <p className="text-[11px] text-muted-foreground">
+                <p className="text-[13px] text-muted-foreground">
                   Cumulative {triKind} losses, $K, accident years 2021 to 2025, annual development.
                   Data cutoff Oct 31, 2026, Actuarial Data Warehouse (2 warnings on file).
                 </p>
@@ -94,7 +94,7 @@ function ActuarialPage() {
                   <button
                     key={k}
                     onClick={() => setTriKind(k)}
-                    className={`rounded-md px-2.5 py-1 text-[11px] capitalize ${triKind === k ? "bg-card font-medium shadow-sm" : "text-muted-foreground"}`}
+                    className={`rounded-md px-2.5 py-1 text-[13px] capitalize ${triKind === k ? "bg-card font-medium shadow-sm" : "text-muted-foreground"}`}
                   >
                     {k}
                   </button>
@@ -144,7 +144,7 @@ function ActuarialPage() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
               Chain ladder, calculated live from the triangle above: total latest {triKind}{" "}
               {fmtK(totalLatest)}, indicated ultimate {fmtK(totalUltimate)}, implied development{" "}
               {fmtK(totalUltimate - totalLatest)}. AY 2025 is only 12 months developed, so its
@@ -163,7 +163,7 @@ function ActuarialPage() {
                   <li key={m.method} className="rounded-xl bg-secondary/50 p-3 text-xs leading-5">
                     <p className="font-semibold">
                       {m.method}{" "}
-                      <span className="ml-1 rounded-full bg-card px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                      <span className="ml-1 rounded-full bg-card px-2 py-0.5 text-[12px] font-medium text-muted-foreground">
                         {m.status}
                       </span>
                     </p>
@@ -204,7 +204,7 @@ function ActuarialPage() {
                   ))}
                 </tbody>
               </table>
-              <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                 Pure premium check: expected loss per exposure has risen with severity. The gap
                 between expected and actual is the main evidence behind pricing exception EXC-04 and
                 feeds the Pricing Analysis adequacy view.
@@ -216,7 +216,7 @@ function ActuarialPage() {
         <section className={`${card} mt-4 p-5`}>
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-sm font-semibold">Reserves by line</h2>
-            <p className="text-[11px] text-muted-foreground">
+            <p className="text-[13px] text-muted-foreground">
               Case reserves and IBNR in $M. Sign-off requires the Actuary role with reserve sign-off
               permission.
             </p>
@@ -337,7 +337,7 @@ function ActuarialPage() {
                   <li key={a.name} className="rounded-xl bg-secondary/50 p-3 text-xs leading-5">
                     <p className="font-semibold">
                       {a.name}: {a.value}{" "}
-                      <span className="ml-1 rounded-full bg-card px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                      <span className="ml-1 rounded-full bg-card px-2 py-0.5 text-[12px] font-medium text-muted-foreground">
                         {a.status} · {a.version}
                       </span>
                     </p>
@@ -348,7 +348,7 @@ function ActuarialPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                 Every assumption change creates a new version and is reviewable. Analyses record the
                 assumption versions they used, so results stay reproducible.
               </p>

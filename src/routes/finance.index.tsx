@@ -145,15 +145,15 @@ function FinanceOverview() {
               className="group bg-card p-4 text-left transition-colors hover:bg-secondary/60"
               title="Open analysis with Alfie"
             >
-              <p className="text-[11px] font-medium text-muted-foreground">{k.label}</p>
+              <p className="text-[13px] font-medium text-muted-foreground">{k.label}</p>
               <p className="mt-1.5 text-2xl font-semibold">{k.value}</p>
               <p
-                className={`mt-1 flex items-center gap-0.5 text-[10px] ${k.good ? "text-positive" : "text-warning"}`}
+                className={`mt-1 flex items-center gap-0.5 text-[12px] ${k.good ? "text-positive" : "text-warning"}`}
               >
                 {k.up ? <ArrowUpRight className="size-3" /> : <ArrowDownRight className="size-3" />}{" "}
                 {k.delta}
               </p>
-              <p className="mt-2 text-[10px] text-primary opacity-0 transition-opacity group-hover:opacity-100">
+              <p className="mt-2 text-[12px] text-primary opacity-0 transition-opacity group-hover:opacity-100">
                 Analyze with Alfie
               </p>
             </button>
@@ -169,14 +169,14 @@ function FinanceOverview() {
                   <button
                     key={p}
                     onClick={() => setPeriod(p)}
-                    className={`rounded-md px-2 py-1 text-[11px] ${period === p ? "bg-card font-medium shadow-sm" : "text-muted-foreground"}`}
+                    className={`rounded-md px-2 py-1 text-[13px] ${period === p ? "bg-card font-medium shadow-sm" : "text-muted-foreground"}`}
                   >
                     {p}
                   </button>
                 ))}
               </div>
             </div>
-            <p className="mt-1 text-[11px] text-muted-foreground">
+            <p className="mt-1 text-[13px] text-muted-foreground">
               Premium revenue and investment income against claims, commissions and operating expenses, $M
             </p>
             <div className="mt-3 h-52">
@@ -223,14 +223,14 @@ function FinanceOverview() {
                   <button
                     key={v}
                     onClick={() => setCashView(v)}
-                    className={`rounded-md px-2 py-1 text-[11px] capitalize ${cashView === v ? "bg-card font-medium shadow-sm" : "text-muted-foreground"}`}
+                    className={`rounded-md px-2 py-1 text-[13px] capitalize ${cashView === v ? "bg-card font-medium shadow-sm" : "text-muted-foreground"}`}
                   >
                     {v}
                   </button>
                 ))}
               </div>
             </div>
-            <p className="mt-1 text-[11px] text-muted-foreground">
+            <p className="mt-1 text-[13px] text-muted-foreground">
               Premium receipts and recoveries in, claims, commissions and expenses out, $M
             </p>
             <div className="mt-3 h-52">
@@ -257,7 +257,7 @@ function FinanceOverview() {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <p className="mt-1 text-[11px] text-muted-foreground">
+            <p className="mt-1 text-[13px] text-muted-foreground">
               Net cash flow has stayed positive in every month shown, with the widest gap in
               October.
             </p>
@@ -268,14 +268,14 @@ function FinanceOverview() {
           <section className={`${card} overflow-hidden`}>
             <div className="p-4 pb-2">
               <h3 className="text-sm font-semibold">Financial performance by line of business</h3>
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-[13px] text-muted-foreground">
                 Year to date, $M. Click a line to investigate with Alfie.
               </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-[11px] text-muted-foreground">
+                  <tr className="text-left text-[13px] text-muted-foreground">
                     {["Line", "GWP", "Earned", "Incurred", "Paid", "Commission", "Net result"].map(
                       (h) => (
                         <th key={h} className="px-4 py-2 font-medium">
@@ -312,7 +312,7 @@ function FinanceOverview() {
 
           <section className={`${card} p-4`}>
             <h3 className="text-sm font-semibold">Receivables and payables</h3>
-            <p className="text-[11px] text-muted-foreground">What is owed, and what is owing</p>
+            <p className="text-[13px] text-muted-foreground">What is owed, and what is owing</p>
             <div className="mt-3 space-y-3">
               {receivablesPayables.map((r) => (
                 <button
@@ -322,14 +322,14 @@ function FinanceOverview() {
                 >
                   <span>
                     <span className="block text-xs font-medium">{r.label}</span>
-                    <span className="mt-0.5 block text-[10px] text-muted-foreground">{r.note}</span>
+                    <span className="mt-0.5 block text-[12px] text-muted-foreground">{r.note}</span>
                   </span>
                   <span className="text-sm font-semibold">{r.value}</span>
                 </button>
               ))}
             </div>
             <div className="mt-4">
-              <p className="mb-2 text-[11px] font-medium text-muted-foreground">
+              <p className="mb-2 text-[13px] font-medium text-muted-foreground">
                 Cash flow by month, net $M
               </p>
               <div className="h-28">
@@ -354,7 +354,7 @@ function FinanceOverview() {
                 </ResponsiveContainer>
               </div>
             </div>
-            <label className="mt-2 block text-[11px] text-muted-foreground">
+            <label className="mt-2 block text-[13px] text-muted-foreground">
               Period for exports
               <select
                 className={`${selectCls} ml-2`}

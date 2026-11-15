@@ -83,12 +83,12 @@ function ReceivablesPage() {
         <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-5">
           {aging.map((a) => (
             <div key={a.bucket} className="bg-card p-4">
-              <p className="text-[11px] font-medium text-muted-foreground">{a.bucket}</p>
+              <p className="text-[13px] font-medium text-muted-foreground">{a.bucket}</p>
               <p className="mt-1.5 text-xl font-semibold">{money(a.amount)}</p>
             </div>
           ))}
         </div>
-        <p className="mt-2 text-[11px] text-muted-foreground">
+        <p className="mt-2 text-[13px] text-muted-foreground">
           Total outstanding in this sample: {money(totalOutstanding)} across the invoices below.
           Full portfolio total is $4.2M.
         </p>
@@ -96,7 +96,7 @@ function ReceivablesPage() {
         <div className="mt-4 grid gap-4 lg:grid-cols-[1.5fr_1fr]">
           <section className={`${card} p-4`}>
             <h3 className="text-sm font-semibold">Receivables aging</h3>
-            <p className="text-[11px] text-muted-foreground">Outstanding balance by age, $</p>
+            <p className="text-[13px] text-muted-foreground">Outstanding balance by age, $</p>
             <div className="mt-3 h-48">
               <ResponsiveContainer>
                 <BarChart
@@ -135,7 +135,7 @@ function ReceivablesPage() {
                 </Button>
               ))}
             </div>
-            <p className="mt-3 text-[11px] leading-5 text-muted-foreground">
+            <p className="mt-3 text-[13px] leading-5 text-muted-foreground">
               Alfie can prepare reminders and payment instructions. Sending external communications
               and taking payment follow the configured permissions and approvals.
             </p>
@@ -194,7 +194,7 @@ function ReceivablesPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-t border-border text-left text-[11px] text-muted-foreground">
+                <tr className="border-t border-border text-left text-[13px] text-muted-foreground">
                   {[
                     "Policy",
                     "Policyholder",
@@ -258,9 +258,9 @@ function ReceivablesPage() {
               >
                 <span>
                   <span className="block text-xs font-medium">{a.label}</span>
-                  <span className="mt-0.5 block text-[11px] text-muted-foreground">{a.detail}</span>
+                  <span className="mt-0.5 block text-[13px] text-muted-foreground">{a.detail}</span>
                 </span>
-                <span className="shrink-0 text-[11px] text-muted-foreground">{a.time}</span>
+                <span className="shrink-0 text-[13px] text-muted-foreground">{a.time}</span>
               </button>
             ))}
           </div>

@@ -229,7 +229,7 @@ function ReviewsPage() {
           {reviewStages.map((stage, i) => (
             <span key={stage} className="flex items-center gap-1.5">
               <span
-                className={`rounded-full px-2.5 py-1 text-[10px] font-medium ${i === selected.stage ? "bg-primary text-primary-foreground" : i < selected.stage ? "bg-positive/15 text-positive" : "bg-secondary text-muted-foreground"}`}
+                className={`rounded-full px-2.5 py-1 text-[12px] font-medium ${i === selected.stage ? "bg-primary text-primary-foreground" : i < selected.stage ? "bg-positive/15 text-positive" : "bg-secondary text-muted-foreground"}`}
               >
                 {stage}
               </span>
@@ -256,7 +256,7 @@ function ReviewsPage() {
                 ["Owner", selected.owner],
               ].map(([k, v]) => (
                 <div key={k} className="rounded-lg bg-secondary/50 px-2.5 py-1.5">
-                  <span className="block text-[10px] uppercase tracking-wide text-muted-foreground">
+                  <span className="block text-[12px] uppercase tracking-wide text-muted-foreground">
                     {k}
                   </span>
                   {v}
@@ -292,7 +292,7 @@ function ReviewsPage() {
                 </tr>
               </tbody>
             </table>
-            <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
               Projections use the scenario engine and its stated assumptions, including retention
               elasticity. They are the proposal's expectations, and post-implementation monitoring
               compares actuals against them.
@@ -306,7 +306,7 @@ function ReviewsPage() {
                 Record implementation
               </Button>
             </div>
-            <ul className="mt-2.5 space-y-1.5 text-[11px] leading-4 text-muted-foreground">
+            <ul className="mt-2.5 space-y-1.5 text-[13px] leading-4 text-muted-foreground">
               <li className="flex gap-1.5">
                 <Lock className="mt-0.5 size-3 shrink-0" /> Approval is available only at the
                 Approval stage.{" "}
@@ -341,14 +341,14 @@ function ReviewsPage() {
                     ["Approval / effective date", filingRecord.approvalDate],
                   ].map(([k, v]) => (
                     <div key={k} className="rounded-lg bg-secondary/50 px-2.5 py-1.5">
-                      <span className="block text-[10px] uppercase tracking-wide text-muted-foreground">
+                      <span className="block text-[12px] uppercase tracking-wide text-muted-foreground">
                         {k}
                       </span>
                       {v}
                     </div>
                   ))}
                 </div>
-                <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+                <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                   {filingRecord.note}
                 </p>
               </section>
@@ -356,7 +356,7 @@ function ReviewsPage() {
             {selected.id === "RR-2026-004" ? (
               <section className={`${card} p-5`}>
                 <h2 className="text-sm font-semibold">Post-implementation monitoring</h2>
-                <p className="mt-1 text-[11px] text-muted-foreground">
+                <p className="mt-1 text-[13px] text-muted-foreground">
                   {postImplementation.implemented}.
                 </p>
                 <table className="mt-2 w-full text-left text-xs">
@@ -418,7 +418,7 @@ function ReviewsPage() {
                   <li key={e.id} className="rounded-xl bg-secondary/50 p-3 text-xs leading-5">
                     <p className="font-semibold">
                       {e.id}: {e.metric}, {e.observed}{" "}
-                      <span className="ml-1 rounded-full bg-card px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                      <span className="ml-1 rounded-full bg-card px-2 py-0.5 text-[12px] font-medium text-muted-foreground">
                         {e.severity} · {e.status}
                       </span>
                     </p>

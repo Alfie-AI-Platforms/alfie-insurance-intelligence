@@ -103,7 +103,7 @@ function PricingReportsPage() {
               <FileBarChart className="size-4" /> Generate a technical report
             </h2>
             <div className="mt-3 space-y-3">
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Report category
                 <select
                   value={gCategory}
@@ -115,7 +115,7 @@ function PricingReportsPage() {
                   ))}
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Portfolio / business line
                 <select
                   value={gLine}
@@ -127,7 +127,7 @@ function PricingReportsPage() {
                   ))}
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Reporting period
                 <select
                   value={gPeriod}
@@ -145,7 +145,7 @@ function PricingReportsPage() {
                   ))}
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Methodology (where applicable)
                 <select
                   value={gMethod}
@@ -167,7 +167,7 @@ function PricingReportsPage() {
             <Button className="mt-4 w-full" onClick={generate}>
               Generate report
             </Button>
-            <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
               Technical reports follow a fixed structure: executive summary, purpose and scope, data
               sources, methodology, assumptions, calculations, results, comparisons, limitations,
               findings and recommendations. Alfie's narrative is labelled as AI commentary and kept
@@ -260,7 +260,7 @@ function PricingReportsPage() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
               Review workflow: Draft, Generated, Under Review, Changes Requested, Approved,
               Published, Archived. Confidential and restricted reports follow the organization's
               distribution rules, and scheduled reports log every run and delivery.

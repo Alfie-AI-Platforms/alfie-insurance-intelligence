@@ -45,7 +45,7 @@ function Toggle({
     >
       <span>
         <span className="block font-medium">{label}</span>
-        {note ? <span className="block text-[11px] text-muted-foreground">{note}</span> : null}
+        {note ? <span className="block text-[13px] text-muted-foreground">{note}</span> : null}
       </span>
       <span className={`relative h-5 w-9 shrink-0 rounded-full ${on ? "bg-primary" : "bg-border"}`}>
         <span
@@ -114,49 +114,49 @@ function SettingsPage() {
               <Building2 className="size-4" /> Organization profile
             </h2>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Organization name
                 <input className={`${inputCls} mt-1`} defaultValue="Northstar Mutual" />
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Legal entity name
                 <input
                   className={`${inputCls} mt-1`}
                   defaultValue="Northstar Mutual Insurance Company"
                 />
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Organization identifier
                 <input className={`${inputCls} mt-1`} defaultValue="NM-ORG-2026-001" />
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Industry
                 <input className={`${inputCls} mt-1`} defaultValue="Insurance" />
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Primary address
                 <input className={`${inputCls} mt-1`} defaultValue="200 Bay Street, Toronto, ON" />
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Country
                 <select className={`${selectCls} mt-1`} defaultValue="Canada">
                   <option>Canada</option>
                   <option>United States</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Business contact email
                 <input
                   className={`${inputCls} mt-1`}
                   defaultValue="operations@northstarmutual.com"
                 />
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Business contact phone
                 <input className={`${inputCls} mt-1`} defaultValue="+1 416 555 0100" />
               </label>
             </div>
-            <p className="mt-2.5 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2.5 text-[13px] leading-4 text-muted-foreground">
               These details are used consistently across modules, documents, reports and generated
               communications. Brand assets and the organization logo are managed with the profile.
             </p>
@@ -170,14 +170,14 @@ function SettingsPage() {
               <SlidersHorizontal className="size-4" /> General preferences
             </h2>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Default language
                 <select className={`${selectCls} mt-1`} defaultValue="English">
                   <option>English</option>
                   <option>French</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Time zone
                 <select className={`${selectCls} mt-1`} defaultValue="America/Toronto (ET)">
                   <option>America/Toronto (ET)</option>
@@ -185,7 +185,7 @@ function SettingsPage() {
                   <option>UTC</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Date format
                 <select className={`${selectCls} mt-1`} defaultValue="MMM DD, YYYY">
                   <option>MMM DD, YYYY</option>
@@ -193,37 +193,37 @@ function SettingsPage() {
                   <option>DD/MM/YYYY</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Default currency
                 <select className={`${selectCls} mt-1`} defaultValue="USD">
                   <option>USD</option>
                   <option>CAD</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Number formatting
                 <select className={`${selectCls} mt-1`} defaultValue="1,234.56">
                   <option>1,234.56</option>
                   <option>1 234,56</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Measurement units
                 <select className={`${selectCls} mt-1`} defaultValue="Metric">
                   <option>Metric</option>
                   <option>Imperial</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Business days
                 <input className={`${inputCls} mt-1`} defaultValue="Monday to Friday" />
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Business hours
                 <input className={`${inputCls} mt-1`} defaultValue="8:00 AM to 6:00 PM ET" />
               </label>
             </div>
-            <p className="mt-2.5 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2.5 text-[13px] leading-4 text-muted-foreground">
               These are organization defaults. Where a preference is personal, such as a user's own
               date format, the personal setting overrides the default for that user only.
             </p>
@@ -237,12 +237,12 @@ function SettingsPage() {
           <h2 className="flex items-center gap-2 text-sm font-semibold">
             <Bot className="size-4 text-primary" /> Alfie configuration
           </h2>
-          <p className="mt-0.5 text-[11px] text-muted-foreground">
+          <p className="mt-0.5 text-[13px] text-muted-foreground">
             Organizational instructions for Alfie. These shape how Alfie works for Northstar Mutual
             without changing the platform's foundational behavior. Changes are versioned and
             auditable. Current version: 7 (updated Oct 15 by Jane Doe).
           </p>
-          <label className="mt-3 block text-[11px] text-muted-foreground">
+          <label className="mt-3 block text-[13px] text-muted-foreground">
             Organization instructions
             <textarea
               value={instructions}
@@ -285,7 +285,7 @@ function SettingsPage() {
               onClick={() => toggle("externalRetrieval")}
             />
           </div>
-          <p className="mt-2 text-[11px] text-muted-foreground">
+          <p className="mt-2 text-[13px] text-muted-foreground">
             Version history: v7 Oct 15, escalation wording · v6 Sep 28, terminology · v5 Aug 19,
             reporting defaults. Previous versions can be reviewed and restored by administrators.
           </p>
@@ -294,7 +294,7 @@ function SettingsPage() {
         <div className="mt-4 grid gap-4 xl:grid-cols-2">
           <section className={card}>
             <h2 className="text-sm font-semibold">AI governance and usage</h2>
-            <p className="mt-0.5 text-[11px] text-muted-foreground">
+            <p className="mt-0.5 text-[13px] text-muted-foreground">
               Which agents are enabled for the organization. Department level availability and data
               source access are governed in Policies &amp; Permissions and Data Sources.
             </p>
@@ -317,11 +317,11 @@ function SettingsPage() {
               ].map(([l, v]) => (
                 <div key={l} className="rounded-xl bg-secondary/50 p-2.5">
                   <p className="text-sm font-semibold">{v}</p>
-                  <p className="text-[10px] text-muted-foreground">{l}</p>
+                  <p className="text-[12px] text-muted-foreground">{l}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-2.5 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2.5 text-[13px] leading-4 text-muted-foreground">
               Usage and execution history are visible to administrators in aggregate. Private
               employee conversation content is not exposed to administrators without an
               organizational policy and an authorized purpose.
@@ -332,7 +332,7 @@ function SettingsPage() {
             <h2 className="flex items-center gap-2 text-sm font-semibold">
               <Bell className="size-4" /> Notifications
             </h2>
-            <p className="mt-0.5 text-[11px] text-muted-foreground">
+            <p className="mt-0.5 text-[13px] text-muted-foreground">
               Organization default channels: in app and email. Individuals may adjust personal
               preferences within what the organization permits.
             </p>
@@ -383,7 +383,7 @@ function SettingsPage() {
               />
             </div>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Session expiration
                 <select className={`${selectCls} mt-1`} defaultValue="12 hours">
                   <option>8 hours</option>
@@ -391,7 +391,7 @@ function SettingsPage() {
                   <option>24 hours</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Account lockout after
                 <select className={`${selectCls} mt-1`} defaultValue="5 failed attempts">
                   <option>3 failed attempts</option>
@@ -399,7 +399,7 @@ function SettingsPage() {
                   <option>10 failed attempts</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Password policy (where passwords are enabled)
                 <select
                   className={`${selectCls} mt-1`}
@@ -409,12 +409,12 @@ function SettingsPage() {
                   <option>12+ characters</option>
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Trusted domains
                 <input className={`${inputCls} mt-1`} defaultValue="northstarmutual.com" />
               </label>
             </div>
-            <p className="mt-2.5 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2.5 text-[13px] leading-4 text-muted-foreground">
               Security alerts go to the Compliance and Risk group. Every change here is written to
               the audit history with its previous value.
             </p>
@@ -444,7 +444,7 @@ function SettingsPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
               Business data integrations, such as the policy or claims systems, are managed in{" "}
               <Link to="/data-sources" className="font-medium text-primary underline">
                 Data Sources
@@ -472,7 +472,7 @@ function SettingsPage() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
               Retention accounts for regulatory, legal and contractual obligations. Deletion happens
               only through approved workflows, and audit records are never deletable by
               administrators.
@@ -527,7 +527,7 @@ function SettingsPage() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-2.5 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2.5 text-[13px] leading-4 text-muted-foreground">
               Audit records capture the event, identity, time, affected resource, previous and new
               values where applicable, and the outcome. They are protected from unauthorized
               modification or deletion.
@@ -545,11 +545,11 @@ function SettingsPage() {
                     <p className="text-xs font-semibold">{s.name}</p>
                     <WorkspaceStatusBadge status={s.status} />
                   </div>
-                  <p className="mt-1 text-[11px] leading-4 text-muted-foreground">{s.note}</p>
+                  <p className="mt-1 text-[13px] leading-4 text-muted-foreground">{s.note}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-3 rounded-xl bg-warning/10 p-3 text-[11px] leading-4">
+            <p className="mt-3 rounded-xl bg-warning/10 p-3 text-[13px] leading-4">
               Open incident: Broker and Customer CRM synchronization has failed twice on a changed
               broker identifier format. Owner: Elena Brooks. Alfie marks CRM data as stale wherever
               it would be used.

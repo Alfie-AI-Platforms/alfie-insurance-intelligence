@@ -163,11 +163,11 @@ function UsersPage() {
             ],
           ].map(([label, value, note]) => (
             <div key={label} className="rounded-2xl border border-border bg-card p-4">
-              <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+              <p className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground">
                 {label}
               </p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
-              <p className="mt-1 text-[11px] text-muted-foreground">{note}</p>
+              <p className="mt-1 text-[13px] text-muted-foreground">{note}</p>
             </div>
           ))}
         </section>
@@ -254,7 +254,7 @@ function UsersPage() {
               <h3 className="flex items-center gap-2 text-sm font-semibold">
                 <Users className="size-4" /> Teams and groups
               </h3>
-              <p className="mt-0.5 text-[11px] text-muted-foreground">
+              <p className="mt-0.5 text-[13px] text-muted-foreground">
                 Groups are used for permissions, notifications, approvals and workflow assignments.
               </p>
               <div className="mt-3 grid gap-2 md:grid-cols-2">
@@ -294,7 +294,7 @@ function UsersPage() {
                   </div>
                 ))}
               </div>
-              <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                 Reviews flag inactive accounts, privileged access, recently changed roles and direct
                 permission assignments. Reviewers confirm or revoke access, and the outcome is
                 recorded.
@@ -307,7 +307,7 @@ function UsersPage() {
               <div className="flex items-start justify-between gap-2">
                 <div>
                   <h2 className="text-sm font-semibold">{selected.name}</h2>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground">
+                  <p className="mt-0.5 text-[13px] text-muted-foreground">
                     {selected.id} · Employee {selected.employeeId}
                   </p>
                 </div>
@@ -332,7 +332,7 @@ function UsersPage() {
                   </div>
                 ))}
               </dl>
-              <p className="mt-3 rounded-xl bg-secondary/50 p-3 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-3 rounded-xl bg-secondary/50 p-3 text-[13px] leading-4 text-muted-foreground">
                 Permissions shown here are inherited from roles and groups. Direct permission
                 assignments, where permitted, are listed separately in Policies &amp; Permissions
                 and are always included in access reviews.
@@ -428,7 +428,7 @@ function UsersPage() {
                 ) : null}
               </div>
               {selected.status === "Deactivated" ? (
-                <p className="mt-3 text-[11px] leading-4 text-muted-foreground">
+                <p className="mt-3 text-[13px] leading-4 text-muted-foreground">
                   This account is deactivated. Its historical actions, approvals and audit records
                   are preserved and remain attributable to {selected.name}.
                 </p>
@@ -458,7 +458,7 @@ function UsersPage() {
 
             <section className={card}>
               <h2 className="text-sm font-semibold">Role templates</h2>
-              <p className="mt-1 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-1 text-[13px] leading-4 text-muted-foreground">
                 Starting templates. Administrators can create and customize roles in Policies &amp;
                 Permissions. Users may hold more than one role where policy permits.
               </p>
@@ -466,7 +466,7 @@ function UsersPage() {
                 {roleTemplates.map((r) => (
                   <span
                     key={r}
-                    className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium"
+                    className="rounded-full bg-secondary px-2 py-0.5 text-[12px] font-medium"
                   >
                     {r}
                   </span>

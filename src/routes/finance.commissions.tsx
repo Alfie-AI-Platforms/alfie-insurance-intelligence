@@ -69,7 +69,7 @@ function CommissionsPage() {
         <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-4">
           {overview.map(([label, value]) => (
             <div key={label} className="bg-card p-4">
-              <p className="text-[11px] font-medium text-muted-foreground">{label}</p>
+              <p className="text-[13px] font-medium text-muted-foreground">{label}</p>
               <p className="mt-1.5 text-xl font-semibold">{value}</p>
             </div>
           ))}
@@ -107,12 +107,12 @@ function CommissionsPage() {
                     {i < 3 ? (
                       <Check className="size-2.5" />
                     ) : (
-                      <span className="text-[9px]">{i + 1}</span>
+                      <span className="text-[12px]">{i + 1}</span>
                     )}
                   </span>
                   <span className={i === 3 ? "font-semibold" : ""}>{step}</span>
                   {i === 3 ? (
-                    <span className="ml-auto text-[10px] text-primary">Current for this cycle</span>
+                    <span className="ml-auto text-[12px] text-primary">Current for this cycle</span>
                   ) : null}
                 </li>
               ))}
@@ -177,7 +177,7 @@ function CommissionsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-t border-border text-left text-[11px] text-muted-foreground">
+                <tr className="border-t border-border text-left text-[13px] text-muted-foreground">
                   {[
                     "Broker",
                     "Policy",
@@ -224,7 +224,7 @@ function CommissionsPage() {
               </tbody>
             </table>
           </div>
-          <p className="border-t border-border p-4 text-[11px] leading-5 text-muted-foreground">
+          <p className="border-t border-border p-4 text-[13px] leading-5 text-muted-foreground">
             Alfie can find duplicate commission entries and unusual commission movements, and
             prepare payment summaries. A disputed record, such as Summit Construction on WC-77120,
             stays out of payment batches until it is validated.

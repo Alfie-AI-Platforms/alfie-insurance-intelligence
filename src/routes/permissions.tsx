@@ -108,12 +108,12 @@ function PermissionsPage() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="text-sm font-semibold">Module permissions by role</h2>
-              <p className="mt-0.5 text-[11px] text-muted-foreground">
+              <p className="mt-0.5 text-[13px] text-muted-foreground">
                 Viewing is always separate from creating, editing, approving and executing. Toggle a
                 cell to stage a change for the selected role.
               </p>
             </div>
-            <label className="block text-[11px] text-muted-foreground">
+            <label className="block text-[13px] text-muted-foreground">
               Role
               <select
                 value={role}
@@ -178,7 +178,7 @@ function PermissionsPage() {
             <p className="mt-3 text-xs leading-5 text-muted-foreground">{roleNote}</p>
           ) : null}
           <div className="mt-4 flex flex-wrap items-end gap-2 border-t border-border pt-4">
-            <label className="block min-w-52 flex-1 text-[11px] text-muted-foreground">
+            <label className="block min-w-52 flex-1 text-[13px] text-muted-foreground">
               New custom role name
               <input
                 value={newRole}
@@ -194,7 +194,7 @@ function PermissionsPage() {
               <Copy className="size-3.5" /> Duplicate {role}
             </Button>
           </div>
-          <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+          <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
             A role also carries data access, restrictions and approval authority, configured below.
             Department assignment alone does not define what a role can see.
           </p>
@@ -242,7 +242,7 @@ function PermissionsPage() {
               assignments.
             </p>
             <div className="mt-3 grid gap-2 sm:grid-cols-3">
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 User
                 <select
                   value={testUser}
@@ -254,7 +254,7 @@ function PermissionsPage() {
                   ))}
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Module
                 <select
                   value={testModule}
@@ -266,7 +266,7 @@ function PermissionsPage() {
                   ))}
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Action
                 <select
                   value={testAction}
@@ -287,7 +287,7 @@ function PermissionsPage() {
             ) : null}
             <div className="mt-4 border-t border-border pt-3">
               <p className="text-xs font-semibold">Recent access denials</p>
-              <ul className="mt-1.5 space-y-1 text-[11px] leading-4 text-muted-foreground">
+              <ul className="mt-1.5 space-y-1 text-[13px] leading-4 text-muted-foreground">
                 <li>
                   Nov 04: Pricing Analysis Agent denied Weather and Catastrophe data, credential
                   expired at the source.
@@ -372,7 +372,7 @@ function PermissionsPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-2.5 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2.5 text-[13px] leading-4 text-muted-foreground">
               Conflicting combinations are checked when roles or permissions are assigned, not
               discovered afterwards. The one warning level rule above is tracked in the Q4 access
               review.
@@ -416,7 +416,7 @@ function PermissionsPage() {
           <h2 className="flex items-center gap-2 text-sm font-semibold">
             <Bot className="size-4 text-primary" /> AI agent authorization profiles
           </h2>
-          <p className="mt-0.5 text-[11px] text-muted-foreground">
+          <p className="mt-0.5 text-[13px] text-muted-foreground">
             Each specialist agent has an explicit profile. Agents inherit the restrictions of the
             employee, automation or service context they operate under, and never gain broader
             access because Alfie coordinates the task.

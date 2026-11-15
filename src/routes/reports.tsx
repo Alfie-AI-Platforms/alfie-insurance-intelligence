@@ -205,7 +205,7 @@ function ReportsPage() {
     <AppShell>
       <div className="mx-auto max-w-7xl px-5 pb-12 pt-8 lg:px-10">
         <PageHeader title="Reports" description="The organization's central reporting and business intelligence workspace. Reports consolidate authorized data from Claims, Underwriting, Policy, Pricing & Actuarial and Finance. Reporting is read and analysis only: nothing here modifies an operational record." actions={<>
-          <label className="block text-[11px] text-muted-foreground">
+          <label className="block text-[13px] text-muted-foreground">
             Reporting period
             <select
               value={period}
@@ -219,7 +219,7 @@ function ReportsPage() {
             </select>
           </label>
         </>} />
-        <p className="mt-3 rounded-xl bg-secondary/60 px-3 py-2 text-[11px] leading-4 text-muted-foreground">
+        <p className="mt-3 rounded-xl bg-secondary/60 px-3 py-2 text-[13px] leading-4 text-muted-foreground">
           Illustrative sample data, shown until your systems are connected. Every figure carries its
           source and last updated time, and figures from a stale source are flagged, never presented
           as current.
@@ -228,12 +228,12 @@ function ReportsPage() {
         <section className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {reportKpis.map((k) => (
             <div key={k.label} className="rounded-2xl border border-border bg-card p-4">
-              <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+              <p className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground">
                 {k.label}
               </p>
               <p className="mt-1.5 text-xl font-semibold">{k.value}</p>
-              <p className="mt-1 text-[11px] font-medium text-positive">{k.change}</p>
-              <p className="mt-1 text-[10px] leading-4 text-muted-foreground">
+              <p className="mt-1 text-[13px] font-medium text-positive">{k.change}</p>
+              <p className="mt-1 text-[12px] leading-4 text-muted-foreground">
                 {k.source} · Updated {k.updated}
               </p>
             </div>
@@ -243,7 +243,7 @@ function ReportsPage() {
         <div className="mt-4 grid gap-4 xl:grid-cols-[minmax(0,1fr)_380px]">
           <section className={card}>
             <h2 className="text-sm font-semibold">Premium growth and loss ratio</h2>
-            <p className="mt-0.5 text-[11px] text-muted-foreground">
+            <p className="mt-0.5 text-[13px] text-muted-foreground">
               Monthly gross written premium ($M) against loss ratio (%), last 6 months. The two
               series come from different departments and use the shared metric definitions.
             </p>
@@ -341,7 +341,7 @@ function ReportsPage() {
                   onClick={() => {
                     setQuestion(s);
                   }}
-                  className="rounded-full border border-border px-2.5 py-1 text-[10px] font-medium hover:bg-secondary"
+                  className="rounded-full border border-border px-2.5 py-1 text-[12px] font-medium hover:bg-secondary"
                 >
                   {s}
                 </button>
@@ -349,11 +349,11 @@ function ReportsPage() {
             </div>
             {answer ? (
               <div className="mt-3 rounded-xl bg-secondary/50 p-3.5 text-xs leading-5">
-                <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                <p className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
                   Via {answer.agents}
                 </p>
                 <p className="mt-1.5">{answer.answer}</p>
-                <p className="mt-2 text-[11px] text-muted-foreground">Sources: {answer.sources}</p>
+                <p className="mt-2 text-[13px] text-muted-foreground">Sources: {answer.sources}</p>
               </div>
             ) : (
               <p className="mt-3 text-xs leading-5 text-muted-foreground">
@@ -383,7 +383,7 @@ function ReportsPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+              <p className="mt-2 text-[13px] leading-4 text-muted-foreground">
                 The executive briefing Alfie prepares from these figures stays traceable: every
                 number links back to its library report.
               </p>
@@ -501,13 +501,13 @@ function ReportsPage() {
             <h2 className="flex items-center gap-2 text-sm font-semibold">
               <Plus className="size-4" /> Report builder
             </h2>
-            <p className="mt-0.5 text-[11px] text-muted-foreground">
+            <p className="mt-0.5 text-[13px] text-muted-foreground">
               Generate a report in steps: category, sources, metrics, period, filters, comparison,
               then review and save. Or describe it in plain language and Alfie will set the same
               fields and explain them.
             </p>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Category
                 <select
                   value={bCategory}
@@ -519,7 +519,7 @@ function ReportsPage() {
                   ))}
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Reporting period
                 <select
                   value={bPeriod}
@@ -537,7 +537,7 @@ function ReportsPage() {
                   ))}
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Comparison
                 <select
                   value={bComparison}
@@ -549,7 +549,7 @@ function ReportsPage() {
                   ))}
                 </select>
               </label>
-              <label className="block text-[11px] text-muted-foreground">
+              <label className="block text-[13px] text-muted-foreground">
                 Filters
                 <select
                   className={`${selectCls} mt-1`}
@@ -563,7 +563,7 @@ function ReportsPage() {
               </label>
             </div>
             <div className="mt-3">
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-[13px] text-muted-foreground">
                 Data sources (only ones your role can use)
               </p>
               <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -578,7 +578,7 @@ function ReportsPage() {
                     key={s}
                     type="button"
                     onClick={() => toggle(bSources, s, setBSources)}
-                    className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${bSources.includes(s) ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}
+                    className={`rounded-full px-2.5 py-1 text-[13px] font-medium ${bSources.includes(s) ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}
                   >
                     {s}
                   </button>
@@ -586,7 +586,7 @@ function ReportsPage() {
               </div>
             </div>
             <div className="mt-3">
-              <p className="text-[11px] text-muted-foreground">Metrics and aggregations</p>
+              <p className="text-[13px] text-muted-foreground">Metrics and aggregations</p>
               <div className="mt-1.5 flex flex-wrap gap-1.5">
                 {[
                   "Total incurred",
@@ -600,7 +600,7 @@ function ReportsPage() {
                     key={s}
                     type="button"
                     onClick={() => toggle(bMetrics, s, setBMetrics)}
-                    className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${bMetrics.includes(s) ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}
+                    className={`rounded-full px-2.5 py-1 text-[13px] font-medium ${bMetrics.includes(s) ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}
                   >
                     {s}
                   </button>
@@ -639,7 +639,7 @@ function ReportsPage() {
                     ))}
                   </tbody>
                 </table>
-                <p className="mt-2 text-[11px] text-muted-foreground">
+                <p className="mt-2 text-[13px] text-muted-foreground">
                   Example of a natural language build: "Claims by region, grouped by product, with
                   total incurred, average settlement and loss ratios for the last twelve months"
                   sets exactly these fields, and Alfie lists the fields and calculations it used.
@@ -671,7 +671,7 @@ function ReportsPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-2.5 text-[11px] leading-4 text-muted-foreground">
+            <p className="mt-2.5 text-[13px] leading-4 text-muted-foreground">
               Every scheduled run, delivery and failure is logged, including data source problems.
               Sensitive reports follow the organization's distribution policy, and schedules can
               require review before anything is sent.
@@ -680,7 +680,7 @@ function ReportsPage() {
               <h3 className="flex items-center gap-2 text-xs font-semibold">
                 <ShieldCheck className="size-3.5" /> Governance and audit
               </h3>
-              <ul className="mt-2 space-y-1.5 text-[11px] leading-4 text-muted-foreground">
+              <ul className="mt-2 space-y-1.5 text-[13px] leading-4 text-muted-foreground">
                 <li>
                   Access follows roles and data level permissions: asking Alfie for a cross
                   department report never grants access to restricted departmental data.
@@ -699,7 +699,7 @@ function ReportsPage() {
                   <li key={a.time + a.detail} className="text-xs leading-5">
                     <span className="font-medium">{a.action}</span>{" "}
                     <span className="text-muted-foreground">· {a.detail}</span>
-                    <span className="block text-[10px] text-muted-foreground">
+                    <span className="block text-[12px] text-muted-foreground">
                       {a.time} · {a.actor}
                     </span>
                   </li>
@@ -756,7 +756,7 @@ function ReportsPage() {
                   ["Sources", preview.sources],
                 ].map(([k, v]) => (
                   <div key={k} className="rounded-lg bg-secondary/50 px-2.5 py-1.5">
-                    <span className="block text-[10px] uppercase tracking-wide text-muted-foreground">
+                    <span className="block text-[12px] uppercase tracking-wide text-muted-foreground">
                       {k}
                     </span>
                     {v}

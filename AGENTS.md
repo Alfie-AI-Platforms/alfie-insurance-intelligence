@@ -56,6 +56,11 @@ directly on the `main` branch.
   (`--font-display`) for headings and for Alfie's drafted output, so
   anything that reads like a document looks like one. Tabular numerals are
   on globally so figures align like a ledger.
+- Readability floor: nothing renders below 12px. The small-text scale is
+  raised in @theme (text-xs is 13px, text-sm is 15px) and arbitrary sizes
+  start at text-[12px]. Secondary text (--muted-foreground) stays close to
+  the foreground in both modes (lightness 0.32 in light mode, 0.85 in
+  dark); do not reintroduce mid-grey secondary text or sub-12px sizes.
 - Controls and tables: native selects never use the browser's own dropdown
   arrow; they carry the `select-chevron` utility from `src/styles.css`
   (chevron at a fixed inset, right padding reserved, left padding only on
