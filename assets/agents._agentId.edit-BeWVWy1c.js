@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./agent-builder-YHFtvPcu.js";var n=e(),r=()=>(0,n.jsx)(t,{editing:!0});export{r as component};
