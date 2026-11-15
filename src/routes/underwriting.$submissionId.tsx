@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AlertTriangle, ArrowLeft, Bot, Check, ChevronDown, Circle, Download, FileText, HelpCircle, Lock, MoreHorizontal, Paperclip, Share2, ShieldAlert, Sparkle, Upload } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
-import { AlfieMark } from "@/components/alfie-ui";
+import { AlfieChip, AlfieMark, AlfiePanelHeader, ReviewBar } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/underwriting/$submissionId")({
 type Doc = { id: string; name: string; label: string; isImage: boolean; url?: string | undefined; size: string; summary: string };
 type Reply = { intro: string; items?: string[]; fields?: [string, string][]; next?: string; appetite?: string; confidence?: string; sources?: string[] | undefined; note?: string };
 type Msg = { id: string; role: "user" | "alfie"; text?: string; files?: Attachment[]; reply?: Reply; actions?: string[]; attached?: boolean };
-type Tab = "conversation" | "pricing" | "activity";
+type Tab = "file" | "pricing" | "activity";
 
 const seedDocs: Doc[] = [
   { id: "d1", name: "ACORD_140_Northstar.pdf", label: "ACORD Application", isImage: false, size: "1.2 MB", summary: "ACORD 125/140. 4 locations listed (Buildings 1, 2, 4 and HQ). Class: metal fabrication. Requested limit $8.5M blanket, $25,000 deductible." },
@@ -71,7 +71,7 @@ function replyFor(q: string, files: Attachment[]): { reply: Reply; actions: stri
 function SubmissionWorkspace() {
   const { submissionId } = Route.useParams();
   const sub = getSubmission(submissionId) ?? { ...submissions[0]!, id: submissionId };
-  const [tab, setTab] = useState<Tab>("conversation");
+  const [tab, setTab] = useState<Tab>("file");
   const [messages, setMessages] = useState<Msg[]>([{ id: "m0", role: "alfie", reply: { intro: "I've reviewed the available submission materials. I can help evaluate the risk, check completeness, compare it against underwriting appetite, identify issues, and prepare a decision-ready underwriting summary." } }]);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
@@ -95,7 +95,7 @@ function SubmissionWorkspace() {
   const send = (text: string, files: Attachment[] = []) => {
     const q = text || (files.length ? "Analyze these attachments." : "");
     if (!q) return;
-    setInput(""); setPending([]); setTab("conversation");
+    setInput(""); setPending([]);
     setMessages((m) => [...m, { id: crypto.randomUUID(), role: "user", text: q, files }]);
     if (files.length) log({ actor: "Jane Doe", actorType: "User", action: "Documents uploaded to conversation", source: files.map((f) => f.name).join(", "), result: "Conversation only — not in submission file" });
     setThinking(true);
@@ -148,33 +148,21 @@ function SubmissionWorkspace() {
   };
   const toAttachment = (d: Doc): Attachment => ({ id: d.id, name: d.name, size: 200000, type: "", isImage: d.isImage, url: d.url });
 
-  const panel = <aside className="scrollbar-thin hidden w-[320px] shrink-0 flex-col overflow-y-auto border-l border-border bg-panel p-5 xl:flex">
-    <h2 className="text-sm font-semibold">Submission Context</h2>
-    <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3 text-xs">
-      {([["Submission", sub.id], ["Insured", sub.insured], ["Broker", sub.broker], ["Line of Business", sub.line], ["Effective Date", sub.effective], ["Requested Limit", compactUsd(sub.limit)], ["Estimated Premium", sub.premium ? usd(sub.premium) : "—"]] as const).map(([k, v]) => <div key={k}><dt className="text-[10px] text-muted-foreground">{k}</dt><dd className="mt-0.5 font-medium">{v}</dd></div>)}
-      <div><dt className="text-[10px] text-muted-foreground">Status</dt><dd className="mt-1"><SubmissionStatusBadge status={sub.status} /></dd></div>
-      <div><dt className="text-[10px] text-muted-foreground">Priority</dt><dd className="mt-1"><UwPriorityBadge priority={sub.priority} /></dd></div>
-    </dl>
-    <Section title={`Documents · ${docs.length}`}>
-      <div className="space-y-1.5">{docs.map((d) => <button key={d.id} onClick={() => setPreview(d)} className="flex w-full items-center gap-2.5 rounded-lg border border-border bg-background p-2 text-left hover:bg-secondary">{d.isImage && d.url ? <img src={d.url} alt={d.label} loading="lazy" width={944} height={704} className="size-8 rounded-md object-cover" /> : <div className="flex size-8 items-center justify-center rounded-md bg-secondary text-muted-foreground"><FileGlyph name={d.name} /></div>}<div className="min-w-0"><p className="text-xs font-medium">{d.label}</p><p className="truncate text-[10px] text-muted-foreground">{fileExt(d.name)} · {d.name}</p></div></button>)}</div>
-    </Section>
-    <Section title="Risk Summary">
-      <dl className="grid grid-cols-2 gap-2 text-xs">{([["Locations", "4"], ["Annual Revenue", "$42M"], ["Employees", "286"], ["Prior Losses", "7"], ["Loss Ratio", "18.4%"], ["Requested Limit", "$8.5M"], ["Deductible", "$25,000"]] as const).map(([k, v]) => <div key={k} className="rounded-lg border border-border bg-background px-2.5 py-2"><dt className="text-[10px] text-muted-foreground">{k}</dt><dd className="mt-0.5 font-semibold">{v}</dd></div>)}</dl>
-    </Section>
-    <Section title="AI Assessment">
-      {([["Submission Completeness", "92%", "text-positive", "What information is missing?"], ["Appetite", "Referral", "text-warning", "Is this risk within our appetite?"], ["Risk Level", "Moderate", "text-warning", "What are the biggest risk factors?"], ["Missing Information", "2 Items", "text-warning", "What information is missing?"], ["Pricing Review", "Recommended", "text-primary", "Give me the pricing factors I should consider."]] as const).map(([k, v, tone, q]) => <button key={k} onClick={() => send(q)} className="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-xs hover:bg-secondary"><span>{k}</span><span className={`font-medium ${tone}`}>{v}</span></button>)}
-      <p className="mt-2 px-2 text-[10px] leading-4 text-muted-foreground">AI assessment prepares the file for review. It is not an underwriting decision.</p>
-    </Section>
-    <section className="mt-6 border-t border-border pt-5">
-      <button onClick={() => setAppetiteOpen((v) => !v)} className="flex w-full items-center justify-between text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground" aria-expanded={appetiteOpen}>Appetite Assessment<ChevronDown className={`size-3.5 transition-transform ${appetiteOpen ? "" : "-rotate-90"}`} /></button>
-      {appetiteOpen ? <div className="mt-3 space-y-1">{appetiteRules.map(([k, s, v]) => <div key={k} className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs">{s === "ok" ? <Check className="size-3.5 text-positive" /> : s === "warn" ? <AlertTriangle className="size-3.5 text-warning" /> : <HelpCircle className="size-3.5 text-muted-foreground" />}<span className="flex-1">{k}</span><span className={`text-[11px] ${s === "ok" ? "text-muted-foreground" : s === "warn" ? "text-warning" : "text-muted-foreground italic"}`}>{v}</span></div>)}
-        <div className="mt-2 rounded-lg bg-secondary px-3 py-2 text-xs"><span className="text-muted-foreground">Overall: </span><span className="font-semibold">Within appetite with referral.</span></div>
-        <Button size="sm" variant="ghost" className="mt-1 w-full justify-start" onClick={() => setGuidelines(true)}><FileText className="size-3.5" />View Applicable Guidelines</Button></div> : null}
-    </section>
-    <Section title="Underwriting Workflow">
-      <ol className="space-y-0.5">{workflow.map((s, i) => <li key={s} className={`flex items-center gap-2.5 rounded-md px-2 py-1.5 text-xs ${i === CURRENT ? "bg-primary/10 font-semibold text-primary" : i < CURRENT ? "text-foreground" : "text-muted-foreground"}`}>{i < CURRENT ? <Check className="size-3.5 text-positive" /> : i === CURRENT ? <ChevronDown className="size-3.5 -rotate-90" /> : <Circle className="size-3" />}{s}{i === CURRENT ? <span className="ml-auto text-[10px] font-medium">Current</span> : null}</li>)}</ol>
-      <p className="mt-2 px-2 text-[10px] leading-4 text-muted-foreground">Alfie completed preparation steps. The decision-ready file is with the underwriter.</p>
-    </Section>
+  const panel = <aside className="scrollbar-thin hidden w-[360px] shrink-0 flex-col border-l border-border bg-panel xl:flex">
+    <div className="border-b border-border p-4"><AlfiePanelHeader context={`Submission ${sub.id} · ${sub.line}`} /></div>
+    <div className="min-h-0 flex-1 space-y-5 overflow-y-auto p-4">
+      {messages.map((m) => m.role === "user" ? <div key={m.id} className="flex flex-col items-end gap-2">
+          {m.files?.length ? <><div className="flex flex-wrap justify-end gap-2">{m.files.map((f) => <AttachmentChip key={f.id} file={f} />)}</div><div className="flex items-center gap-2 text-[10px] text-muted-foreground"><Paperclip className="size-3" />{m.files.length} attachment{m.files.length > 1 ? "s" : ""} ready for analysis · Use in this conversation{m.attached ? <span className="text-positive">· Added to submission</span> : <Button size="sm" variant="ghost" className="h-6 px-2 text-[10px]" onClick={() => setConfirm(m)}><Upload className="size-3" />Add to Submission</Button>}</div></> : null}
+          <div className="max-w-[80%] rounded-2xl bg-ink px-4 py-2.5 text-sm text-ink-foreground">{m.text}</div>
+        </div> : <div key={m.id} className="flex gap-3"><AlfieMark /><div className="min-w-0 flex-1 text-sm leading-6">
+          {m.reply ? <ReplyView reply={m.reply} /> : null}
+          {m.actions?.length ? <div className="mt-3 flex flex-wrap gap-2">{m.actions.map((a) => <Button key={a} size="sm" variant="secondary" onClick={() => runAction(a)}>{a}</Button>)}</div> : null}
+          {m.id === "m0" ? <div className="mt-4 flex flex-wrap gap-2">{prompts.map((p) => <Button key={p} size="sm" variant="secondary" className="font-normal" onClick={() => send(p)}><Sparkle className="size-3 text-primary" />{p}</Button>)}</div> : null}
+        </div></div>)}
+        {thinking ? <div className="flex items-center gap-3 text-xs text-muted-foreground"><AlfieMark /><span className="animate-pulse">Reviewing submission package and appetite guides…</span></div> : null}
+        <div ref={endRef} />
+    </div>
+    <div className="border-t border-border p-4"><AlfieComposer value={input} onChange={setInput} onSend={send} pending={pending} placeholder="Ask Alfie about this submission…" /><p className="mt-2 text-[10px] leading-4 text-muted-foreground">Alfie reads, extracts, and prepares. Acceptance, pricing, and binding decisions remain with authorized underwriters.</p></div>
   </aside>;
 
   return <AppShell rightPanel={panel}><div className="flex h-full flex-col">
@@ -198,7 +186,7 @@ function SubmissionWorkspace() {
             <DropdownMenuContent align="end"><DropdownMenuItem onSelect={() => setTab("activity")}>View activity</DropdownMenuItem><DropdownMenuItem onSelect={() => setTab("pricing")}>Open pricing</DropdownMenuItem><DropdownMenuItem onSelect={() => runAction("Add Underwriting Note")}>Add note</DropdownMenuItem><DropdownMenuItem asChild><Link to="/underwriting">Back to queue</Link></DropdownMenuItem></DropdownMenuContent></DropdownMenu>
         </div>
       </div>
-      <div className="mt-4 flex gap-1">{(["conversation", "pricing", "activity"] as const).map((t) => <Button key={t} size="sm" variant={tab === t ? "soft" : "ghost"} className={tab === t ? "text-foreground" : ""} onClick={() => setTab(t)}>{t === "conversation" ? "Alfie conversation" : t === "pricing" ? "Pricing" : `Activity · ${audit.length}`}</Button>)}</div>
+      <div className="mt-4 flex gap-1">{(["file", "pricing", "activity"] as const).map((t) => <Button key={t} size="sm" variant={tab === t ? "soft" : "ghost"} className={tab === t ? "text-foreground" : ""} onClick={() => setTab(t)}>{t === "file" ? "Submission file" : t === "pricing" ? "Pricing" : `Activity · ${audit.length}`}</Button>)}</div>
     </div>
     {notice ? <div className="mx-5 mt-3 rounded-lg border border-border bg-secondary px-3 py-2 text-xs lg:mx-8">{notice}</div> : null}
 
@@ -208,29 +196,51 @@ function SubmissionWorkspace() {
       <div className="grid gap-3 sm:grid-cols-2"><div className="rounded-xl border border-border bg-card p-4"><p className="text-[11px] text-muted-foreground">Indicative Premium</p><p className="mt-1 text-2xl font-semibold">{usd(sub.premium || 185000)}</p>{pricingRun ? <p className="mt-1 text-[11px] text-muted-foreground">Range $178,000 – $196,000</p> : null}</div><div className="rounded-xl border border-border bg-card p-4"><p className="text-[11px] text-muted-foreground">Pricing Status</p><p className="mt-1 text-2xl font-semibold text-warning">Review Required</p></div></div>
       <h3 className="mb-2 mt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Factors</h3>
       <div className="divide-y divide-border rounded-xl border border-border bg-card">{pricingFactors.map(([k, v, d]) => <div key={k} className="flex items-center gap-3 px-4 py-3 text-sm"><span className="w-36 font-medium">{k}</span><span className="flex-1 text-xs text-muted-foreground">{v}</span>{pricingRun ? <span className={`text-xs font-medium ${d === "+" ? "text-warning" : "text-positive"}`}>{d === "+" ? "Upward" : "Downward"}</span> : null}</div>)}</div>
-      <div className="mt-4 flex flex-wrap gap-2"><Button onClick={runPricing}><Sparkle className="size-3.5" />Run Pricing Analysis</Button><Button variant="secondary" onClick={() => { setTab("conversation"); send("Give me the pricing factors I should consider."); }}>Prepare Pricing Summary</Button></div>
+      <div className="mt-4 flex flex-wrap gap-2"><Button onClick={runPricing}><Sparkle className="size-3.5" />Run Pricing Analysis</Button><Button variant="secondary" onClick={() => send("Give me the pricing factors I should consider.")}>Prepare Pricing Summary</Button></div>
       <p className="mt-4 text-[11px] leading-5 text-muted-foreground">Alfie provides indicative pricing analysis only. The final production price is set by an authorized underwriter; agent configuration does not permit autonomous rating for this line.</p>
     </div></div>
 
-    : <div className="flex min-h-0 flex-1 flex-col">
-      <div className="flex-1 px-5 py-6 lg:px-8"><div className="mx-auto max-w-3xl space-y-6">
-        {messages.map((m) => m.role === "user" ? <div key={m.id} className="flex flex-col items-end gap-2">
-          {m.files?.length ? <><div className="flex flex-wrap justify-end gap-2">{m.files.map((f) => <AttachmentChip key={f.id} file={f} />)}</div><div className="flex items-center gap-2 text-[10px] text-muted-foreground"><Paperclip className="size-3" />{m.files.length} attachment{m.files.length > 1 ? "s" : ""} ready for analysis · Use in this conversation{m.attached ? <span className="text-positive">· Added to submission</span> : <Button size="sm" variant="ghost" className="h-6 px-2 text-[10px]" onClick={() => setConfirm(m)}><Upload className="size-3" />Add to Submission</Button>}</div></> : null}
-          <div className="max-w-[80%] rounded-2xl bg-ink px-4 py-2.5 text-sm text-ink-foreground">{m.text}</div>
-        </div> : <div key={m.id} className="flex gap-3"><AlfieMark /><div className="min-w-0 flex-1 text-sm leading-6">
-          {m.reply ? <ReplyView reply={m.reply} /> : null}
-          {m.actions?.length ? <div className="mt-3 flex flex-wrap gap-2">{m.actions.map((a) => <Button key={a} size="sm" variant="secondary" onClick={() => runAction(a)}>{a}</Button>)}</div> : null}
-          {m.id === "m0" ? <div className="mt-4 flex flex-wrap gap-2">{prompts.map((p) => <Button key={p} size="sm" variant="secondary" className="font-normal" onClick={() => send(p)}><Sparkle className="size-3 text-primary" />{p}</Button>)}</div> : null}
-        </div></div>)}
-        {thinking ? <div className="flex items-center gap-3 text-xs text-muted-foreground"><AlfieMark /><span className="animate-pulse">Reviewing submission package and appetite guides…</span></div> : null}
-        <div ref={endRef} />
-      </div></div>
-      <div className="sticky bottom-0 bg-background px-5 pb-5 pt-2 lg:px-8"><div className="mx-auto max-w-3xl"><AlfieComposer value={input} onChange={setInput} onSend={send} pending={pending} placeholder="Ask Alfie about this submission…" /><p className="mt-2 text-center text-[10px] text-muted-foreground">Alfie reads, extracts, and prepares. Acceptance, pricing, and binding decisions remain with authorized underwriters.</p></div></div>
-    </div>}
-
+    : <div className="px-5 py-5 lg:px-8"><div className="mx-auto max-w-3xl">
+      <ReviewBar status={`Underwriter review · step ${CURRENT + 1} of ${workflow.length}`} title="Requested limit $8.5M exceeds the $5M class authority" detail="Alfie assessed this submission as within appetite with referral. The limit exception needs a senior underwriter decision.">
+        <Button size="sm" variant="secondary" onClick={() => runAction("Request Missing Information")}>Request information</Button>
+        <Button size="sm" onClick={() => runAction("Prepare Referral")}>Prepare referral</Button>
+      </ReviewBar>
+      <section className="mt-8">
+        <div className="mb-3 flex flex-wrap items-center gap-2"><AlfieChip label="Alfie draft" /><span className="text-xs text-muted-foreground">Submission assessment for underwriter review. Not an acceptance, pricing, or binding decision.</span></div>
+        <div className="rounded-xl border border-border bg-card p-5"><ReplyView reply={mainAnalysis} />
+          <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4">{["Review Evidence", "Prepare Referral", "Request Information"].map((a) => <Button key={a} size="sm" variant="secondary" onClick={() => runAction(a)}>{a}</Button>)}</div>
+        </div>
+      </section>
+      <Section title="Submission details">
+        <dl className="grid grid-cols-2 gap-x-3 gap-y-3 text-xs md:grid-cols-4">
+          {([["Submission", sub.id], ["Insured", sub.insured], ["Broker", sub.broker], ["Line of Business", sub.line], ["Effective Date", sub.effective], ["Requested Limit", compactUsd(sub.limit)], ["Estimated Premium", sub.premium ? usd(sub.premium) : "—"]] as const).map(([k, v]) => <div key={k}><dt className="text-[10px] text-muted-foreground">{k}</dt><dd className="mt-0.5 font-medium">{v}</dd></div>)}
+          <div><dt className="text-[10px] text-muted-foreground">Status</dt><dd className="mt-1"><SubmissionStatusBadge status={sub.status} /></dd></div>
+          <div><dt className="text-[10px] text-muted-foreground">Priority</dt><dd className="mt-1"><UwPriorityBadge priority={sub.priority} /></dd></div>
+        </dl>
+      </Section>
+      <Section title="Risk summary">
+        <dl className="grid grid-cols-2 gap-2 text-xs md:grid-cols-4">{([["Locations", "4"], ["Annual Revenue", "$42M"], ["Employees", "286"], ["Prior Losses", "7"], ["Loss Ratio", "18.4%"], ["Requested Limit", "$8.5M"], ["Deductible", "$25,000"]] as const).map(([k, v]) => <div key={k} className="rounded-lg border border-border bg-card px-2.5 py-2"><dt className="text-[10px] text-muted-foreground">{k}</dt><dd className="mt-0.5 font-semibold">{v}</dd></div>)}</dl>
+      </Section>
+      <Section title={`Documents · ${docs.length}`}>
+        <div className="space-y-1.5">{docs.map((d) => <button key={d.id} onClick={() => setPreview(d)} className="flex w-full items-center gap-2.5 rounded-lg border border-border bg-card p-2 text-left hover:bg-secondary">{d.isImage && d.url ? <img src={d.url} alt={d.label} loading="lazy" width={944} height={704} className="size-8 rounded-md object-cover" /> : <div className="flex size-8 items-center justify-center rounded-md bg-secondary text-muted-foreground"><FileGlyph name={d.name} /></div>}<div className="min-w-0"><p className="text-xs font-medium">{d.label}</p><p className="truncate text-[10px] text-muted-foreground">{fileExt(d.name)} · {d.name}</p></div></button>)}</div>
+      </Section>
+      <Section title="Appetite assessment">
+        <div className="space-y-1">{appetiteRules.map(([k, st, v]) => <div key={k} className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs">{st === "ok" ? <Check className="size-3.5 text-positive" /> : st === "warn" ? <AlertTriangle className="size-3.5 text-warning" /> : <HelpCircle className="size-3.5 text-muted-foreground" />}<span className="flex-1">{k}</span><span className={`text-[11px] ${st === "warn" ? "text-warning" : "text-muted-foreground"}`}>{v}</span></div>)}
+          <div className="mt-2 rounded-lg bg-secondary px-3 py-2 text-xs"><span className="text-muted-foreground">Overall: </span><span className="font-semibold">Within appetite with referral.</span></div>
+          <Button size="sm" variant="ghost" className="mt-1 w-full justify-start" onClick={() => setGuidelines(true)}><FileText className="size-3.5" />View Applicable Guidelines</Button></div>
+      </Section>
+      <Section title="Assessment">
+        {([["Submission Completeness", "92%", "text-positive", "What information is missing?"], ["Appetite", "Referral", "text-warning", "Is this risk within our appetite?"], ["Risk Level", "Moderate", "text-warning", "What are the biggest risk factors?"], ["Missing Information", "2 Items", "text-warning", "What information is missing?"], ["Pricing Review", "Recommended", "text-primary", "Give me the pricing factors I should consider."]] as const).map(([k, v, tone, q]) => <button key={k} onClick={() => send(q)} className="flex w-full items-center justify-between rounded-md px-2 py-1.5 text-xs hover:bg-secondary"><span>{k}</span><span className={`font-medium ${tone}`}>{v}</span></button>)}
+        <p className="mt-2 px-2 text-[10px] leading-4 text-muted-foreground">Assessment opens in the Alfie rail. AI assessment prepares the file for review. It is not an underwriting decision.</p>
+      </Section>
+      <Section title="Workflow">
+        <ol className="space-y-0.5">{workflow.map((step, i) => <li key={step} className={`flex items-center gap-2.5 rounded-md px-2 py-1.5 text-xs ${i === CURRENT ? "bg-primary/10 font-semibold text-primary" : i < CURRENT ? "text-foreground" : "text-muted-foreground"}`}>{i < CURRENT ? <Check className="size-3.5 text-positive" /> : i === CURRENT ? <ChevronDown className="size-3.5 -rotate-90" /> : <Circle className="size-3" />}{step}{i === CURRENT ? <span className="ml-auto text-[10px] font-medium">Current</span> : null}</li>)}</ol>
+        <p className="mt-2 px-2 text-[10px] leading-4 text-muted-foreground">Alfie completed preparation steps. The decision-ready file is with the underwriter.</p>
+      </Section>
+    </div></div>}
     <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}><DialogContent className="max-w-xl">{preview ? <><DialogHeader><DialogTitle>{preview.label}</DialogTitle><DialogDescription>{fileExt(preview.name)} · {preview.name} · {preview.size}</DialogDescription></DialogHeader>
       {preview.isImage ? <img src={preview.url} alt={preview.label} className="w-full rounded-lg" /> : <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm"><FileText className="mb-2 size-5 text-muted-foreground" />{preview.summary}</div>}
-      <DialogFooter className="flex-wrap gap-2 sm:justify-start"><Button size="sm" variant="secondary" onClick={() => download(preview)}><Download className="size-3.5" />Download</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPreview(null); send(d.isImage ? "Review these property photos for underwriting concerns." : `Analyze the ${d.label}.`, d.isImage ? [toAttachment(d)] : []); }}><Sparkle className="size-3.5" />Analyze with Alfie</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPending((p) => (p.some((x) => x.id === d.id) ? p : [...p, toAttachment(d)])); setPreview(null); setTab("conversation"); }}><Paperclip className="size-3.5" />Attach to conversation</Button></DialogFooter></> : null}</DialogContent></Dialog>
+      <DialogFooter className="flex-wrap gap-2 sm:justify-start"><Button size="sm" variant="secondary" onClick={() => download(preview)}><Download className="size-3.5" />Download</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPreview(null); send(d.isImage ? "Review these property photos for underwriting concerns." : `Analyze the ${d.label}.`, d.isImage ? [toAttachment(d)] : []); }}><Sparkle className="size-3.5" />Analyze with Alfie</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPending((p) => (p.some((x) => x.id === d.id) ? p : [...p, toAttachment(d)])); setPreview(null); }}><Paperclip className="size-3.5" />Attach to conversation</Button></DialogFooter></> : null}</DialogContent></Dialog>
 
     <Dialog open={!!confirm} onOpenChange={(o) => !o && setConfirm(null)}><DialogContent><DialogHeader><DialogTitle>Add to submission file?</DialogTitle><DialogDescription>These files will be added to the permanent document record for {sub.id} and logged in the audit trail.</DialogDescription></DialogHeader>
       <div className="flex flex-wrap gap-2">{confirm?.files?.map((f) => <AttachmentChip key={f.id} file={f} />)}</div>

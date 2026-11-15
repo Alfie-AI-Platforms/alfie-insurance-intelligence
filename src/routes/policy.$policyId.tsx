@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Bot, Check, ChevronDown, Circle, Download, FileText, Lock, MoreHorizontal, Paperclip, Share2, ShieldAlert, Sparkle, Upload, Users } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
-import { AlfieMark } from "@/components/alfie-ui";
+import { AlfieMark, AlfiePanelHeader, ReviewBar } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/policy/$policyId")({
 type Doc = { id: string; name: string; label: string; date: string; summary: string; isImage?: boolean; url?: string | undefined };
 type Reply = { intro: string; items?: string[]; fields?: [string, string][]; next?: string; sources?: string[] | undefined; note?: string; agents?: string[] };
 type Msg = { id: string; role: "user" | "alfie"; text?: string; files?: Attachment[]; reply?: Reply; actions?: string[]; attached?: boolean };
-type Tab = "conversation" | "details" | "operations" | "history";
+type Tab = "details" | "operations" | "history";
 type Coverage = { name: string; limit: number; deductible: string; status: string };
 
 const roles = Object.keys(rolePermissions) as Role[];
@@ -71,7 +71,7 @@ function PolicyWorkspace() {
   const { policyId } = Route.useParams();
   const pol = getPolicy(policyId) ?? { ...policies[1]!, id: policyId };
   const [role, setRole] = useState<Role>("Policy Administrator");
-  const [tab, setTab] = useState<Tab>("conversation");
+  const [tab, setTab] = useState<Tab>("details");
   const [detail, setDetail] = useState<DetailTab>("Overview");
   const [messages, setMessages] = useState<Msg[]>([{ id: "m0", role: "alfie", reply: { intro: "I've loaded the policy record and its available documentation. I can help you understand coverage, review policy terms, compare versions, prepare endorsements, monitor renewal dates, and manage policy servicing." } }]);
   const [input, setInput] = useState("");
@@ -104,7 +104,7 @@ function PolicyWorkspace() {
   const send = (text: string, files: Attachment[] = []) => {
     const q = text || (files.length ? "Analyze these attachments." : "");
     if (!q) return;
-    setInput(""); setPending([]); setTab("conversation");
+    setInput(""); setPending([]);
     setMessages((m) => [...m, { id: crypto.randomUUID(), role: "user", text: q, files }]);
     if (files.length) log({ actor: "Jane Doe", actorType: "User", action: "Documents uploaded to conversation", source: files.map((f) => f.name).join(", "), approval: "Not required", next: "Conversation only" });
     setThinking(true);
@@ -147,26 +147,21 @@ function PolicyWorkspace() {
   const download = (d: Doc) => { const a = document.createElement("a"); a.href = d.url ?? URL.createObjectURL(new Blob([`${d.label}\n\n${d.summary}`], { type: "text/plain" })); a.download = d.url ? d.name : `${d.name}.txt`; a.click(); };
   const toAttachment = (d: Doc): Attachment => ({ id: d.id, name: d.name, size: 180000, type: "", isImage: !!d.isImage, url: d.url });
 
-  const panel = <aside className="scrollbar-thin hidden w-[320px] shrink-0 flex-col overflow-y-auto border-l border-border bg-panel p-5 xl:flex">
-    <h2 className="text-sm font-semibold">Policy Context</h2>
-    <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3 text-xs">
-      {([["Policy Number", pol.id], ["Policyholder", pol.holder], ["Line of Business", pol.line], ["Effective Date", "November 1, 2026"], ["Expiration Date", "November 1, 2027"], ["Annual Premium", dollars(premium)], ["Total Insured Value", shortDollars(pol.tiv)], ["Assigned Team", pol.team], ["Version", `v${version}`]] as const).map(([k, v]) => <div key={k}><dt className="text-[10px] text-muted-foreground">{k}</dt><dd className="mt-0.5 font-medium">{v}</dd></div>)}
-      <div><dt className="text-[10px] text-muted-foreground">Policy Status</dt><dd className="mt-1"><PolicyStatusBadge status={issued && pol.status === "Pending Issuance" ? "Active" : pol.status} /></dd></div>
-    </dl>
-    <section className="mt-6 border-t border-border pt-5">
-      <button onClick={() => setDocsOpen((v) => !v)} aria-expanded={docsOpen} className="flex w-full items-center justify-between text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Policy Documents · {docs.length}<ChevronDown className={`size-3.5 transition-transform ${docsOpen ? "" : "-rotate-90"}`} /></button>
-      {docsOpen ? <div className="mt-3 space-y-1.5">{docs.map((d) => <button key={d.id} onClick={() => setPreview(d)} className="flex w-full items-center gap-2.5 rounded-lg border border-border bg-background p-2 text-left hover:bg-secondary">{d.isImage && d.url ? <img src={d.url} alt={d.label} className="size-8 rounded-md object-cover" /> : <div className="flex size-8 items-center justify-center rounded-md bg-secondary text-muted-foreground"><FileGlyph name={d.name} /></div>}<div className="min-w-0 flex-1"><p className="text-xs font-medium">{d.label}</p><p className="truncate text-[10px] text-muted-foreground">{fileExt(d.name)} · {d.name}</p></div><span className="shrink-0 text-[10px] text-muted-foreground">{d.date}</span></button>)}</div> : null}
-    </section>
-    <Section title="Policy Lifecycle">
-      <Timeline steps={lifecycle} current={LIFE_NOW} />
-    </Section>
-    {endStep > 0 || audit.some((e) => e.approval === "Pending") ? <Section title="Endorsement in progress · END-0418">
-      <Timeline steps={endorsementTimeline} current={endStep >= 6 ? 4 : endStep >= 5 ? 3 : endStep >= 3 ? 2 : 1} />
-    </Section> : null}
-    <Section title="Your access">
-      <p className="mb-2 text-xs font-medium">{role}</p>
-      <div className="flex flex-wrap gap-1">{(["view", "analyze", "prepare", "edit", "approveEndorsement", "issue", "approveRenewal", "cancel", "reinstate", "viewFinancials"] as const).map((p) => <span key={p} className={`rounded-full px-2 py-0.5 text-[10px] ${allowed(p) ? "bg-status-active text-status-active-foreground" : "bg-secondary text-muted-foreground line-through"}`}>{permLabel[p]}</span>)}</div>
-    </Section>
+  const panel = <aside className="scrollbar-thin hidden w-[360px] shrink-0 flex-col border-l border-border bg-panel xl:flex">
+    <div className="border-b border-border p-4"><AlfiePanelHeader context={`Policy ${pol.id} · ${pol.line}`} /></div>
+    <div className="min-h-0 flex-1 space-y-5 overflow-y-auto p-4">
+      {messages.map((m) => m.role === "user" ? <div key={m.id} className="flex flex-col items-end gap-2">
+          {m.files?.length ? <><div className="flex flex-wrap justify-end gap-2">{m.files.map((f) => <AttachmentChip key={f.id} file={f} />)}</div><div className="flex items-center gap-2 text-[10px] text-muted-foreground"><Paperclip className="size-3" />{m.files.length} attachment{m.files.length > 1 ? "s" : ""} ready for analysis · Use in this Conversation{m.attached ? <span className="text-positive">· Attached to policy</span> : <Button size="sm" variant="ghost" className="h-6 px-2 text-[10px]" onClick={() => setConfirm(m)}><Upload className="size-3" />Attach to Policy</Button>}</div></> : null}
+          <div className="max-w-[80%] rounded-2xl bg-ink px-4 py-2.5 text-sm text-ink-foreground">{m.text}</div>
+        </div> : <div key={m.id} className="flex gap-3"><AlfieMark /><div className="min-w-0 flex-1 text-sm leading-6">
+          {m.reply ? <ReplyView reply={m.reply} /> : null}
+          {m.actions?.length ? <div className="mt-3 flex flex-wrap gap-2">{m.actions.map((a) => <Button key={a} size="sm" variant="secondary" onClick={() => runAction(a)}>{a}</Button>)}</div> : null}
+          {m.id === "m0" ? <div className="mt-4 flex flex-wrap gap-2">{prompts.map((p) => <Button key={p} size="sm" variant="secondary" className="font-normal" onClick={() => send(p)}><Sparkle className="size-3 text-primary" />{p}</Button>)}</div> : null}
+        </div></div>)}
+        {thinking ? <div className="flex items-center gap-3 text-xs text-muted-foreground"><AlfieMark /><span className="animate-pulse">Policy Agent is reviewing the policy record…</span></div> : null}
+        <div ref={endRef} />
+    </div>
+    <div className="border-t border-border p-4"><AlfieComposer value={input} onChange={setInput} onSend={send} pending={pending} placeholder="Ask Alfie about this policy..." /><p className="mt-2 text-[10px] leading-4 text-muted-foreground">Alfie prepares policy changes. Issuance, endorsements, renewals, and cancellations require authorized human approval.</p></div>
   </aside>;
 
   return <AppShell rightPanel={panel}><div className="flex h-full flex-col">
@@ -182,7 +177,7 @@ function PolicyWorkspace() {
             <DropdownMenuContent align="end"><DropdownMenuItem onSelect={() => setTab("history")}>View history</DropdownMenuItem><DropdownMenuItem onSelect={() => setTab("operations")}>Policy operations</DropdownMenuItem><DropdownMenuItem onSelect={() => send("Generate proof of insurance.")}>Generate proof of insurance</DropdownMenuItem><DropdownMenuItem asChild><Link to="/policy">Back to portfolio</Link></DropdownMenuItem></DropdownMenuContent></DropdownMenu>
         </div>
       </div>
-      <div className="mt-4 flex gap-1 overflow-x-auto">{(["conversation", "details", "operations", "history"] as const).map((t) => <Button key={t} size="sm" variant={tab === t ? "soft" : "ghost"} className={tab === t ? "text-foreground" : ""} onClick={() => setTab(t)}>{t === "conversation" ? "Alfie conversation" : t === "details" ? "Policy details" : t === "operations" ? "Policy Operations" : `History · ${audit.length}`}</Button>)}</div>
+      <div className="mt-4 flex gap-1 overflow-x-auto">{(["details", "operations", "history"] as const).map((t) => <Button key={t} size="sm" variant={tab === t ? "soft" : "ghost"} className={tab === t ? "text-foreground" : ""} onClick={() => setTab(t)}>{t === "details" ? "Policy details" : t === "operations" ? "Policy Operations" : `History · ${audit.length}`}</Button>)}</div>
     </div>
     {notice ? <div className="mx-5 mt-3 rounded-lg border border-border bg-secondary px-3 py-2 text-xs lg:mx-8">{notice}</div> : null}
 
@@ -191,8 +186,16 @@ function PolicyWorkspace() {
       <div className="overflow-x-auto rounded-xl border border-border bg-card"><table className="w-full min-w-[900px] text-left text-xs"><thead><tr className="border-b border-border text-[10px] uppercase tracking-wider text-muted-foreground">{["Timestamp", "Actor", "Action", "Previous Value", "New Value", "Source", "Approval"].map((h) => <th key={h} className="px-3 py-2.5 font-medium">{h}</th>)}</tr></thead><tbody>{audit.map((e, i) => <tr key={i} className="border-b border-border last:border-0"><td className="whitespace-nowrap px-3 py-2.5 text-muted-foreground">{e.time}</td><td className="px-3 py-2.5"><span className="flex items-center gap-1.5 font-medium">{e.actorType === "Alfie" ? <Bot className="size-3.5 text-primary" /> : null}{e.actor}</span></td><td className="px-3 py-2.5">{e.action}</td><td className="px-3 py-2.5 text-muted-foreground">{e.prev ?? "—"}</td><td className="px-3 py-2.5">{e.next ?? "—"}</td><td className="px-3 py-2.5 text-muted-foreground">{e.source}</td><td className="px-3 py-2.5"><span className={`rounded-full px-2 py-0.5 text-[10px] ${e.approval === "Approved" ? "bg-status-active text-status-active-foreground" : e.approval === "Pending" ? "bg-status-paused text-status-paused-foreground" : "bg-secondary text-muted-foreground"}`}>{e.approval}</span></td></tr>)}</tbody></table></div></div>
 
     : tab === "details" ? <div className="flex-1 px-5 py-5 lg:px-8"><div className="mx-auto max-w-4xl">
+      <div className="mb-5"><ReviewBar status="Endorsement pending · Information Review" title="Add location 220 Industrial Pkwy (END-0418)" detail="Requested by Apex Insurance Brokers on Oct 28. Underwriting review is required before this policy changes. Renewal preparation is also under way for November 1, 2027.">
+        <Button size="sm" variant="secondary" onClick={() => runAction("Review Renewal")}>Review renewal</Button>
+        <Button size="sm" onClick={() => runAction("Prepare Endorsement")}>Prepare endorsement</Button>
+      </ReviewBar></div>
       <div className="scrollbar-none flex gap-1 overflow-x-auto border-b border-border pb-2">{detailTabs.map((d) => <Button key={d} size="sm" variant={detail === d ? "soft" : "ghost"} className={detail === d ? "text-foreground" : ""} onClick={() => setDetail(d)}>{d}</Button>)}</div>
-      <div className="mt-5 text-sm">{detail === "Overview" ? <KV rows={[["Policyholder", pol.holder], ["Line / form", `${pol.line} · CP 00 10 / CP 10 30`], ["Policy period", "Nov 01, 2026 – Nov 01, 2027"], ["Annual premium", dollars(premium)], ["Total insured value", shortDollars(pol.tiv)], ["Current version", `v${version}`], ["Broker / producer", "Apex Insurance Brokers"]]} />
+      <div className="mt-5 text-sm">{detail === "Overview" ? <><KV rows={[["Policyholder", pol.holder], ["Line / form", `${pol.line} · CP 00 10 / CP 10 30`], ["Policy period", "Nov 01, 2026 – Nov 01, 2027"], ["Annual premium", dollars(premium)], ["Total insured value", shortDollars(pol.tiv)], ["Current version", `v${version}`], ["Broker / producer", "Apex Insurance Brokers"]]} />
+        <div className="mt-5 grid items-start gap-4 md:grid-cols-2">
+          <div className="rounded-xl border border-border p-4"><h4 className="mb-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Policy lifecycle</h4><Timeline steps={lifecycle} current={LIFE_NOW} /></div>
+          <div className="rounded-xl border border-border p-4"><h4 className="mb-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Your access</h4><p className="mb-2 text-xs font-medium">{role}</p><div className="flex flex-wrap gap-1">{(["view", "analyze", "prepare", "edit", "approveEndorsement", "issue", "approveRenewal", "cancel", "reinstate", "viewFinancials"] as const).map((perm) => <span key={perm} className={`rounded-full px-2 py-0.5 text-[10px] ${allowed(perm) ? "bg-status-active text-status-active-foreground" : "bg-secondary text-muted-foreground line-through"}`}>{permLabel[perm]}</span>)}</div><p className="mt-3 text-[11px] leading-4 text-muted-foreground">Approvals follow the role selected in the header. Alfie prepares changes; authorized people approve them.</p></div>
+        </div></>
         : detail === "Coverage" ? <><div className="overflow-hidden rounded-xl border border-border"><table className="w-full text-left text-xs"><thead><tr className="border-b border-border bg-secondary/50 text-[10px] uppercase tracking-wider text-muted-foreground">{["Coverage", "Limit", "Deductible", "Status"].map((h) => <th key={h} className="px-3 py-2.5 font-medium">{h}</th>)}</tr></thead><tbody>{coverage.map((c) => <tr key={c.name} className="border-b border-border last:border-0"><td className="px-3 py-2.5 font-medium">{c.name}</td><td className="px-3 py-2.5 tabular-nums">{dollars(c.limit)}</td><td className="px-3 py-2.5">{c.deductible}</td><td className="px-3 py-2.5 text-positive">{c.status}</td></tr>)}</tbody></table></div>
           <div className="mt-5 grid gap-4 md:grid-cols-2"><List title="Exclusions" items={exclusions} /><List title="Special conditions" items={conditions} /></div></>
         : detail === "Insured Parties" ? <KV rows={pol.personal ? [["Primary policyholder", pol.holder], ["Named insureds", `${pol.holder}, Sarah Brown`], ["Listed drivers", "Michael Brown, Sarah Brown"], ["Loss payee", "TD Auto Finance"], ["Broker / producer", "Apex Insurance Brokers"]] : [["Primary policyholder", pol.holder], ["Named insureds", "Northstar Manufacturing Inc.; Northstar Fabrication Ltd."], ["Additional insureds", "Bayview Industrial REIT (landlord, Location 2)"], ["Mortgagee / loss payee", "Royal Commercial Bank"], ["Broker / producer", "Apex Insurance Brokers · Lisa Moreno"]]} />
@@ -205,7 +208,7 @@ function PolicyWorkspace() {
         : <p className="text-xs text-muted-foreground">Full history is in the History tab. <Button size="sm" variant="link" onClick={() => setTab("history")}>Open history</Button></p>}</div>
     </div></div>
 
-    : tab === "operations" ? <div className="flex-1 space-y-4 px-5 py-5 lg:px-8"><div className="mx-auto max-w-4xl space-y-4">
+    : <div className="flex-1 space-y-4 px-5 py-5 lg:px-8"><div className="mx-auto max-w-4xl space-y-4">
       <p className="text-xs text-muted-foreground">Viewing as <span className="font-semibold text-foreground">{role}</span>. Consequential actions require the matching permission and human approval. Alfie prepares; authorized people decide.</p>
 
       <Op title="A. Issue Policy" badge={issued ? "Issued" : "Pending issuance"}>
@@ -242,25 +245,10 @@ function PolicyWorkspace() {
       </Op>
     </div></div>
 
-    : <div className="flex min-h-0 flex-1 flex-col">
-      <div className="flex-1 px-5 py-6 lg:px-8"><div className="mx-auto max-w-3xl space-y-6">
-        {messages.map((m) => m.role === "user" ? <div key={m.id} className="flex flex-col items-end gap-2">
-          {m.files?.length ? <><div className="flex flex-wrap justify-end gap-2">{m.files.map((f) => <AttachmentChip key={f.id} file={f} />)}</div><div className="flex items-center gap-2 text-[10px] text-muted-foreground"><Paperclip className="size-3" />{m.files.length} attachment{m.files.length > 1 ? "s" : ""} ready for analysis · Use in this Conversation{m.attached ? <span className="text-positive">· Attached to policy</span> : <Button size="sm" variant="ghost" className="h-6 px-2 text-[10px]" onClick={() => setConfirm(m)}><Upload className="size-3" />Attach to Policy</Button>}</div></> : null}
-          <div className="max-w-[80%] rounded-2xl bg-ink px-4 py-2.5 text-sm text-ink-foreground">{m.text}</div>
-        </div> : <div key={m.id} className="flex gap-3"><AlfieMark /><div className="min-w-0 flex-1 text-sm leading-6">
-          {m.reply ? <ReplyView reply={m.reply} /> : null}
-          {m.actions?.length ? <div className="mt-3 flex flex-wrap gap-2">{m.actions.map((a) => <Button key={a} size="sm" variant="secondary" onClick={() => runAction(a)}>{a}</Button>)}</div> : null}
-          {m.id === "m0" ? <div className="mt-4 flex flex-wrap gap-2">{prompts.map((p) => <Button key={p} size="sm" variant="secondary" className="font-normal" onClick={() => send(p)}><Sparkle className="size-3 text-primary" />{p}</Button>)}</div> : null}
-        </div></div>)}
-        {thinking ? <div className="flex items-center gap-3 text-xs text-muted-foreground"><AlfieMark /><span className="animate-pulse">Policy Agent is reviewing the policy record…</span></div> : null}
-        <div ref={endRef} />
-      </div></div>
-      <div className="sticky bottom-0 bg-background px-5 pb-5 pt-2 lg:px-8"><div className="mx-auto max-w-3xl"><AlfieComposer value={input} onChange={setInput} onSend={send} pending={pending} placeholder="Ask Alfie about this policy..." /><p className="mt-2 text-center text-[10px] text-muted-foreground">Alfie prepares policy changes. Issuance, endorsements, renewals, and cancellations require authorized human approval.</p></div></div>
-    </div>}
-
+}
     <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}><DialogContent className="max-w-xl">{preview ? <><DialogHeader><DialogTitle>{preview.label}</DialogTitle><DialogDescription>{fileExt(preview.name)} · {preview.name} · {preview.date}</DialogDescription></DialogHeader>
       {preview.isImage && preview.url ? <img src={preview.url} alt={preview.label} className="w-full rounded-lg" /> : <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm"><FileText className="mb-2 size-5 text-muted-foreground" />{preview.summary}</div>}
-      <DialogFooter className="flex-wrap gap-2 sm:justify-start"><Button size="sm" variant="secondary" onClick={() => download(preview)}><Download className="size-3.5" />Download</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPreview(null); send(d.label === "Inspection Report" || d.label === "Proof of Insurance" ? "Find inconsistencies in the policy documents." : "Summarize this policy."); }}><Sparkle className="size-3.5" />Analyze with Alfie</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPending((p) => (p.some((x) => x.id === d.id) ? p : [...p, toAttachment(d)])); setPreview(null); setTab("conversation"); }}><Paperclip className="size-3.5" />Attach to Conversation</Button></DialogFooter></> : null}</DialogContent></Dialog>
+      <DialogFooter className="flex-wrap gap-2 sm:justify-start"><Button size="sm" variant="secondary" onClick={() => download(preview)}><Download className="size-3.5" />Download</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPreview(null); send(d.label === "Inspection Report" || d.label === "Proof of Insurance" ? "Find inconsistencies in the policy documents." : "Summarize this policy."); }}><Sparkle className="size-3.5" />Analyze with Alfie</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPending((p) => (p.some((x) => x.id === d.id) ? p : [...p, toAttachment(d)])); setPreview(null); }}><Paperclip className="size-3.5" />Attach to Conversation</Button></DialogFooter></> : null}</DialogContent></Dialog>
 
     <Dialog open={!!confirm} onOpenChange={(o) => !o && setConfirm(null)}><DialogContent><DialogHeader><DialogTitle>Attach to policy record?</DialogTitle><DialogDescription>These files will be added to the permanent record for {pol.id} and logged in the policy history. The policy version itself does not change.</DialogDescription></DialogHeader>
       <div className="flex flex-wrap gap-2">{confirm?.files?.map((f) => <AttachmentChip key={f.id} file={f} />)}</div>
