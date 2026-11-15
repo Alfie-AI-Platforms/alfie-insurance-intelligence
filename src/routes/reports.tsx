@@ -711,7 +711,7 @@ function ReportsPage() {
       </div>
 
       <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}>
-        <DialogContent>
+        <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>{preview?.name}</DialogTitle>
             <DialogDescription>{preview?.description}</DialogDescription>
@@ -719,15 +719,15 @@ function ReportsPage() {
           {preview ? (
             <div className="space-y-3 text-sm leading-6">
               {reportContent[preview.id] ? (
-                <>
+                <div className="rounded-xl border border-border bg-card p-5">
                   <div>
-                    <p className="font-semibold">Executive summary</p>
-                    <p className="mt-1 text-muted-foreground">
+                    <p className="font-display text-base font-semibold">Executive summary</p>
+                    <p className="mt-1 font-display text-[15px] leading-7">
                       {reportContent[preview.id]!.summary}
                     </p>
                   </div>
                   <div>
-                    <p className="font-semibold">Headline figures</p>
+                    <p className="mt-5 font-display text-base font-semibold">Headline figures</p>
                     <table className="mt-1 w-full text-xs">
                       <tbody>
                         {reportContent[preview.id]!.figures.map(([label, value, change]) => (
@@ -740,7 +740,7 @@ function ReportsPage() {
                       </tbody>
                     </table>
                   </div>
-                </>
+                </div>
               ) : null}
               <div className="grid grid-cols-2 gap-2 text-xs">
                 {[

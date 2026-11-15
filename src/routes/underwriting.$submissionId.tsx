@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AlertTriangle, ArrowLeft, Bot, Check, ChevronDown, Circle, Download, FileText, HelpCircle, Lock, MoreHorizontal, Paperclip, Share2, ShieldAlert, Sparkle, Upload } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { AlfieChip, AlfieMark, AlfiePanelHeader, ReviewBar } from "@/components/alfie-ui";
+import { DocumentSheet } from "@/components/document-view";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -29,6 +30,35 @@ const seedDocs: Doc[] = [
   { id: "d5", name: "risk_inspection_2026.pdf", label: "Risk Inspection Report", isImage: false, size: "2.8 MB", summary: "Inspection Aug 2026. Overall housekeeping good. Recommendation: relocate exterior pallet storage ≥ 15 m from Building 1." },
   { id: "d6", name: "building1_exterior.jpg", label: "Property Photo", isImage: true, url: property1, size: "1.9 MB", summary: "Exterior of Building 1 with pallet storage along the north wall." },
 ];
+
+const docSections: Record<string, { heading: string; body: string }[]> = {
+  d1: [
+    { heading: "Locations and values", body: "Four locations are listed: Building 1 (main plant), Building 2 (fabrication), Building 4 (storage) and the head office. Total insured value declared on the application is $28.8M of the $31.2M shown on the statement of values." },
+    { heading: "Coverage requested", body: "Blanket building and business personal property limit of $8.5M with a $25,000 per-occurrence deductible. Business income with extra expense is requested on an actual loss sustained basis." },
+    { heading: "Operations", body: "Metal fabrication, NAICS 332. Hot work is performed under a permit program. The applicant declares no losses beyond those shown on the attached loss runs." },
+  ],
+  d2: [
+    { heading: "Schedule of values", body: "Building 1 $12.6M, Building 2 $9.8M, Building 3 (warehouse) $2.4M, Building 4 $3.9M, head office $2.5M. Total insured value $31.2M including business personal property at each location." },
+    { heading: "Construction and protection", body: "Buildings 1 and 2 are joisted masonry with sprinkler protection noted as partial. Building 3 is frame construction, built 1998. Protection details for Building 2 are carried from the prior year's schedule and marked unverified." },
+    { heading: "Certification", body: "Values certified by the insured and submitted by Apex Insurance Brokers with the 2026 renewal application. Values are replacement cost unless marked ACV." },
+  ],
+  d3: [
+    { heading: "Five-year summary", body: "Seven losses with $1.12M incurred over the 2021 to 2025 period. The loss ratio on the expiring program is 18.4%. No single year accounts for more than $410K of the incurred total." },
+    { heading: "Largest losses", body: "2024 water damage, $410K incurred, a Building 1 supply line failure. 2023 machinery breakdown, $286K. 2022 wind damage, $148K. The remaining four losses are each under $100K." },
+    { heading: "Frequency", body: "Three losses occurred in 2025, above the preferred frequency of two per year used in the appetite guide. Severity remains within the preferred band." },
+  ],
+  d4: [
+    { heading: "Hot work and operations", body: "A hot work permit program is in place, with a designated fire watch during and 60 minutes after cutting and welding. Production runs two shifts, five days a week." },
+    { heading: "Fire protection", body: "Sprinkler type and last inspection date for Building 2 are blank on the submitted form. Buildings 1 and 4 show automatic sprinklers with annual inspection current." },
+    { heading: "Housekeeping and storage", body: "Exterior storage is declared as racked materials only. Smoking is restricted to a designated area away from the buildings." },
+  ],
+  d5: [
+    { heading: "Overall condition", body: "Inspection completed August 2026. Housekeeping is good throughout the occupied buildings, electrical rooms are clear, and the hot work program was observed in operation." },
+    { heading: "Recommendations", body: "One recommendation is open: relocate exterior pallet storage to at least 15 metres from Building 1. No critical recommendations were issued." },
+    { heading: "Protection verification", body: "Sprinkler valves were sealed and the alarm panel showed no faults at the time of inspection. The Building 2 sprinkler type could not be verified during the visit." },
+  ],
+};
+
 
 const prompts = ["Analyze this submission.", "Is this risk within our appetite?", "What information is missing?", "What are the biggest risk factors?", "Compare the loss history with our appetite.", "Prepare an underwriting summary.", "Prepare questions for the broker.", "Prepare a referral recommendation.", "Give me the pricing factors I should consider."];
 const workflow = ["Submission Received", "Documents Ingested", "Data Extracted", "Completeness Checked", "Appetite Assessment", "Underwriter Review", "Pricing", "Quote", "Referral / Approval", "Bind"];
@@ -238,8 +268,8 @@ function SubmissionWorkspace() {
         <p className="mt-2 px-2 text-[12px] leading-4 text-muted-foreground">Alfie completed preparation steps. The decision-ready file is with the underwriter.</p>
       </Section>
     </div></div>}
-    <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}><DialogContent className="max-w-xl">{preview ? <><DialogHeader><DialogTitle>{preview.label}</DialogTitle><DialogDescription>{fileExt(preview.name)} · {preview.name} · {preview.size}</DialogDescription></DialogHeader>
-      {preview.isImage ? <img src={preview.url} alt={preview.label} className="w-full rounded-lg" /> : <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm"><FileText className="mb-2 size-5 text-muted-foreground" />{preview.summary}</div>}
+    <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}><DialogContent className="max-w-2xl">{preview ? <><DialogHeader><DialogTitle>{preview.label}</DialogTitle><DialogDescription>{fileExt(preview.name)} · {preview.name} · {preview.size}</DialogDescription></DialogHeader>
+      {preview.isImage ? <img src={preview.url} alt={preview.label} className="w-full rounded-lg" /> : <DocumentSheet summary={preview.summary} sections={docSections[preview.id] ?? []} />}
       <DialogFooter className="flex-wrap gap-2 sm:justify-start"><Button size="sm" variant="secondary" onClick={() => download(preview)}><Download className="size-3.5" />Download</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPreview(null); send(d.isImage ? "Review these property photos for underwriting concerns." : `Analyze the ${d.label}.`, d.isImage ? [toAttachment(d)] : []); }}><Sparkle className="size-3.5" />Analyze with Alfie</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPending((p) => (p.some((x) => x.id === d.id) ? p : [...p, toAttachment(d)])); setPreview(null); }}><Paperclip className="size-3.5" />Attach to conversation</Button></DialogFooter></> : null}</DialogContent></Dialog>
 
     <Dialog open={!!confirm} onOpenChange={(o) => !o && setConfirm(null)}><DialogContent><DialogHeader><DialogTitle>Add to submission file?</DialogTitle><DialogDescription>These files will be added to the permanent document record for {sub.id} and logged in the audit trail.</DialogDescription></DialogHeader>
@@ -248,7 +278,7 @@ function SubmissionWorkspace() {
 
     <Dialog open={guidelines} onOpenChange={setGuidelines}><DialogContent className="max-w-xl"><DialogHeader><DialogTitle>Applicable guidelines</DialogTitle><DialogDescription>Commercial Property Appetite Guide v4.2 · effective Jan 1, 2026. Sections Alfie evaluated for this submission.</DialogDescription></DialogHeader>
       <div className="divide-y divide-border rounded-lg border border-border">{appetiteRules.map(([k, s, , g]) => <div key={k} className="flex items-start gap-2 px-3 py-2.5 text-xs">{s === "ok" ? <Check className="mt-0.5 size-3.5 text-positive" /> : s === "warn" ? <AlertTriangle className="mt-0.5 size-3.5 text-warning" /> : <HelpCircle className="mt-0.5 size-3.5 text-muted-foreground" />}<div><p className="font-medium">{k}</p><p className="text-muted-foreground">{g}</p></div></div>)}</div>
-      <DialogFooter><Button variant="secondary" onClick={() => setGuidelines(false)}>Close</Button></DialogFooter></DialogContent></Dialog>
+</DialogContent></Dialog>
   </div></AppShell>;
 }
 

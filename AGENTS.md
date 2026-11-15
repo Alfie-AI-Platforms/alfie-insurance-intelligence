@@ -70,6 +70,13 @@ directly on the `main` branch.
   their max-width wrapper. Reports and documents are read in place through
   preview dialogs (content lives in `reportContent` in reports-data.ts and
   `documentPreviews` in workspace-data.ts); exports are secondary.
+- Previews: every file surface (Documents library, claim evidence,
+  submission documents, policy documents, report library) renders its
+  content through the shared `DocumentSheet` in
+  `src/components/document-view.tsx`, so a document or report is read
+  inside the software as a serif document sheet. Downloads and exports
+  stay available but secondary. Preview dialogs never carry a footer
+  Close button; closing is the dialog's corner X.
 
 ## Conventions
 

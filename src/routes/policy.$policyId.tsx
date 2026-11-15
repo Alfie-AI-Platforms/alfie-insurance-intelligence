@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowLeft, ArrowRight, Bot, Check, ChevronDown, Circle, Download, FileText, Lock, MoreHorizontal, Paperclip, Share2, ShieldAlert, Sparkle, Upload, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bot, Check, ChevronDown, Circle, Download, Lock, MoreHorizontal, Paperclip, Share2, ShieldAlert, Sparkle, Upload, Users } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { AlfieMark, AlfiePanelHeader, ReviewBar } from "@/components/alfie-ui";
+import { DocumentSheet } from "@/components/document-view";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -31,6 +32,38 @@ const seedDocs: Doc[] = [
   { id: "p6", name: "renewal_package_2027.docx", label: "Renewal Documents", date: "Draft", summary: "Draft renewal package. Exposure update and SOV refresh outstanding." },
   { id: "p7", name: "proof_of_insurance.pdf", label: "Proof of Insurance", date: "Oct 02, 2026", summary: "Certificate of insurance issued to Apex Insurance Brokers." },
 ];
+
+const docSections: Record<string, { heading: string; body: string }[]> = {
+  p1: [
+    { heading: "Named insured and period", body: "Northstar Manufacturing Inc. Policy period November 1, 2026 to November 1, 2027. Annual premium $185,000. Form CP 00 10 with CP 10 30 Causes of Loss, Special Form." },
+    { heading: "Limits summary", body: "Total insured value $8.5M across four locations. Building coverage $5.0M, business interruption $2.0M with a 72-hour waiting period, equipment breakdown $1.5M as endorsed." },
+  ],
+  p2: [
+    { heading: "Coverage form", body: "Building and Personal Property Coverage Form CP 00 10. We will pay for direct physical loss of or damage to covered property at the premises described in the declarations, caused by a covered cause of loss." },
+    { heading: "Causes of loss", body: "Causes of Loss, Special Form CP 10 30 applies: risks of direct physical loss unless excluded. Principal exclusions include flood and surface water, earth movement, and wear and tear." },
+  ],
+  p3: [
+    { heading: "Locations", body: "Four locations are scheduled: Buildings 1, 2 and 4 and the head office, each with building, contents and business income values as shown in the schedule columns." },
+    { heading: "Coverage parts", body: "Building $5.0M, business interruption $2.0M (72-hour waiting period), equipment breakdown $1.5M. Deductibles: $25,000 property, $10,000 equipment breakdown." },
+  ],
+  p4: [
+    { heading: "END-0412, equipment breakdown", body: "Effective October 15, 2026, the equipment breakdown limit increases from $1.0M to $1.5M. Additional premium $5,400 for the remainder of the term." },
+    { heading: "Endorsement record", body: "This schedule lists endorsements issued on the policy in chronological order. END-0418, adding the location at 220 Industrial Pkwy, is requested and pending underwriting approval; it is not yet part of the policy." },
+  ],
+  p5: [
+    { heading: "Findings", body: "Inspection completed August 18, 2026. Housekeeping good, hot work program in operation, alarm panel without faults at the time of the visit." },
+    { heading: "Open recommendation", body: "Relocate exterior pallet storage to at least 15 metres from Building 1. This report was received after policy issuance and has not yet been attached to the policy record." },
+  ],
+  p6: [
+    { heading: "Renewal status", body: "Draft package for the November 1, 2027 renewal. The proposed renewal premium in the working papers is 6.0% above the current term, before exposure updates." },
+    { heading: "Outstanding items", body: "An exposure update from the insured and a refreshed statement of values are outstanding. The draft does not yet reflect the requested 220 Industrial Pkwy location." },
+  ],
+  p7: [
+    { heading: "Certificate", body: "This certificate is issued to Apex Insurance Brokers as evidence of the coverage described. It confers no rights on the certificate holder beyond the terms of the policy itself." },
+    { heading: "Coverage evidenced", body: "Commercial property coverage for Northstar Manufacturing Inc., policy period November 1, 2026 to November 1, 2027, limits as shown on the declarations page." },
+  ],
+};
+
 const seedCoverage: Coverage[] = [
   { name: "Building Coverage", limit: 5_000_000, deductible: "$25,000", status: "Active" },
   { name: "Business Interruption", limit: 2_000_000, deductible: "72-hour waiting period", status: "Active" },
@@ -246,8 +279,8 @@ function PolicyWorkspace() {
     </div></div>
 
 }
-    <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}><DialogContent className="max-w-xl">{preview ? <><DialogHeader><DialogTitle>{preview.label}</DialogTitle><DialogDescription>{fileExt(preview.name)} · {preview.name} · {preview.date}</DialogDescription></DialogHeader>
-      {preview.isImage && preview.url ? <img src={preview.url} alt={preview.label} className="w-full rounded-lg" /> : <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm"><FileText className="mb-2 size-5 text-muted-foreground" />{preview.summary}</div>}
+    <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}><DialogContent className="max-w-2xl">{preview ? <><DialogHeader><DialogTitle>{preview.label}</DialogTitle><DialogDescription>{fileExt(preview.name)} · {preview.name} · {preview.date}</DialogDescription></DialogHeader>
+      {preview.isImage && preview.url ? <img src={preview.url} alt={preview.label} className="w-full rounded-lg" /> : <DocumentSheet summary={preview.summary} sections={docSections[preview.id] ?? []} />}
       <DialogFooter className="flex-wrap gap-2 sm:justify-start"><Button size="sm" variant="secondary" onClick={() => download(preview)}><Download className="size-3.5" />Download</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPreview(null); send(d.label === "Inspection Report" || d.label === "Proof of Insurance" ? "Find inconsistencies in the policy documents." : "Summarize this policy."); }}><Sparkle className="size-3.5" />Analyze with Alfie</Button><Button size="sm" variant="secondary" onClick={() => { const d = preview; setPending((p) => (p.some((x) => x.id === d.id) ? p : [...p, toAttachment(d)])); setPreview(null); }}><Paperclip className="size-3.5" />Attach to Conversation</Button></DialogFooter></> : null}</DialogContent></Dialog>
 
     <Dialog open={!!confirm} onOpenChange={(o) => !o && setConfirm(null)}><DialogContent><DialogHeader><DialogTitle>Attach to policy record?</DialogTitle><DialogDescription>These files will be added to the permanent record for {pol.id} and logged in the policy history. The policy version itself does not change.</DialogDescription></DialogHeader>

@@ -4,6 +4,7 @@ import {
   Bot,
   CheckCircle2,
   Clock3,
+  Download,
   Eye,
   FileText,
   GitCompareArrows,
@@ -16,6 +17,7 @@ import {
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { PageHeader } from "@/components/alfie-ui";
+import { DocumentSheet } from "@/components/document-view";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -573,22 +575,11 @@ function DocumentsPage() {
             </DialogDescription>
           </DialogHeader>
           {selectedPreview ? (
-            <div className="max-h-[55vh] overflow-y-auto pr-1">
-              <div className="rounded-xl border border-border bg-card p-5">
-                <p className="font-display text-[15px] leading-7">{selectedPreview.summary}</p>
-                {selectedPreview.sections.map((s) => (
-                  <div key={s.heading}>
-                    <h3 className="mt-5 font-display text-base font-semibold">{s.heading}</h3>
-                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{s.body}</p>
-                  </div>
-                ))}
-                <p className="mt-6 border-t border-border pt-3 text-[13px] leading-4 text-muted-foreground">
-                  Preview shows the opening sections of the document. The full text, versions and
-                  approval record stay on the governed record in this repository. Sample document
-                  content, shown until your systems are connected.
-                </p>
-              </div>
-            </div>
+            <DocumentSheet
+              summary={selectedPreview.summary}
+              sections={selectedPreview.sections}
+              note="Preview shows the opening sections of the document. The full text, versions and approval record stay on the governed record in this repository. Sample document content, shown until your systems are connected."
+            />
           ) : (
             <div className="rounded-xl border border-dashed border-border p-6 text-center">
               <FileText className="mx-auto size-6 text-muted-foreground" />
@@ -603,8 +594,20 @@ function DocumentsPage() {
             <span className="mr-auto text-[13px] text-muted-foreground">
               Classification: {selected.classification}. Access: {selected.access}.
             </span>
-            <Button variant="outline" onClick={() => setViewOpen(false)}>
-              Close
+            <Button
+              variant="outline"
+              onClick={() => {
+                const text = selectedPreview
+                  ? `${selected.name}\n\n${selectedPreview.summary}\n\n${selectedPreview.sections.map((s) => `${s.heading}\n${s.body}`).join("\n\n")}`
+                  : `${selected.name}\n\n${selected.type} · ${selected.id} · Version ${selected.version}`;
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(new Blob([text], { type: "text/plain" }));
+                a.download = `${selected.name.replace(/[^a-z0-9]+/gi, "_")}.txt`;
+                a.click();
+                URL.revokeObjectURL(a.href);
+              }}
+            >
+              <Download className="size-4" /> Download
             </Button>
           </DialogFooter>
         </DialogContent>

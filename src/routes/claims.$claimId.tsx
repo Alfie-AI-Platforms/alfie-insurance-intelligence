@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowLeft, Bot, Check, ChevronDown, Circle, Download, Eye, FileText, Lock, MoreHorizontal, Paperclip, Share2, ShieldAlert, Sparkle, Upload } from "lucide-react";
+import { ArrowLeft, Bot, Check, ChevronDown, Circle, Download, Lock, MoreHorizontal, Paperclip, Share2, ShieldAlert, Sparkle, Upload } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { AlfieChip, AlfieMark, AlfiePanelHeader, ReviewBar } from "@/components/alfie-ui";
+import { DocumentSheet } from "@/components/document-view";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -31,6 +32,24 @@ const seedEvidence: Evidence[] = [
   { id: "e5", name: "repair_estimate_EST-8821.pdf", label: "Repair Estimate", isImage: false, size: "286 KB", summary: "Lakeshore Collision Centre. Total $12,400: bumper, fender, headlight, labour 18.5h." },
   { id: "e6", name: "claimant_statement.docx", label: "Claimant Statement", isImage: false, size: "64 KB", summary: "Statement from Michael Brown. Lists incident location as King St W & Spadina Ave." },
 ];
+
+const evidenceSections: Record<string, { heading: string; body: string }[]> = {
+  e4: [
+    { heading: "Occurrence", body: "On September 14, 2026 at approximately 4:40 PM, Unit 1 (the insured vehicle) was stopped in traffic westbound on Queen St W at Bathurst St when it was struck from behind by Unit 2. Both vehicles sustained damage. No injuries were reported at the scene." },
+    { heading: "Statements and findings", body: "The driver of Unit 2 advised they did not stop in time. The attending officer recorded the point of impact at the rear of Unit 1 and noted no contributing factors on the part of the insured driver." },
+    { heading: "Report particulars", body: "Report TPS-26-118204, Toronto Police Service, filed September 14, 2026. No charges were laid against the insured driver. This is the occurrence record Alfie compares against the claimant statement." },
+  ],
+  e5: [
+    { heading: "Parts", body: "Front bumper cover and absorber, left fender, headlight assembly and grille trim. Parts subtotal $6,940, OEM specification as listed by Lakeshore Collision Centre." },
+    { heading: "Labour and refinishing", body: "Labour 18.5 hours at the shop's posted rate, including panel alignment and paint blend to the adjacent panels. Labour and refinishing subtotal $4,260." },
+    { heading: "Total and notes", body: "Total estimate $12,400 as shown on EST-8821. The estimate exceeds the adjuster's $5,000 authority, which is why this claim sits at supervisor review. The supplement process applies if teardown finds further damage." },
+  ],
+  e6: [
+    { heading: "Account of the incident", body: "I was driving west on King Street and stopped near Spadina when the car behind hit me. It was around rush hour and traffic was stop and go. My car rolled a little but I did not hit anyone in front of me." },
+    { heading: "Damage and condition", body: "The back bumper is pushed in and the trunk does not close properly. The car still drives. I have had no other accidents this year and the car had no damage before this." },
+    { heading: "Declaration", body: "Statement provided by Michael Brown, recorded September 16, 2026 and signed electronically. The insured confirms the account is complete to the best of their knowledge." },
+  ],
+};
 
 const prompts = ["Analyze this claim.", "What requires my attention?", "Compare the repair estimate with the damage photos.", "Check the policy information.", "What information is missing?", "Prepare a summary for the adjuster.", "Show me potential risk or fraud indicators."];
 const workflow = ["Intake", "Evidence Received", "Policy Located", "AI Analysis", "Adjuster Review", "Decision", "Settlement", "Closed"];
@@ -196,9 +215,9 @@ function ClaimWorkspace() {
         <ol className="space-y-0.5">{workflow.map((step, i) => <li key={step} className={`flex items-center gap-2.5 rounded-md px-2 py-1.5 text-xs ${i === CURRENT ? "bg-primary/10 font-semibold text-primary" : i < CURRENT ? "text-foreground" : "text-muted-foreground"}`}>{i < CURRENT ? <Check className="size-3.5 text-positive" /> : i === CURRENT ? <ChevronDown className="size-3.5 -rotate-90" /> : <Circle className="size-3" />}{step}{i === CURRENT ? <span className="ml-auto text-[12px] font-medium">Current</span> : null}</li>)}</ol>
       </Section>
     </div></div>}
-    <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}><DialogContent className="max-w-xl">{preview ? <><DialogHeader><DialogTitle>{preview.label}</DialogTitle><DialogDescription>{fileExt(preview.name)} · {preview.name} · {preview.size}</DialogDescription></DialogHeader>
-      {preview.isImage ? <img src={preview.url} alt={preview.label} className="w-full rounded-lg" /> : <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm"><FileText className="mb-2 size-5 text-muted-foreground" />{preview.summary}</div>}
-      <DialogFooter className="flex-wrap gap-2 sm:justify-start"><Button size="sm" variant="secondary" onClick={() => download(preview)}><Download className="size-3.5" />Download</Button><Button size="sm" variant="secondary" onClick={() => { const e = preview; setPreview(null); send(`Analyze ${e.label}.`, [{ id: e.id, name: e.name, size: 200000, type: "", isImage: e.isImage, url: e.url }]); }}><Sparkle className="size-3.5" />Analyze with Alfie</Button><Button size="sm" variant="secondary" onClick={() => attachEvidence(preview)}><Paperclip className="size-3.5" />Attach to conversation</Button><Button size="sm" variant="ghost" onClick={() => setPreview(null)}><Eye className="size-3.5" />Close</Button></DialogFooter></> : null}</DialogContent></Dialog>
+    <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}><DialogContent className="max-w-2xl">{preview ? <><DialogHeader><DialogTitle>{preview.label}</DialogTitle><DialogDescription>{fileExt(preview.name)} · {preview.name} · {preview.size}</DialogDescription></DialogHeader>
+      {preview.isImage ? <img src={preview.url} alt={preview.label} className="w-full rounded-lg" /> : <DocumentSheet summary={preview.summary} sections={evidenceSections[preview.id] ?? []} />}
+      <DialogFooter className="flex-wrap gap-2 sm:justify-start"><Button size="sm" variant="secondary" onClick={() => download(preview)}><Download className="size-3.5" />Download</Button><Button size="sm" variant="secondary" onClick={() => { const e = preview; setPreview(null); send(`Analyze ${e.label}.`, [{ id: e.id, name: e.name, size: 200000, type: "", isImage: e.isImage, url: e.url }]); }}><Sparkle className="size-3.5" />Analyze with Alfie</Button><Button size="sm" variant="secondary" onClick={() => attachEvidence(preview)}><Paperclip className="size-3.5" />Attach to conversation</Button></DialogFooter></> : null}</DialogContent></Dialog>
 
     <Dialog open={!!confirm} onOpenChange={(o) => !o && setConfirm(null)}><DialogContent><DialogHeader><DialogTitle>Attach to claim record?</DialogTitle><DialogDescription>These files will be added to the permanent evidence record for {claim.id} and logged in the audit trail. This cannot be undone from the conversation.</DialogDescription></DialogHeader>
       <div className="flex flex-wrap gap-2">{confirm?.files?.map((f) => <AttachmentChip key={f.id} file={f} />)}</div>
