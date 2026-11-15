@@ -141,7 +141,7 @@ function DataSourcesPage() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">Data Sources</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">Data Sources</h1>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
               The integration layer for Alfie Insurance. Administrators connect systems, define
               exactly what Alfie may access, and monitor connection health. Connecting a system

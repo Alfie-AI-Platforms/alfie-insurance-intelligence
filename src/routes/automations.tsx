@@ -124,7 +124,7 @@ function AutomationsPage() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">Automations</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">Automations</h1>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
               Repeatable workflows that connect triggers, conditions, specialist agents, data
               sources, actions, approvals and notifications. Automations are not Agents: agents

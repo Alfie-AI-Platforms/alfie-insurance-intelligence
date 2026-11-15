@@ -98,7 +98,7 @@ function SettingsPage() {
     <AppShell>
       <div className="mx-auto max-w-7xl">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">Settings</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Settings</h1>
           <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
             Organization wide configuration for Alfie Insurance. Membership lives in Users &amp;
             Access and authorization lives in Policies &amp; Permissions. Settings holds the

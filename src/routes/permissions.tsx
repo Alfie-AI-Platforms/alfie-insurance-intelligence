@@ -100,7 +100,7 @@ function PermissionsPage() {
     <AppShell>
       <div className="mx-auto max-w-7xl">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">Policies &amp; Permissions</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Policies &amp; Permissions</h1>
           <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
             The authorization framework for people, specialist agents, automations and integrations.
             This is not the Policy module: Policy manages insurance contracts, Policies &amp;

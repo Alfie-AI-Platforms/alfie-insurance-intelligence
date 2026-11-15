@@ -172,7 +172,7 @@ function DocumentsPage() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">Documents</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">Documents</h1>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
               The organization's permanent document repository. This is different from files
               attached to a chat: documents here are governed records with versions,

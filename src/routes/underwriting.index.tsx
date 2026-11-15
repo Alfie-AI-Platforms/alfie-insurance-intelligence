@@ -64,7 +64,7 @@ function UnderwritingPage() {
   const sel = "h-8 rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring";
 
   return <AppShell><div className="mx-auto max-w-6xl px-5 pb-12 pt-8 lg:px-10">
-    <div className="flex flex-wrap items-end justify-between gap-4"><div><h1 className="text-3xl font-semibold">Underwriting</h1><p className="mt-2 text-sm text-muted-foreground">Evaluate risks, prioritize submissions, and make faster underwriting decisions with Alfie.</p></div><Button onClick={() => setNewOpen(true)}><Plus className="size-4" />New Submission</Button></div>
+    <div className="flex flex-wrap items-end justify-between gap-4"><div><h1 className="text-2xl font-semibold tracking-tight">Underwriting</h1><p className="mt-2 text-sm text-muted-foreground">Evaluate risks, prioritize submissions, and make faster underwriting decisions with Alfie.</p></div><Button onClick={() => setNewOpen(true)}><Plus className="size-4" />New Submission</Button></div>
 
     <div className="relative mt-6"><Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><input value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && search.trim().split(" ").length > 3) { ask(search); setSearch(""); } }} placeholder="Search submissions, insureds, policies, or ask Alfie…" aria-label="Search submissions" className="h-11 w-full rounded-xl border border-border bg-secondary/50 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus:border-ring" /></div>
 

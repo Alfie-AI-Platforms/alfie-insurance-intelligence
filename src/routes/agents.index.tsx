@@ -13,7 +13,7 @@ function AgentsPage() {
   const [items, setItems] = useState(initialAgents);
   const [menu, setMenu] = useState<string | null>(null);
   return <AppShell><div className="mx-auto max-w-6xl px-5 py-8 lg:px-10 lg:py-10">
-    <div className="flex flex-wrap items-end justify-between gap-4"><div><h1 className="text-3xl font-semibold">Agents</h1><p className="mt-2 text-sm text-muted-foreground">Create and manage AI agents that work across your insurance operations.</p></div><Button onClick={() => navigate({ to: "/agents/new" })}><Plus className="size-4" />Create Agent</Button></div>
+    <div className="flex flex-wrap items-end justify-between gap-4"><div><h1 className="text-2xl font-semibold tracking-tight">Agents</h1><p className="mt-2 text-sm text-muted-foreground">Create and manage AI agents that work across your insurance operations.</p></div><Button onClick={() => navigate({ to: "/agents/new" })}><Plus className="size-4" />Create Agent</Button></div>
     <div className="mt-8 overflow-hidden rounded-md border border-border bg-card">
       <div className="hidden grid-cols-[2fr_1fr_110px_110px_1fr_44px] gap-4 border-b border-border bg-secondary/50 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground md:grid"><span>Agent</span><span>Department</span><span>Status</span><span>Last run</span><span>Access</span><span /></div>
       {items.map((agent) => <div key={agent.id} className="relative grid gap-3 border-b border-border px-4 py-4 last:border-0 md:grid-cols-[2fr_1fr_110px_110px_1fr_44px] md:items-center md:gap-4">

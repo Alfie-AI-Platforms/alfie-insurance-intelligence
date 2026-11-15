@@ -26,7 +26,7 @@ export function SampleDataNote({ children }: { children?: ReactNode }) {
 
 export function PricingHeader({ title, subtitle, actions }: { title: string; subtitle: string; actions?: ReactNode }) {
   return <div className="space-y-5">
-    <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-xs font-medium text-muted-foreground">Pricing & Actuarial</p><h1 className="mt-1 text-3xl font-semibold">{title}</h1><p className="mt-2 max-w-2xl text-sm text-muted-foreground">{subtitle}</p></div>{actions ? <div className="flex flex-wrap gap-2">{actions}</div> : null}</div>
+    <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-xs font-medium text-muted-foreground">Pricing & Actuarial</p><h1 className="mt-1 text-2xl font-semibold tracking-tight">{title}</h1><p className="mt-2 max-w-2xl text-sm text-muted-foreground">{subtitle}</p></div>{actions ? <div className="flex flex-wrap gap-2">{actions}</div> : null}</div>
     <PricingNav />
   </div>;
 }

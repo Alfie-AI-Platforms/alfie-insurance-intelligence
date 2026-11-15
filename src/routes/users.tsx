@@ -134,7 +134,7 @@ function UsersPage() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">Users &amp; Access</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">Users &amp; Access</h1>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
               The people who can access this organization, their departments, roles and account
               status. Department membership alone never grants unrestricted access to a department's
