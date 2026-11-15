@@ -12,6 +12,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { PageHeader } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { WorkspaceStatusBadge } from "@/components/workspace-badges";
 import { agents } from "@/lib/agents-data";
@@ -97,15 +98,7 @@ function SettingsPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-7xl">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Settings</h1>
-          <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-            Organization wide configuration for Alfie Insurance. Membership lives in Users &amp;
-            Access and authorization lives in Policies &amp; Permissions. Settings holds the
-            operating configuration both of them rely on, and only authorized administrators see
-            this module.
-          </p>
-        </div>
+<PageHeader title="Settings" description="Organization wide configuration for Alfie Insurance. Membership lives in Users & Access and authorization lives in Policies & Permissions. Settings holds the operating configuration both of them rely on, and only authorized administrators see this module." />
 
         {savedNote ? (
           <p className="mt-4 flex items-start gap-2 rounded-2xl border border-positive/30 bg-positive/5 px-4 py-3 text-sm leading-6">

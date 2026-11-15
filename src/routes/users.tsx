@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { PageHeader } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -132,20 +133,11 @@ function UsersPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Users &amp; Access</h1>
-            <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-              The people who can access this organization, their departments, roles and account
-              status. Department membership alone never grants unrestricted access to a department's
-              records: data level permissions in Policies &amp; Permissions apply on top of every
-              role.
-            </p>
-          </div>
+        <PageHeader title="Users & Access" description="The people who can access this organization, their departments, roles and account status. Department membership alone never grants unrestricted access to a department's records: data level permissions in Policies & Permissions apply on top of every role." actions={<>
           <Button onClick={() => setInviteOpen(true)}>
             <MailPlus className="size-4" /> Invite employee
           </Button>
-        </div>
+        </>} />
 
         <section className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {[

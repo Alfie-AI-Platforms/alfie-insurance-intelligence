@@ -23,6 +23,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { PageHeader } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -202,16 +203,7 @@ function ReportsPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Reports</h1>
-            <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-              The organization's central reporting and business intelligence workspace. Reports
-              consolidate authorized data from Claims, Underwriting, Policy, Pricing &amp; Actuarial
-              and Finance. Reporting is read and analysis only: nothing here modifies an operational
-              record.
-            </p>
-          </div>
+        <PageHeader title="Reports" description="The organization's central reporting and business intelligence workspace. Reports consolidate authorized data from Claims, Underwriting, Policy, Pricing & Actuarial and Finance. Reporting is read and analysis only: nothing here modifies an operational record." actions={<>
           <label className="block text-[11px] text-muted-foreground">
             Reporting period
             <select
@@ -225,7 +217,7 @@ function ReportsPage() {
               <option>Last 12 months</option>
             </select>
           </label>
-        </div>
+        </>} />
         <p className="mt-3 rounded-xl bg-secondary/60 px-3 py-2 text-[11px] leading-4 text-muted-foreground">
           Illustrative sample data, shown until your systems are connected. Every figure carries its
           source and last updated time, and figures from a stale source are flagged, never presented

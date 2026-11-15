@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useRef, useState } from "react";
 import { Bot, CheckCircle2, Pause, Play, Plus, Search, ShieldCheck, Workflow } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { PageHeader } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { WorkspaceStatusBadge } from "@/components/workspace-badges";
 import {
@@ -122,20 +123,11 @@ function AutomationsPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Automations</h1>
-            <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-              Repeatable workflows that connect triggers, conditions, specialist agents, data
-              sources, actions, approvals and notifications. Automations are not Agents: agents
-              define capabilities and responsibilities, automations define when work starts, which
-              steps run, and where a human must approve.
-            </p>
-          </div>
+        <PageHeader title="Automations" description="Repeatable workflows that connect triggers, conditions, specialist agents, data sources, actions, approvals and notifications. Automations are not Agents: agents define capabilities and responsibilities, automations define when work starts, which steps run, and where a human must approve." actions={<>
           <Button onClick={() => builderRef.current?.scrollIntoView({ behavior: "smooth" })}>
             <Plus className="size-4" /> New automation
           </Button>
-        </div>
+        </>} />
 
         <section className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {[

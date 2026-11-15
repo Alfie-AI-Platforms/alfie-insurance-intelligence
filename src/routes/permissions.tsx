@@ -10,6 +10,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { PageHeader } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { WorkspaceStatusBadge } from "@/components/workspace-badges";
 import {
@@ -99,15 +100,7 @@ function PermissionsPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-7xl">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Policies &amp; Permissions</h1>
-          <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-            The authorization framework for people, specialist agents, automations and integrations.
-            This is not the Policy module: Policy manages insurance contracts, Policies &amp;
-            Permissions manages who and what may access, change, approve and execute across the
-            platform.
-          </p>
-        </div>
+<PageHeader title="Policies & Permissions" description="The authorization framework for people, specialist agents, automations and integrations. This is not the Policy module: Policy manages insurance contracts, Policies & Permissions manages who and what may access, change, approve and execute across the platform." />
 
         <section className={`${card} mt-5`}>
           <div className="flex flex-wrap items-end justify-between gap-3">

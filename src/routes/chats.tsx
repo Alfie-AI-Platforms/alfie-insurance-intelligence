@@ -14,6 +14,7 @@ import {
   User,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { PageHeader } from "@/components/alfie-ui";
 import { AlfieComposer, AttachmentChip, type Attachment } from "@/components/alfie-composer";
 import { Button } from "@/components/ui/button";
 import {
@@ -305,20 +306,11 @@ function ChatsPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Chat</h1>
-            <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-              The general workspace for working with Alfie across every department. Unlike the
-              conversations inside Claims, Underwriting, Policy, Pricing or Finance, a chat here is
-              not tied to one record. Alfie coordinates the right specialist agents and uses only
-              the Documents and Data Sources you are authorized to access.
-            </p>
-          </div>
+        <PageHeader title="Chat" description="The general workspace for working with Alfie across every department. Unlike the conversations inside Claims, Underwriting, Policy, Pricing or Finance, a chat here is not tied to one record. Alfie coordinates the right specialist agents and uses only the Documents and Data Sources you are authorized to access." actions={<>
           <Button onClick={newConversation}>
             <Plus className="size-4" /> New conversation
           </Button>
-        </div>
+        </>} />
 
         <div className="mt-5 grid gap-4 lg:grid-cols-[300px_minmax(0,1fr)]">
           {/* Conversation list */}

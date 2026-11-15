@@ -14,6 +14,7 @@ import {
   UploadCloud,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { PageHeader } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -170,16 +171,7 @@ function DocumentsPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Documents</h1>
-            <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-              The organization's permanent document repository. This is different from files
-              attached to a chat: documents here are governed records with versions,
-              classifications, approvals and retention. Alfie only retrieves documents your role is
-              authorized to access.
-            </p>
-          </div>
+        <PageHeader title="Documents" description="The organization's permanent document repository. This is different from files attached to a chat: documents here are governed records with versions, classifications, approvals and retention. Alfie only retrieves documents your role is authorized to access." actions={<>
           <div>
             <input
               ref={fileRef}
@@ -199,7 +191,7 @@ function DocumentsPage() {
               <UploadCloud className="size-4" /> Upload document
             </Button>
           </div>
-        </div>
+        </>} />
 
         <section className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {[
