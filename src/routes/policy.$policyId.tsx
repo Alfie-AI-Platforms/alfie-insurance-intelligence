@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Bot, Check, ChevronDown, Circle, Download, FileText, Lock, MoreHorizontal, Paperclip, Share2, ShieldAlert, Sparkle, Upload, Users } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { AlfieMark } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -246,12 +247,12 @@ function PolicyWorkspace() {
         {messages.map((m) => m.role === "user" ? <div key={m.id} className="flex flex-col items-end gap-2">
           {m.files?.length ? <><div className="flex flex-wrap justify-end gap-2">{m.files.map((f) => <AttachmentChip key={f.id} file={f} />)}</div><div className="flex items-center gap-2 text-[10px] text-muted-foreground"><Paperclip className="size-3" />{m.files.length} attachment{m.files.length > 1 ? "s" : ""} ready for analysis · Use in this Conversation{m.attached ? <span className="text-positive">· Attached to policy</span> : <Button size="sm" variant="ghost" className="h-6 px-2 text-[10px]" onClick={() => setConfirm(m)}><Upload className="size-3" />Attach to Policy</Button>}</div></> : null}
           <div className="max-w-[80%] rounded-2xl bg-ink px-4 py-2.5 text-sm text-ink-foreground">{m.text}</div>
-        </div> : <div key={m.id} className="flex gap-3"><div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground"><Bot className="size-3.5" /></div><div className="min-w-0 flex-1 text-sm leading-6">
+        </div> : <div key={m.id} className="flex gap-3"><AlfieMark /><div className="min-w-0 flex-1 text-sm leading-6">
           {m.reply ? <ReplyView reply={m.reply} /> : null}
           {m.actions?.length ? <div className="mt-3 flex flex-wrap gap-2">{m.actions.map((a) => <Button key={a} size="sm" variant="secondary" onClick={() => runAction(a)}>{a}</Button>)}</div> : null}
           {m.id === "m0" ? <div className="mt-4 flex flex-wrap gap-2">{prompts.map((p) => <Button key={p} size="sm" variant="secondary" className="font-normal" onClick={() => send(p)}><Sparkle className="size-3 text-primary" />{p}</Button>)}</div> : null}
         </div></div>)}
-        {thinking ? <div className="flex items-center gap-3 text-xs text-muted-foreground"><div className="flex size-7 items-center justify-center rounded-lg bg-primary text-primary-foreground"><Bot className="size-3.5" /></div><span className="animate-pulse">Policy Agent is reviewing the policy record…</span></div> : null}
+        {thinking ? <div className="flex items-center gap-3 text-xs text-muted-foreground"><AlfieMark /><span className="animate-pulse">Policy Agent is reviewing the policy record…</span></div> : null}
         <div ref={endRef} />
       </div></div>
       <div className="sticky bottom-0 bg-background px-5 pb-5 pt-2 lg:px-8"><div className="mx-auto max-w-3xl"><AlfieComposer value={input} onChange={setInput} onSend={send} pending={pending} placeholder="Ask Alfie about this policy..." /><p className="mt-2 text-center text-[10px] text-muted-foreground">Alfie prepares policy changes. Issuance, endorsements, renewals, and cancellations require authorized human approval.</p></div></div>

@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowDownRight, ArrowUpRight, Bot, Plus, Search, Sparkle, X } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { AlfieMark } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AlfieComposer, AttachmentChip, type Attachment } from "@/components/alfie-composer";
@@ -69,7 +70,7 @@ function ClaimsPage() {
     <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3 lg:grid-cols-5">{metrics.map(([label, value, trend, up]) => <div key={label} className="bg-card p-4"><p className="text-[11px] font-medium text-muted-foreground">{label}</p><p className="mt-1.5 text-2xl font-semibold">{value}</p><p className="mt-1 flex items-center gap-0.5 text-[10px] text-muted-foreground">{up ? <ArrowUpRight className="size-3" /> : <ArrowDownRight className="size-3" />}{trend}</p></div>)}</div>
 
     <section className="mt-6 rounded-2xl border border-border bg-panel p-4">
-      <div className="mb-3 flex items-center gap-2"><div className="flex size-7 items-center justify-center rounded-lg bg-primary text-primary-foreground"><Bot className="size-3.5" /></div><h2 className="text-sm font-semibold">Ask Alfie about your claims</h2></div>
+      <div className="mb-3 flex items-center gap-2"><AlfieMark /><h2 className="text-sm font-semibold">Ask Alfie about your claims</h2></div>
       <AlfieComposer value={prompt} onChange={setPrompt} onSend={ask} placeholder="Ask Alfie about your claims…" />
       <div className="mt-3 flex flex-wrap gap-2">{examples.map((ex) => <Button key={ex} variant="secondary" size="sm" className="h-auto whitespace-normal py-1.5 text-left font-normal" onClick={() => ask(ex)}><Sparkle className="size-3 shrink-0 text-primary" />{ex}</Button>)}</div>
       {thinking ? <p className="mt-4 animate-pulse text-xs text-muted-foreground">Alfie is reviewing the claims portfolio…</p> : null}

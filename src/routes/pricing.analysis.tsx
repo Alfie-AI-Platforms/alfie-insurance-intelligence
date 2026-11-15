@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Bot, Check, ChevronDown, ChevronRight, Circle, Database, Download, FlaskConical, PanelRightClose, PanelRightOpen, Share2, Sparkle, Upload } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { AlfieMark } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AlfieComposer, AttachmentChip, type Attachment } from "@/components/alfie-composer";
@@ -78,8 +79,8 @@ function AnalysisWorkspace() {
       <header className="flex flex-wrap items-start justify-between gap-3 py-5"><div><h1 className="text-xl font-semibold">Commercial Property Rate Adequacy Analysis</h1><p className="mt-1 text-sm text-muted-foreground">Evaluating current premium levels against claims experience, risk exposure, and portfolio performance.</p><div className="mt-2"><SampleDataNote /></div></div>
         <div className="flex gap-1"><Button variant="ghost" size="icon" aria-label="Share" title="Share"><Share2 className="size-4" /></Button><Button variant="ghost" size="icon" aria-label="Export" title="Export"><Download className="size-4" /></Button>{!panel ? <Button variant="ghost" size="icon" onClick={() => setPanel(true)} aria-label="Show context panel" className="hidden xl:inline-flex"><PanelRightOpen className="size-4" /></Button> : null}</div></header>
       <div className="flex-1 space-y-5 pb-6">{messages.map((m) => m.role === "user" ? <div key={m.id} className="ml-auto max-w-[85%] space-y-2"><div className="rounded-2xl bg-secondary px-4 py-2.5 text-sm">{m.text}</div>{m.files?.length ? <><div className="flex flex-wrap justify-end gap-2">{m.files.map((f) => <AttachmentChip key={f.id} file={f} />)}</div><p className="text-right text-[11px] text-muted-foreground">{m.files.length} attachment{m.files.length > 1 ? "s" : ""} ready for analysis</p></> : null}</div>
-        : <div key={m.id} className="flex gap-3"><div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground"><Bot className="size-3.5" /></div><ReplyView reply={m.reply!} onAction={action} /></div>)}
-        {thinking ? <div className="flex items-center gap-3 text-sm text-muted-foreground"><div className="flex size-7 items-center justify-center rounded-lg bg-primary text-primary-foreground"><Bot className="size-3.5" /></div><span className="animate-pulse">Alfie is retrieving authorized data and validating sources…</span></div> : null}
+        : <div key={m.id} className="flex gap-3"><AlfieMark /><ReplyView reply={m.reply!} onAction={action} /></div>)}
+        {thinking ? <div className="flex items-center gap-3 text-sm text-muted-foreground"><AlfieMark /><span className="animate-pulse">Alfie is retrieving authorized data and validating sources…</span></div> : null}
         <div ref={end} />
       </div>
       <div className="sticky bottom-0 bg-background pb-5 pt-2"><div className="mb-2 flex flex-wrap gap-1.5">{followUps.map((f) => <button key={f} onClick={() => send(f)} className="rounded-full border border-border bg-card px-2.5 py-1 text-[11px] text-muted-foreground hover:text-foreground">{f}</button>)}</div>

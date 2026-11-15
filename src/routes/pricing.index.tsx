@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { ArrowDownRight, ArrowUpRight, Bot, FileBarChart, FlaskConical, Plus, Sparkle } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { AlfieMark } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { AlfieComposer, type Attachment } from "@/components/alfie-composer";
 import { PricingHeader, SampleDataNote, card, selectCls } from "@/components/pricing-nav";
@@ -31,7 +32,7 @@ function PricingOverview() {
     <PricingHeader title="Pricing & Actuarial" subtitle="Understand portfolio performance, evaluate pricing adequacy, and model better insurance decisions with Alfie." actions={<><Button variant="outline" onClick={() => navigate({ to: "/pricing/analysis" })}><Plus className="size-4" />New Analysis</Button><Button variant="outline" onClick={() => navigate({ to: "/pricing/scenarios" })}><FlaskConical className="size-4" />Create Scenario</Button><Button onClick={() => navigate({ to: "/pricing/reports" })}><FileBarChart className="size-4" />Generate Report</Button></>} />
 
     <section className="mt-6 rounded-2xl border border-border bg-panel p-4">
-      <div className="mb-3 flex items-center gap-2"><div className="flex size-7 items-center justify-center rounded-lg bg-primary text-primary-foreground"><Bot className="size-3.5" /></div><h2 className="text-sm font-semibold">Ask Alfie about your pricing and portfolio.</h2></div>
+      <div className="mb-3 flex items-center gap-2"><AlfieMark /><h2 className="text-sm font-semibold">Ask Alfie about your pricing and portfolio.</h2></div>
       <AlfieComposer value={prompt} onChange={setPrompt} onSend={open} placeholder="Ask Alfie to analyze pricing performance, investigate trends, or model a scenario..." />
       <div className="mt-3 flex flex-wrap gap-2">{prompts.map((p) => <Button key={p} variant="secondary" size="sm" className="h-auto whitespace-normal py-1.5 text-left font-normal" onClick={() => open(p)}><Sparkle className="size-3 shrink-0 text-primary" />{p}</Button>)}</div>
     </section>
