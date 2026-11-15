@@ -94,7 +94,7 @@ function AnalysisWorkspace() {
 }
 
 function ReplyView({ reply, onAction }: { reply: Reply; onAction: (a: string) => void }) {
-  return <div className="min-w-0 flex-1 space-y-3 text-sm">
+  return <div className="min-w-0 flex-1 space-y-3 font-display text-[15px] leading-7">
     {reply.agents?.length ? <p className="text-[11px] text-muted-foreground">Coordinated with {reply.agents.join(", ")}</p> : null}
     <p>{reply.intro}</p>
     {reply.table ? <div className="overflow-x-auto rounded-xl border border-border"><table className="w-full text-xs"><thead><tr className="bg-secondary/60">{reply.table[0].map((h) => <th key={h} className="px-3 py-2 text-left font-medium">{h}</th>)}</tr></thead><tbody>{reply.table.slice(1).map((r) => <tr key={r[0]} className="border-t border-border">{r.map((c, i) => <td key={i} className={`px-3 py-2 ${i === 0 ? "font-medium" : ""}`}>{c}</td>)}</tr>)}</tbody></table></div> : null}
