@@ -47,7 +47,7 @@ export function AlfieComposer({ placeholder, onSend, value, onChange, pending }:
   };
   const onDrop = (e: DragEvent) => { e.preventDefault(); setDragging(false); add(e.dataTransfer.files); };
 
-  return <div onDragOver={(e) => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)} onDrop={onDrop} className={`relative rounded-2xl border bg-card p-2 shadow-workspace transition-colors focus-within:border-ring ${dragging ? "border-primary bg-secondary" : "border-border"}`}>
+  return <div onDragOver={(e) => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)} onDrop={onDrop} className={`relative rounded-2xl border bg-card p-2 shadow-workspace transition-colors focus-within:border-ring focus-within:ring-2 focus-within:ring-brand-cyan/25 ${dragging ? "border-primary bg-secondary" : "border-border"}`}>
     {dragging ? <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-2xl text-sm font-medium text-primary">Drop files to use in this conversation</div> : null}
     {all.length ? <div className="flex flex-wrap gap-2 px-2 pb-2 pt-2">{all.map((f) => <AttachmentChip key={f.id} file={f} onRemove={files.some((x) => x.id === f.id) ? () => setFiles((c) => c.filter((x) => x.id !== f.id)) : undefined} />)}</div> : null}
     {all.length ? <p className="px-3 text-[10px] text-muted-foreground">{all.length} attachment{all.length > 1 ? "s" : ""} for this conversation only — not added to any permanent record.</p> : null}
@@ -58,7 +58,7 @@ export function AlfieComposer({ placeholder, onSend, value, onChange, pending }:
       <Button type="button" variant="ghost" size="icon" className="size-8" onClick={() => fileRef.current?.click()} aria-label="Add attachment" title="Add attachment (PDF, DOCX, XLSX, CSV, TXT)"><Paperclip className="size-4" /></Button>
       <Button type="button" variant="ghost" size="icon" className="size-8" onClick={() => imageRef.current?.click()} aria-label="Upload image" title="Upload image (JPG, PNG)"><ImagePlus className="size-4" /></Button>
       <span className="ml-1 hidden text-[10px] text-muted-foreground sm:inline">Drag & drop files or images</span>
-      <Button type="button" size="icon" onClick={submit} disabled={!value.trim() && all.length === 0} className="ml-auto size-8 rounded-full" aria-label="Send"><Send className="size-3.5" /></Button>
+      <Button type="button" variant="ghost" size="icon" onClick={submit} disabled={!value.trim() && all.length === 0} className="alfie-gradient ml-auto size-8 rounded-full text-white hover:text-white hover:opacity-90" aria-label="Send"><Send className="size-3.5" /></Button>
     </div>
   </div>;
 }

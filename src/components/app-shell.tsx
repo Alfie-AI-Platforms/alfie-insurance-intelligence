@@ -1,14 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardCheck, FileBarChart, FileText, FolderOpen, House, Landmark, Menu, MessageSquareText, Moon, Network, Settings, ShieldCheck, Sun, User, Users, WandSparkles, X, Zap, LifeBuoy, LogOut, SlidersHorizontal, type LucideIcon } from "lucide-react";
+import { Bell, Bot, Building2, ChevronDown, ChevronLeft, ChevronRight, CircleDollarSign, ClipboardCheck, FileBarChart, FileText, FolderOpen, House, Landmark, Menu, MessageSquareText, Moon, Network, Settings, ShieldCheck, Sparkles, Sun, User, Users, WandSparkles, X, Zap, LifeBuoy, LogOut, SlidersHorizontal, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type NavItem = readonly [string, "/" | "/agents" | "/claims" | "/underwriting" | "/policy" | "/pricing" | "/finance" | "/chats" | "/documents" | "/data-sources" | "/automations" | "/users" | "/permissions" | "/settings" | "/reports", LucideIcon];
 type NavGroup = { title: string; items: readonly NavItem[] };
 const groups: readonly NavGroup[] = [
-  { title: "", items: [["Home", "/", House], ["Claims", "/claims", ClipboardCheck], ["Underwriting", "/underwriting", ShieldCheck], ["Policy", "/policy", FileText], ["Pricing & Actuarial", "/pricing", CircleDollarSign], ["Finance", "/finance", Landmark], ["Reports", "/reports", FileBarChart]] },
-  { title: "Workspace", items: [["Chats", "/chats", MessageSquareText], ["Documents", "/documents", FolderOpen], ["Data Sources", "/data-sources", Network], ["Automations", "/automations", Zap]] },
-  { title: "Administration", items: [["Users & Access", "/users", Users], ["Policies & Permissions", "/permissions", ShieldCheck], ["Agents", "/agents", Bot], ["Settings", "/settings", Settings]] },
+  { title: "", items: [["Home", "/", House]] },
+  { title: "Work", items: [["Claims", "/claims", ClipboardCheck], ["Underwriting", "/underwriting", ShieldCheck], ["Policy", "/policy", FileText]] },
+  { title: "Intelligence", items: [["Pricing & Actuarial", "/pricing", CircleDollarSign], ["Finance", "/finance", Landmark], ["Reports", "/reports", FileBarChart]] },
+  { title: "Library", items: [["Chats", "/chats", MessageSquareText], ["Documents", "/documents", FolderOpen], ["Data Sources", "/data-sources", Network], ["Automations", "/automations", Zap], ["Agents", "/agents", Bot]] },
+  { title: "Administration", items: [["Users & Access", "/users", Users], ["Policies & Permissions", "/permissions", ShieldCheck], ["Settings", "/settings", Settings]] },
 ];
 const profileItems: readonly (readonly [string, LucideIcon])[] = [["Profile", User], ["Preferences", SlidersHorizontal], ["Help", LifeBuoy], ["Sign out", LogOut]];
 
@@ -55,8 +57,8 @@ export function AppShell({ children, rightPanel }: { children: ReactNode; rightP
         </div>)}
       </nav>
       <div className="relative p-3">
-        <div className={`mb-2 rounded-md bg-premium text-premium-foreground ${collapsed ? "flex size-10 items-center justify-center p-0" : "p-3"}`} title="Alfie Pro">
-          <div className="flex items-center gap-2 text-xs font-semibold"><WandSparkles className="size-4" />{!collapsed ? "Alfie Pro" : null}</div>{!collapsed ? <p className="mt-1 text-[10px] text-premium-muted">Your AI copilot for insurance</p> : null}
+        <div className={`alfie-surface mb-2 rounded-md text-white ${collapsed ? "flex size-10 items-center justify-center p-0" : "p-3"}`} title="Alfie Pro">
+          <div className="flex items-center gap-2 text-xs font-semibold"><WandSparkles className="size-4 text-brand-cyan" />{!collapsed ? "Alfie Pro" : null}</div>{!collapsed ? <p className="mt-1 text-[10px] text-white/70">Your AI copilot for insurance</p> : null}
         </div>
         {profileOpen ? <div className={`absolute bottom-[66px] z-50 w-52 rounded-md border border-border bg-popover p-1 shadow-workspace ${collapsed ? "left-14" : "left-3"}`}>{profileItems.map(([label, Icon]) => <Button key={label} variant="ghost" className="w-full justify-start px-3 text-xs" onClick={() => setProfileOpen(false)}><Icon className="size-4" />{label}</Button>)}</div> : null}
         <Button variant="ghost" onClick={() => setProfileOpen((value) => !value)} className={`h-auto w-full ${collapsed ? "px-0" : "justify-start px-2 py-2"}`} aria-label="Open user menu">
@@ -78,5 +80,5 @@ export function AppShell({ children, rightPanel }: { children: ReactNode; rightP
 }
 
 function SearchField() {
-  return <><svg aria-hidden="true" className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input className="h-10 w-full rounded-md border border-border bg-secondary/50 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-2 focus:ring-ring/20" placeholder="Search across claims, policies, customers, or ask Alfie…" aria-label="Global search" /></>;
+  return <><span aria-hidden="true" className="alfie-gradient absolute left-2.5 top-1/2 flex size-5 -translate-y-1/2 items-center justify-center rounded-md text-white"><Sparkles className="size-3" /></span><input className="h-10 w-full rounded-md border border-border bg-secondary/50 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus:border-brand-teal focus:ring-2 focus:ring-brand-cyan/25" placeholder="Search across claims, policies, customers, or ask Alfie…" aria-label="Global search" /></>;
 }
