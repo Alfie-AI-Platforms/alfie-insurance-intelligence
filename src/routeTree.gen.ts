@@ -42,7 +42,12 @@ import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
 import { Route as PolicyIndexRouteImport } from './routes/policy.index'
 import { Route as PolicyPolicyIdRouteImport } from './routes/policy.$policyId'
 import { Route as PricingIndexRouteImport } from './routes/pricing.index'
+import { Route as PricingActuarialRouteImport } from './routes/pricing.actuarial'
 import { Route as PricingAnalysisRouteImport } from './routes/pricing.analysis'
+import { Route as PricingModelsRouteImport } from './routes/pricing.models'
+import { Route as PricingReportsRouteImport } from './routes/pricing.reports'
+import { Route as PricingReviewsRouteImport } from './routes/pricing.reviews'
+import { Route as PricingScenariosRouteImport } from './routes/pricing.scenarios'
 import { Route as UnderwritingIndexRouteImport } from './routes/underwriting.index'
 import { Route as UnderwritingSubmissionIdRouteImport } from './routes/underwriting.$submissionId'
 import { Route as AgentsAgentIdIndexRouteImport } from './routes/agents.$agentId.index'
@@ -214,9 +219,34 @@ const PricingIndexRoute = PricingIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PricingRoute,
 } as any)
+const PricingActuarialRoute = PricingActuarialRouteImport.update({
+  id: '/actuarial',
+  path: '/actuarial',
+  getParentRoute: () => PricingRoute,
+} as any)
 const PricingAnalysisRoute = PricingAnalysisRouteImport.update({
   id: '/analysis',
   path: '/analysis',
+  getParentRoute: () => PricingRoute,
+} as any)
+const PricingModelsRoute = PricingModelsRouteImport.update({
+  id: '/models',
+  path: '/models',
+  getParentRoute: () => PricingRoute,
+} as any)
+const PricingReportsRoute = PricingReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => PricingRoute,
+} as any)
+const PricingReviewsRoute = PricingReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => PricingRoute,
+} as any)
+const PricingScenariosRoute = PricingScenariosRouteImport.update({
+  id: '/scenarios',
+  path: '/scenarios',
   getParentRoute: () => PricingRoute,
 } as any)
 const UnderwritingIndexRoute = UnderwritingIndexRouteImport.update({
@@ -275,7 +305,12 @@ export interface FileRoutesByFullPath {
   '/finance/reinsurance': typeof FinanceReinsuranceRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/policy/$policyId': typeof PolicyPolicyIdRoute
+  '/pricing/actuarial': typeof PricingActuarialRoute
   '/pricing/analysis': typeof PricingAnalysisRoute
+  '/pricing/models': typeof PricingModelsRoute
+  '/pricing/reports': typeof PricingReportsRoute
+  '/pricing/reviews': typeof PricingReviewsRoute
+  '/pricing/scenarios': typeof PricingScenariosRoute
   '/underwriting/$submissionId': typeof UnderwritingSubmissionIdRoute
   '/agents/': typeof AgentsIndexRoute
   '/claims/': typeof ClaimsIndexRoute
@@ -309,7 +344,12 @@ export interface FileRoutesByTo {
   '/finance/reinsurance': typeof FinanceReinsuranceRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/policy/$policyId': typeof PolicyPolicyIdRoute
+  '/pricing/actuarial': typeof PricingActuarialRoute
   '/pricing/analysis': typeof PricingAnalysisRoute
+  '/pricing/models': typeof PricingModelsRoute
+  '/pricing/reports': typeof PricingReportsRoute
+  '/pricing/reviews': typeof PricingReviewsRoute
+  '/pricing/scenarios': typeof PricingScenariosRoute
   '/underwriting/$submissionId': typeof UnderwritingSubmissionIdRoute
   '/agents': typeof AgentsIndexRoute
   '/claims': typeof ClaimsIndexRoute
@@ -351,7 +391,12 @@ export interface FileRoutesById {
   '/finance/reinsurance': typeof FinanceReinsuranceRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/policy/$policyId': typeof PolicyPolicyIdRoute
+  '/pricing/actuarial': typeof PricingActuarialRoute
   '/pricing/analysis': typeof PricingAnalysisRoute
+  '/pricing/models': typeof PricingModelsRoute
+  '/pricing/reports': typeof PricingReportsRoute
+  '/pricing/reviews': typeof PricingReviewsRoute
+  '/pricing/scenarios': typeof PricingScenariosRoute
   '/underwriting/$submissionId': typeof UnderwritingSubmissionIdRoute
   '/agents/': typeof AgentsIndexRoute
   '/claims/': typeof ClaimsIndexRoute
@@ -394,7 +439,12 @@ export interface FileRouteTypes {
     | '/finance/reinsurance'
     | '/finance/reports'
     | '/policy/$policyId'
+    | '/pricing/actuarial'
     | '/pricing/analysis'
+    | '/pricing/models'
+    | '/pricing/reports'
+    | '/pricing/reviews'
+    | '/pricing/scenarios'
     | '/underwriting/$submissionId'
     | '/agents/'
     | '/claims/'
@@ -428,7 +478,12 @@ export interface FileRouteTypes {
     | '/finance/reinsurance'
     | '/finance/reports'
     | '/policy/$policyId'
+    | '/pricing/actuarial'
     | '/pricing/analysis'
+    | '/pricing/models'
+    | '/pricing/reports'
+    | '/pricing/reviews'
+    | '/pricing/scenarios'
     | '/underwriting/$submissionId'
     | '/agents'
     | '/claims'
@@ -469,7 +524,12 @@ export interface FileRouteTypes {
     | '/finance/reinsurance'
     | '/finance/reports'
     | '/policy/$policyId'
+    | '/pricing/actuarial'
     | '/pricing/analysis'
+    | '/pricing/models'
+    | '/pricing/reports'
+    | '/pricing/reviews'
+    | '/pricing/scenarios'
     | '/underwriting/$submissionId'
     | '/agents/'
     | '/claims/'
@@ -733,11 +793,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingIndexRouteImport
       parentRoute: typeof PricingRoute
     }
+    '/pricing/actuarial': {
+      id: '/pricing/actuarial'
+      path: '/actuarial'
+      fullPath: '/pricing/actuarial'
+      preLoaderRoute: typeof PricingActuarialRouteImport
+      parentRoute: typeof PricingRoute
+    }
     '/pricing/analysis': {
       id: '/pricing/analysis'
       path: '/analysis'
       fullPath: '/pricing/analysis'
       preLoaderRoute: typeof PricingAnalysisRouteImport
+      parentRoute: typeof PricingRoute
+    }
+    '/pricing/models': {
+      id: '/pricing/models'
+      path: '/models'
+      fullPath: '/pricing/models'
+      preLoaderRoute: typeof PricingModelsRouteImport
+      parentRoute: typeof PricingRoute
+    }
+    '/pricing/reports': {
+      id: '/pricing/reports'
+      path: '/reports'
+      fullPath: '/pricing/reports'
+      preLoaderRoute: typeof PricingReportsRouteImport
+      parentRoute: typeof PricingRoute
+    }
+    '/pricing/reviews': {
+      id: '/pricing/reviews'
+      path: '/reviews'
+      fullPath: '/pricing/reviews'
+      preLoaderRoute: typeof PricingReviewsRouteImport
+      parentRoute: typeof PricingRoute
+    }
+    '/pricing/scenarios': {
+      id: '/pricing/scenarios'
+      path: '/scenarios'
+      fullPath: '/pricing/scenarios'
+      preLoaderRoute: typeof PricingScenariosRouteImport
       parentRoute: typeof PricingRoute
     }
     '/underwriting/': {
@@ -865,12 +960,22 @@ const PolicyRouteWithChildren =
   PolicyRoute._addFileChildren(PolicyRouteChildren)
 
 interface PricingRouteChildren {
+  PricingActuarialRoute: typeof PricingActuarialRoute
   PricingAnalysisRoute: typeof PricingAnalysisRoute
+  PricingModelsRoute: typeof PricingModelsRoute
+  PricingReportsRoute: typeof PricingReportsRoute
+  PricingReviewsRoute: typeof PricingReviewsRoute
+  PricingScenariosRoute: typeof PricingScenariosRoute
   PricingIndexRoute: typeof PricingIndexRoute
 }
 
 const PricingRouteChildren: PricingRouteChildren = {
+  PricingActuarialRoute: PricingActuarialRoute,
   PricingAnalysisRoute: PricingAnalysisRoute,
+  PricingModelsRoute: PricingModelsRoute,
+  PricingReportsRoute: PricingReportsRoute,
+  PricingReviewsRoute: PricingReviewsRoute,
+  PricingScenariosRoute: PricingScenariosRoute,
   PricingIndexRoute: PricingIndexRoute,
 }
 
