@@ -33,6 +33,23 @@ directly on the `main` branch.
   and `src/lib/error-page.ts` support it. Client errors from the root
   boundary go through `src/lib/error-reporting.ts`.
 
+## Design system
+
+- The pre-restructure dashboard build is preserved at git tag
+  `pre-ui-rework` (main afb22de) if it is ever needed for review.
+- Brand gradient: the Alfie logo gradient (#00F6FF to #03484B, tokens
+  `--brand-cyan` / `--brand-teal` in `src/styles.css`) appears ONLY where
+  Alfie is present: Alfie's mark and avatar (`AlfieMark`), the composer,
+  Alfie panels, and markers on AI-generated content (`AlfieChip`). General
+  UI chrome, navigation, and non-Alfie actions stay on the neutral black,
+  white, and grey tokens. The insurer's own identity (sidebar header) is
+  never gradient.
+- Page pattern: module pages use the shared scaffolding in
+  `src/components/alfie-ui.tsx` (`PageHeader`, `SectionLabel`), page titles
+  are text-2xl semibold tracking-tight, and file workspaces (a claim, a
+  submission, a policy) pair a centre canvas with an Alfie rail and a
+  context rail. Home is a queue first, composer at the centre.
+
 ## Conventions
 
 - No em dashes in user-facing copy.
