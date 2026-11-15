@@ -296,7 +296,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   return <section className="mt-6 border-t border-border pt-5"><h3 className="mb-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{title}</h3>{children}</section>;
 }
 function ReplyView({ reply }: { reply: Reply }) {
-  return <div className="space-y-3">
+  return <div className="space-y-3 font-display text-[15px] leading-7">
     <p>{reply.intro}</p>
     {reply.fields ? <dl className="divide-y divide-border rounded-xl border border-border">{reply.fields.map(([k, v]) => <div key={k} className="grid grid-cols-[150px_1fr] gap-3 px-3 py-2 text-xs"><dt className="text-muted-foreground">{k}</dt><dd className="font-medium">{v}</dd></div>)}</dl> : null}
     {reply.items ? <>{reply.fields ? <p className="text-xs font-semibold">Items requiring attention:</p> : null}<ol className="list-decimal space-y-1.5 pl-5">{reply.items.map((i) => <li key={i}>{i}</li>)}</ol></> : null}

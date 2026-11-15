@@ -247,7 +247,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 }
 
 function ReplyView({ reply }: { reply: Reply }) {
-  return <div className="space-y-3">
+  return <div className="space-y-3 font-display text-[15px] leading-7">
     <p>{reply.intro}</p>
     {reply.items ? <ol className="list-decimal space-y-1.5 pl-5">{reply.items.map((i) => <li key={i}>{i}</li>)}</ol> : null}
     {reply.fields ? <dl className="divide-y divide-border rounded-xl border border-border">{reply.fields.map(([k, v]) => <div key={k} className="grid grid-cols-[150px_1fr] gap-3 px-3 py-2 text-xs"><dt className="text-muted-foreground">{k}</dt><dd className="font-medium">{v}</dd></div>)}</dl> : null}
