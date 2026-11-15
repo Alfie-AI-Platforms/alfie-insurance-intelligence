@@ -57,3 +57,35 @@ export function AlfiePanelHeader({ context, title = "Alfie" }: { context: string
     </div>
   );
 }
+
+const chipTones = {
+  active: "bg-status-active text-status-active-foreground",
+  paused: "bg-status-paused text-status-paused-foreground",
+  neutral: "bg-secondary text-secondary-foreground",
+  danger: "bg-destructive/10 text-destructive",
+} as const;
+
+export function StatusChip({ tone = "neutral", children }: { tone?: keyof typeof chipTones; children: ReactNode }) {
+  return <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium ${chipTones[tone]}`}>{children}</span>;
+}
+
+/*
+ * The review bar is the one place a human decision is asked for on a file:
+ * what is pending, why it needs a person, and the actions that resolve it.
+ * Every module renders approvals through this bar so review feels the same
+ * on a claim, a submission, or a rate change.
+ */
+export function ReviewBar({ status, title, detail, children }: { status: string; title: string; detail?: string; children?: ReactNode }) {
+  return (
+    <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 shadow-sm">
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <StatusChip tone="paused">{status}</StatusChip>
+          <p className="text-sm font-semibold">{title}</p>
+        </div>
+        {detail ? <p className="mt-1 text-xs leading-5 text-muted-foreground">{detail}</p> : null}
+      </div>
+      {children ? <div className="flex items-center gap-2">{children}</div> : null}
+    </div>
+  );
+}
