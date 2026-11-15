@@ -19,7 +19,7 @@
  */
 
 @theme inline {
-  --font-sans: "Inter", sans-serif;
+  --font-sans: "Geist Variable", "Inter", sans-serif;
   --font-display: "Source Serif 4", Georgia, serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -220,7 +220,7 @@
   }
 
   /* Headings name documents and files, so they use the serif display face.
-     Interface chrome, tables, and controls stay in Inter. */
+     Interface chrome, tables, and controls stay in Geist. */
   h1 {
     font-family: var(--font-display);
     font-weight: 600;
