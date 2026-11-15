@@ -108,7 +108,7 @@ function PricingReportsPage() {
                 <select
                   value={gCategory}
                   onChange={(e) => setGCategory(e.target.value)}
-                  className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                  className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
                 >
                   {categories.slice(1).map((c) => (
                     <option key={c}>{c}</option>
@@ -120,7 +120,7 @@ function PricingReportsPage() {
                 <select
                   value={gLine}
                   onChange={(e) => setGLine(e.target.value)}
-                  className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                  className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
                 >
                   {lines.map((l) => (
                     <option key={l.line}>{l.line}</option>
@@ -132,7 +132,7 @@ function PricingReportsPage() {
                 <select
                   value={gPeriod}
                   onChange={(e) => setGPeriod(e.target.value)}
-                  className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                  className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
                 >
                   {[
                     "Q3 2026",
@@ -150,7 +150,7 @@ function PricingReportsPage() {
                 <select
                   value={gMethod}
                   onChange={(e) => setGMethod(e.target.value)}
-                  className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                  className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
                 >
                   {[
                     "Chain Ladder",

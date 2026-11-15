@@ -16,13 +16,13 @@ import {
 import {
   ArrowDownRight,
   ArrowUpRight,
-  Bot,
   Download,
   FileBarChart,
   Plus,
   Sparkle,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { AlfieMark } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { AlfieComposer, type Attachment } from "@/components/alfie-composer";
 import { FinanceHeader, SampleDataNote, card, selectCls } from "@/components/finance-nav";
@@ -109,9 +109,7 @@ function FinanceOverview() {
 
         <section className="mt-6 rounded-2xl border border-border bg-panel p-4">
           <div className="mb-3 flex items-center gap-2">
-            <div className="flex size-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Bot className="size-3.5" />
-            </div>
+            <AlfieMark className="size-7 rounded-lg" />
             <h2 className="text-sm font-semibold">Ask Alfie about your finances.</h2>
           </div>
           <AlfieComposer
@@ -164,14 +162,8 @@ function FinanceOverview() {
 
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
           <section className={`${card} p-4`}>
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-sm font-semibold">Revenue vs expenses</h3>
-                <p className="text-[11px] text-muted-foreground">
-                  Premium revenue and investment income against claims, commissions and operating
-                  expenses, $M
-                </p>
-              </div>
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="text-sm font-semibold">Revenue vs expenses</h3>
               <div className="flex rounded-lg bg-secondary p-0.5">
                 {(["Monthly", "Quarterly", "Annual"] as const).map((p) => (
                   <button
@@ -184,6 +176,9 @@ function FinanceOverview() {
                 ))}
               </div>
             </div>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+              Premium revenue and investment income against claims, commissions and operating expenses, $M
+            </p>
             <div className="mt-3 h-52">
               <ResponsiveContainer>
                 <AreaChart data={series}>
@@ -221,13 +216,8 @@ function FinanceOverview() {
           </section>
 
           <section className={`${card} p-4`}>
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-sm font-semibold">Cash flow trend</h3>
-                <p className="text-[11px] text-muted-foreground">
-                  Premium receipts and recoveries in, claims, commissions and expenses out, $M
-                </p>
-              </div>
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="text-sm font-semibold">Cash flow trend</h3>
               <div className="flex rounded-lg bg-secondary p-0.5">
                 {(["inflows", "outflows"] as const).map((v) => (
                   <button
@@ -240,6 +230,9 @@ function FinanceOverview() {
                 ))}
               </div>
             </div>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+              Premium receipts and recoveries in, claims, commissions and expenses out, $M
+            </p>
             <div className="mt-3 h-52">
               <ResponsiveContainer>
                 <LineChart data={monthly}>

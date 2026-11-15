@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import {
   Archive,
-  Bot,
   CheckCircle2,
   FilePlus2,
   FolderOpen,
@@ -14,7 +13,7 @@ import {
   User,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
-import { PageHeader } from "@/components/alfie-ui";
+import { AlfieMark, PageHeader } from "@/components/alfie-ui";
 import { AlfieComposer, AttachmentChip, type Attachment } from "@/components/alfie-composer";
 import { Button } from "@/components/ui/button";
 import {
@@ -305,7 +304,7 @@ function ChatsPage() {
 
   return (
     <AppShell>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-5 pb-12 pt-8 lg:px-10">
         <PageHeader title="Chat" description="The general workspace for working with Alfie across every department. Unlike the conversations inside Claims, Underwriting, Policy, Pricing or Finance, a chat here is not tied to one record. Alfie coordinates the right specialist agents and uses only the Documents and Data Sources you are authorized to access." actions={<>
           <Button onClick={newConversation}>
             <Plus className="size-4" /> New conversation
@@ -328,7 +327,7 @@ function ChatsPage() {
               <select
                 value={folder}
                 onChange={(e) => setFolder(e.target.value)}
-                className="h-9 w-full rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                className="select-chevron h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
               >
                 {conversationFolders.map((f) => (
                   <option key={f}>{f}</option>
@@ -476,9 +475,7 @@ function ChatsPage() {
                 ) : m.reply ? (
                   <div key={m.id} className="max-w-[94%]">
                     <div className="mb-2 flex flex-wrap items-center gap-2">
-                      <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                        <Bot className="size-3" />
-                      </div>
+                      <AlfieMark className="size-6 rounded-md" />
                       <span className="text-xs font-semibold">Alfie</span>
                       <span className="text-[10px] text-muted-foreground">
                         via {m.reply.agents.join(", ")}

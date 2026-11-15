@@ -60,7 +60,7 @@ function ClaimsPage() {
     setNewOpen(false);
     setForm({ claimant: "", type: "Auto Collision", policy: "", loss: "" });
   };
-  const selectCls = "h-8 rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring";
+  const selectCls = "select-chevron h-8 rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring";
 
   return <AppShell><div className="mx-auto max-w-6xl px-5 pb-12 pt-8 lg:px-10">
     <div className="flex flex-wrap items-end justify-between gap-4"><div><h1 className="text-2xl font-semibold tracking-tight">Claims</h1><p className="mt-2 text-sm text-muted-foreground">Manage, investigate, and triage claims with Alfie.</p></div><Button onClick={() => setNewOpen(true)}><Plus className="size-4" />New Claim</Button></div>
@@ -106,7 +106,7 @@ function ClaimsPage() {
 
     <Dialog open={newOpen} onOpenChange={setNewOpen}><DialogContent><DialogHeader><DialogTitle>New claim</DialogTitle><DialogDescription>Record first notice of loss. Alfie will begin intake analysis once evidence is received.</DialogDescription></DialogHeader>
       <div className="grid gap-3">{([["Claimant name", "claimant"], ["Policy number", "policy"], ["Estimated loss ($)", "loss"]] as const).map(([label, key]) => <label key={key} className="text-xs font-medium">{label}<input value={form[key]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus:border-ring" /></label>)}
-        <label className="text-xs font-medium">Loss type<select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-sm">{["Auto Collision", "Water Damage", "Commercial Property", "Theft", "Fire", "General Liability"].map((x) => <option key={x}>{x}</option>)}</select></label></div>
+        <label className="text-xs font-medium">Loss type<select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-sm">{["Auto Collision", "Water Damage", "Commercial Property", "Theft", "Fire", "General Liability"].map((x) => <option key={x}>{x}</option>)}</select></label></div>
       <DialogFooter><Button variant="secondary" onClick={() => setNewOpen(false)}>Cancel</Button><Button onClick={createClaim}>Create claim</Button></DialogFooter></DialogContent></Dialog>
   </div></AppShell>;
 }

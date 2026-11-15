@@ -39,6 +39,7 @@ import {
   lossTrend,
   reportAudit,
   reportCategories,
+  reportContent,
   reportKpis,
   reportLibrary,
   scheduledReports,
@@ -51,7 +52,7 @@ const card = "rounded-2xl border border-border bg-card p-5";
 const inputCls =
   "h-9 w-full rounded-lg border border-border bg-background px-2.5 text-xs outline-none focus:border-ring";
 const selectCls =
-  "h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring";
+  "select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring";
 
 const askReplies: { match: string[]; agents: string; answer: string; sources: string }[] = [
   {
@@ -202,14 +203,14 @@ function ReportsPage() {
 
   return (
     <AppShell>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-5 pb-12 pt-8 lg:px-10">
         <PageHeader title="Reports" description="The organization's central reporting and business intelligence workspace. Reports consolidate authorized data from Claims, Underwriting, Policy, Pricing & Actuarial and Finance. Reporting is read and analysis only: nothing here modifies an operational record." actions={<>
           <label className="block text-[11px] text-muted-foreground">
             Reporting period
             <select
               value={period}
               onChange={(e) => setPeriod(e.target.value)}
-              className="mt-1 h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+              className="select-chevron mt-1 h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
             >
               <option>This quarter</option>
               <option>Last quarter</option>
@@ -233,7 +234,7 @@ function ReportsPage() {
               <p className="mt-1.5 text-xl font-semibold">{k.value}</p>
               <p className="mt-1 text-[11px] font-medium text-positive">{k.change}</p>
               <p className="mt-1 text-[10px] leading-4 text-muted-foreground">
-                {k.source} · Updated {k.updated} · {period}
+                {k.source} · Updated {k.updated}
               </p>
             </div>
           ))}
@@ -465,7 +466,7 @@ function ReportsPage() {
                             setShareNote(null);
                           }}
                         >
-                          Open
+                          View
                         </Button>
                         <Button size="sm" variant="ghost" onClick={() => duplicate(r)}>
                           <Copy className="size-3.5" />
@@ -511,7 +512,7 @@ function ReportsPage() {
                 <select
                   value={bCategory}
                   onChange={(e) => setBCategory(e.target.value)}
-                  className={`${inputCls} mt-1`}
+                  className={`${selectCls} mt-1`}
                 >
                   {reportCategories.slice(1).map((c) => (
                     <option key={c}>{c}</option>
@@ -523,7 +524,7 @@ function ReportsPage() {
                 <select
                   value={bPeriod}
                   onChange={(e) => setBPeriod(e.target.value)}
-                  className={`${inputCls} mt-1`}
+                  className={`${selectCls} mt-1`}
                 >
                   {[
                     "This month",
@@ -541,7 +542,7 @@ function ReportsPage() {
                 <select
                   value={bComparison}
                   onChange={(e) => setBComparison(e.target.value)}
-                  className={`${inputCls} mt-1`}
+                  className={`${selectCls} mt-1`}
                 >
                   {["Prior period", "Same period last year", "No comparison"].map((c) => (
                     <option key={c}>{c}</option>
@@ -551,7 +552,7 @@ function ReportsPage() {
               <label className="block text-[11px] text-muted-foreground">
                 Filters
                 <select
-                  className={`${inputCls} mt-1`}
+                  className={`${selectCls} mt-1`}
                   defaultValue="All business lines, all regions"
                 >
                   <option>All business lines, all regions</option>
@@ -717,6 +718,30 @@ function ReportsPage() {
           </DialogHeader>
           {preview ? (
             <div className="space-y-3 text-sm leading-6">
+              {reportContent[preview.id] ? (
+                <>
+                  <div>
+                    <p className="font-semibold">Executive summary</p>
+                    <p className="mt-1 text-muted-foreground">
+                      {reportContent[preview.id]!.summary}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Headline figures</p>
+                    <table className="mt-1 w-full text-xs">
+                      <tbody>
+                        {reportContent[preview.id]!.figures.map(([label, value, change]) => (
+                          <tr key={label} className="border-t border-border">
+                            <td className="py-2 font-medium">{label}</td>
+                            <td className="py-2 text-right tabular-nums">{value}</td>
+                            <td className="py-2 text-right text-muted-foreground">{change}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              ) : null}
               <div className="grid grid-cols-2 gap-2 text-xs">
                 {[
                   ["Report ID", preview.id],

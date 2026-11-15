@@ -62,7 +62,7 @@ function PolicyPage() {
     setRows((r) => [{ id, holder: form.holder || "New Policyholder", line: form.line, coverage: form.line.includes("Auto") ? "Auto Coverage" : "Property Coverage", premium: Number(form.premium) || 0, status: "Pending Issuance", effective: "Dec 01, 2026", expiration: "Dec 01, 2027", effectiveISO: "2026-12-01", expirationISO: "2027-12-01", team: form.line, tiv: 0, personal: form.line === "Personal Auto" || form.line === "Homeowners" }, ...r]);
     setNewOpen(false); setForm({ holder: "", line: "Commercial Property", premium: "" });
   };
-  const sel = "h-8 rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring";
+  const sel = "select-chevron h-8 rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring";
 
   return <AppShell><div className="mx-auto max-w-6xl px-5 pb-12 pt-8 lg:px-10">
     <div className="flex flex-wrap items-end justify-between gap-4"><div><h1 className="text-2xl font-semibold tracking-tight">Policy</h1><p className="mt-2 text-sm text-muted-foreground">Manage policy portfolios, coverage, renewals, and policy changes with Alfie.</p></div><Button onClick={() => setNewOpen(true)}><Plus className="size-4" />Create Policy</Button></div>
@@ -110,7 +110,7 @@ function PolicyPage() {
       <div className="grid gap-3">
         <label className="text-xs font-medium">Policyholder<input value={form.holder} onChange={(e) => setForm({ ...form, holder: e.target.value })} className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus:border-ring" /></label>
         <label className="text-xs font-medium">Annual premium ($)<input value={form.premium} onChange={(e) => setForm({ ...form, premium: e.target.value })} className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus:border-ring" /></label>
-        <label className="text-xs font-medium">Line of business<select value={form.line} onChange={(e) => setForm({ ...form, line: e.target.value })} className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-sm">{["Commercial Property", "Commercial Auto", "General Liability", "Cyber", "Personal Auto", "Homeowners"].map((x) => <option key={x}>{x}</option>)}</select></label>
+        <label className="text-xs font-medium">Line of business<select value={form.line} onChange={(e) => setForm({ ...form, line: e.target.value })} className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-sm">{["Commercial Property", "Commercial Auto", "General Liability", "Cyber", "Personal Auto", "Homeowners"].map((x) => <option key={x}>{x}</option>)}</select></label>
       </div>
       <DialogFooter><Button variant="secondary" onClick={() => setNewOpen(false)}>Cancel</Button><Button onClick={create}>Create policy</Button></DialogFooter></DialogContent></Dialog>
   </div></AppShell>;

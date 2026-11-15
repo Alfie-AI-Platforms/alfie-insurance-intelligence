@@ -1,7 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Bot, Sparkle } from "lucide-react";
+import { Sparkle } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { AlfieMark } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { FinanceHeader, SampleDataNote, card, selectCls } from "@/components/finance-nav";
 import { FinanceStatusBadge } from "@/components/finance-badges";
@@ -108,9 +109,7 @@ function AccountingPage() {
 
         <section className={`${card} mt-4 p-4`}>
           <div className="mb-3 flex items-center gap-2">
-            <div className="flex size-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Bot className="size-3.5" />
-            </div>
+            <AlfieMark className="size-7 rounded-lg" />
             <h3 className="text-sm font-semibold">Reconciliation Assistant</h3>
           </div>
           <div className="flex flex-wrap gap-2">

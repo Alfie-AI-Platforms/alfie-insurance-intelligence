@@ -139,7 +139,7 @@ function DataSourcesPage() {
 
   return (
     <AppShell>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-5 pb-12 pt-8 lg:px-10">
         <PageHeader title="Data Sources" description="The integration layer for Alfie Insurance. Administrators connect systems, define exactly what Alfie may access, and monitor connection health. Connecting a system never grants every employee or agent unrestricted access: least privilege applies per dataset, department, role and agent." actions={<>
           <Button onClick={() => setAddOpen(true)}>
             <Plus className="size-4" /> Add data source
@@ -200,7 +200,7 @@ function DataSourcesPage() {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                className="select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
               >
                 {sourceCategories.map((c) => (
                   <option key={c}>{c}</option>

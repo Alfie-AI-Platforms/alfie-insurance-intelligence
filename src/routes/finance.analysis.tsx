@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
-  Bot,
   Check,
   ChevronDown,
   Circle,
@@ -12,6 +11,7 @@ import {
   Sparkle,
 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
+import { AlfieMark } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -658,9 +658,7 @@ function FinanceAnalysis() {
         <div className="mt-6 flex-1 space-y-5">
           {messages.length === 0 ? (
             <div className="rounded-2xl border border-border bg-panel p-5 text-center">
-              <div className="mx-auto mb-3 flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                <Bot className="size-4" />
-              </div>
+              <AlfieMark className="mx-auto mb-3 size-9 rounded-lg" />
               <h2 className="text-base font-semibold">Start a financial analysis</h2>
               <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
                 Ask about financial position, premium, claims payments, expenses, receivables,
@@ -698,9 +696,7 @@ function FinanceAnalysis() {
             ) : m.reply ? (
               <div key={m.id} className="max-w-[92%]">
                 <div className="mb-2 flex items-center gap-2">
-                  <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                    <Bot className="size-3" />
-                  </div>
+                  <AlfieMark className="size-6 rounded-md" />
                   <span className="text-xs font-semibold">Alfie</span>
                   {m.reply.agents ? (
                     <span className="text-[10px] text-muted-foreground">

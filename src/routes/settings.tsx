@@ -23,6 +23,8 @@ export const Route = createFileRoute("/settings")({ component: SettingsPage });
 const card = "rounded-2xl border border-border bg-card p-5";
 const inputCls =
   "h-9 w-full rounded-lg border border-border bg-background px-2.5 text-xs outline-none focus:border-ring";
+const selectCls =
+  "select-chevron h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring";
 
 function Toggle({
   label,
@@ -97,7 +99,7 @@ function SettingsPage() {
 
   return (
     <AppShell>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-5 pb-12 pt-8 lg:px-10">
 <PageHeader title="Settings" description="Organization wide configuration for Alfie Insurance. Membership lives in Users & Access and authorization lives in Policies & Permissions. Settings holds the operating configuration both of them rely on, and only authorized administrators see this module." />
 
         {savedNote ? (
@@ -137,7 +139,7 @@ function SettingsPage() {
               </label>
               <label className="block text-[11px] text-muted-foreground">
                 Country
-                <select className={`${inputCls} mt-1`} defaultValue="Canada">
+                <select className={`${selectCls} mt-1`} defaultValue="Canada">
                   <option>Canada</option>
                   <option>United States</option>
                 </select>
@@ -170,14 +172,14 @@ function SettingsPage() {
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
               <label className="block text-[11px] text-muted-foreground">
                 Default language
-                <select className={`${inputCls} mt-1`} defaultValue="English">
+                <select className={`${selectCls} mt-1`} defaultValue="English">
                   <option>English</option>
                   <option>French</option>
                 </select>
               </label>
               <label className="block text-[11px] text-muted-foreground">
                 Time zone
-                <select className={`${inputCls} mt-1`} defaultValue="America/Toronto (ET)">
+                <select className={`${selectCls} mt-1`} defaultValue="America/Toronto (ET)">
                   <option>America/Toronto (ET)</option>
                   <option>America/Vancouver (PT)</option>
                   <option>UTC</option>
@@ -185,7 +187,7 @@ function SettingsPage() {
               </label>
               <label className="block text-[11px] text-muted-foreground">
                 Date format
-                <select className={`${inputCls} mt-1`} defaultValue="MMM DD, YYYY">
+                <select className={`${selectCls} mt-1`} defaultValue="MMM DD, YYYY">
                   <option>MMM DD, YYYY</option>
                   <option>YYYY-MM-DD</option>
                   <option>DD/MM/YYYY</option>
@@ -193,21 +195,21 @@ function SettingsPage() {
               </label>
               <label className="block text-[11px] text-muted-foreground">
                 Default currency
-                <select className={`${inputCls} mt-1`} defaultValue="USD">
+                <select className={`${selectCls} mt-1`} defaultValue="USD">
                   <option>USD</option>
                   <option>CAD</option>
                 </select>
               </label>
               <label className="block text-[11px] text-muted-foreground">
                 Number formatting
-                <select className={`${inputCls} mt-1`} defaultValue="1,234.56">
+                <select className={`${selectCls} mt-1`} defaultValue="1,234.56">
                   <option>1,234.56</option>
                   <option>1 234,56</option>
                 </select>
               </label>
               <label className="block text-[11px] text-muted-foreground">
                 Measurement units
-                <select className={`${inputCls} mt-1`} defaultValue="Metric">
+                <select className={`${selectCls} mt-1`} defaultValue="Metric">
                   <option>Metric</option>
                   <option>Imperial</option>
                 </select>
@@ -383,7 +385,7 @@ function SettingsPage() {
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
               <label className="block text-[11px] text-muted-foreground">
                 Session expiration
-                <select className={`${inputCls} mt-1`} defaultValue="12 hours">
+                <select className={`${selectCls} mt-1`} defaultValue="12 hours">
                   <option>8 hours</option>
                   <option>12 hours</option>
                   <option>24 hours</option>
@@ -391,7 +393,7 @@ function SettingsPage() {
               </label>
               <label className="block text-[11px] text-muted-foreground">
                 Account lockout after
-                <select className={`${inputCls} mt-1`} defaultValue="5 failed attempts">
+                <select className={`${selectCls} mt-1`} defaultValue="5 failed attempts">
                   <option>3 failed attempts</option>
                   <option>5 failed attempts</option>
                   <option>10 failed attempts</option>
@@ -400,7 +402,7 @@ function SettingsPage() {
               <label className="block text-[11px] text-muted-foreground">
                 Password policy (where passwords are enabled)
                 <select
-                  className={`${inputCls} mt-1`}
+                  className={`${selectCls} mt-1`}
                   defaultValue="14+ characters, breached password check"
                 >
                   <option>14+ characters, breached password check</option>
@@ -487,7 +489,7 @@ function SettingsPage() {
               <select
                 value={auditType}
                 onChange={(e) => setAuditType(e.target.value)}
-                className="h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                className="select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
               >
                 {["All types", ...Array.from(new Set(auditEvents.map((e) => e.type)))].map((t) => (
                   <option key={t}>{t}</option>

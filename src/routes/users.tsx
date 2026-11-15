@@ -36,6 +36,8 @@ export const Route = createFileRoute("/users")({ component: UsersPage });
 const card = "rounded-2xl border border-border bg-card p-5";
 const inputCls =
   "h-9 w-full rounded-lg border border-border bg-background px-2.5 text-xs outline-none focus:border-ring";
+const selectCls =
+  "select-chevron h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring";
 const offboardingSteps = [
   "Suspend or deactivate the account",
   "Revoke active sessions",
@@ -132,7 +134,7 @@ function UsersPage() {
 
   return (
     <AppShell>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-5 pb-12 pt-8 lg:px-10">
         <PageHeader title="Users & Access" description="The people who can access this organization, their departments, roles and account status. Department membership alone never grants unrestricted access to a department's records: data level permissions in Policies & Permissions apply on top of every role." actions={<>
           <Button onClick={() => setInviteOpen(true)}>
             <MailPlus className="size-4" /> Invite employee
@@ -191,7 +193,7 @@ function UsersPage() {
               <select
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
-                className="h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                className="select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
               >
                 {["All departments", ...departments].map((d) => (
                   <option key={d}>{d}</option>
@@ -200,7 +202,7 @@ function UsersPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                className="select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
               >
                 {["All statuses", "Active", "Invited", "Suspended", "Deactivated"].map((s) => (
                   <option key={s}>{s}</option>
@@ -233,7 +235,7 @@ function UsersPage() {
                       </td>
                       <td className="py-2.5 pr-3">{u.department}</td>
                       <td className="py-2.5 pr-3">{u.roles.join(", ")}</td>
-                      <td className="py-2.5 pr-3">{u.lastLogin}</td>
+                      <td className="whitespace-nowrap py-2.5 pr-3">{u.lastLogin}</td>
                       <td className="py-2.5">
                         <WorkspaceStatusBadge status={u.status} />
                       </td>
@@ -509,7 +511,7 @@ function UsersPage() {
               <select
                 value={inviteDept}
                 onChange={(e) => setInviteDept(e.target.value)}
-                className={`${inputCls} mt-1`}
+                className={`${selectCls} mt-1`}
               >
                 {departments.map((d) => (
                   <option key={d}>{d}</option>
@@ -521,7 +523,7 @@ function UsersPage() {
               <select
                 value={inviteRole}
                 onChange={(e) => setInviteRole(e.target.value)}
-                className={`${inputCls} mt-1`}
+                className={`${selectCls} mt-1`}
               >
                 {roleTemplates.map((r) => (
                   <option key={r}>{r}</option>
@@ -530,7 +532,7 @@ function UsersPage() {
             </label>
             <label className="block text-xs font-medium">
               Manager
-              <select className={`${inputCls} mt-1`} defaultValue="Jane Doe">
+              <select className={`${selectCls} mt-1`} defaultValue="Jane Doe">
                 <option>Jane Doe</option>
                 <option>Sarah Chen</option>
                 <option>Marcus Lee</option>
@@ -542,7 +544,7 @@ function UsersPage() {
               <select
                 value={inviteExpiry}
                 onChange={(e) => setInviteExpiry(e.target.value)}
-                className={`${inputCls} mt-1`}
+                className={`${selectCls} mt-1`}
               >
                 {["3 days", "7 days", "14 days"].map((x) => (
                   <option key={x}>{x}</option>

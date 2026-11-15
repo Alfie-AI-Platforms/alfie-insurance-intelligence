@@ -30,6 +30,8 @@ export const Route = createFileRoute("/permissions")({ component: PermissionsPag
 const card = "rounded-2xl border border-border bg-card p-5";
 const inputCls =
   "h-9 w-full rounded-lg border border-border bg-background px-2.5 text-xs outline-none focus:border-ring";
+const selectCls =
+  "select-chevron h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring";
 
 function PermissionsPage() {
   const [role, setRole] = useState("Claims Manager");
@@ -99,7 +101,7 @@ function PermissionsPage() {
 
   return (
     <AppShell>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-5 pb-12 pt-8 lg:px-10">
 <PageHeader title="Policies & Permissions" description="The authorization framework for people, specialist agents, automations and integrations. This is not the Policy module: Policy manages insurance contracts, Policies & Permissions manages who and what may access, change, approve and execute across the platform." />
 
         <section className={`${card} mt-5`}>
@@ -119,7 +121,7 @@ function PermissionsPage() {
                   setRole(e.target.value);
                   setRoleNote(null);
                 }}
-                className="mt-1 h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                className="select-chevron mt-1 h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
               >
                 {roles.map((r) => (
                   <option key={r}>{r}</option>
@@ -245,7 +247,7 @@ function PermissionsPage() {
                 <select
                   value={testUser}
                   onChange={(e) => setTestUser(e.target.value)}
-                  className={`${inputCls} mt-1`}
+                  className={`${selectCls} mt-1`}
                 >
                   {orgUsers.map((u) => (
                     <option key={u.id}>{u.name}</option>
@@ -257,7 +259,7 @@ function PermissionsPage() {
                 <select
                   value={testModule}
                   onChange={(e) => setTestModule(e.target.value)}
-                  className={`${inputCls} mt-1`}
+                  className={`${selectCls} mt-1`}
                 >
                   {platformModules.map((m) => (
                     <option key={m}>{m}</option>
@@ -269,7 +271,7 @@ function PermissionsPage() {
                 <select
                   value={testAction}
                   onChange={(e) => setTestAction(e.target.value)}
-                  className={`${inputCls} mt-1`}
+                  className={`${selectCls} mt-1`}
                 >
                   {permissionActions.map((a) => (
                     <option key={a}>{a}</option>

@@ -235,6 +235,180 @@ export const orgDocuments: OrgDocument[] = [
   },
 ];
 
+/*
+ * Readable content for the in-app document preview, keyed by document id.
+ * Viewing a document shows its summary and opening sections in the
+ * workspace, so reading never requires a download. The full governed record
+ * (versions, approvals, retention) stays on the document itself.
+ */
+export const documentPreviews: Record<
+  string,
+  { summary: string; sections: { heading: string; body: string }[] }
+> = {
+  "DOC-1042": {
+    summary:
+      "The current Commercial Property policy wording for the 2026 program year. It sets out what is covered, what is excluded, and the conditions that apply across all commercial property policies issued on this form.",
+    sections: [
+      {
+        heading: "1. Insuring agreement",
+        body: "We insure the described property against direct physical loss or damage from a covered cause of loss, up to the limits shown in the declarations, subject to the terms of this form.",
+      },
+      {
+        heading: "2. Key exclusions",
+        body: "This form does not cover flood in designated zones, earthquake unless endorsed, wear and tear, or loss caused by faulty workmanship except resulting damage as defined in section 2.4.",
+      },
+      {
+        heading: "3. Conditions and deductibles",
+        body: "The standard deductible is $5,000 per occurrence unless the declarations state otherwise. Vacancy beyond 30 consecutive days must be reported, and protective safeguards must be maintained as a condition of coverage.",
+      },
+    ],
+  },
+  "DOC-1038": {
+    summary:
+      "The 2026 property quota share treaty with Meridian Re. It defines what Northstar cedes, the limits and retentions that apply, and how claims under the treaty are notified and settled.",
+    sections: [
+      {
+        heading: "Treaty scope",
+        body: "The treaty covers Commercial Property and Commercial Auto physical damage written during the treaty period, on a quota share basis at the cession rate set out in Schedule A.",
+      },
+      {
+        heading: "Cessions and limits",
+        body: "Automatic cessions apply up to the treaty capacity per risk. Risks above capacity require facultative placement and are not covered by this agreement until accepted in writing.",
+      },
+      {
+        heading: "Claims cooperation",
+        body: "Northstar notifies Meridian Re of any claim reasonably expected to exceed the notification threshold within 15 business days, and provides bordereaux monthly in the agreed format.",
+      },
+    ],
+  },
+  "DOC-1031": {
+    summary:
+      "The operating manual for the Claims department: how claims are received, investigated, reserved, settled and documented. Every adjuster works to this manual, and Alfie's claims preparation follows the same steps.",
+    sections: [
+      {
+        heading: "First notice of loss",
+        body: "Every claim is acknowledged within one business day of first notice. The file is opened with the policy verified, the loss coded, and the first reserve set from the information available at intake.",
+      },
+      {
+        heading: "Authority and escalation",
+        body: "Adjusters settle within their configured authority. Anything above authority, any coverage dispute, and any suspected fraud indicator is escalated the same business day, with the reason recorded on the file.",
+      },
+      {
+        heading: "Documentation standards",
+        body: "The file must show what was decided, on what evidence, and by whom. Notes are written for the next reader: factual, dated, and free of speculation about liability before investigation is complete.",
+      },
+    ],
+  },
+  "DOC-1027": {
+    summary:
+      "Underwriting guidelines for Commercial Auto: the risks Northstar wants, the risks it will only take on referral, and how pricing responds to fleet, territory and loss experience.",
+    sections: [
+      {
+        heading: "Appetite",
+        body: "Preferred classes are local and intermediate fleets with radius under 300 km, five or more years in business, and a three-year loss ratio below 55%. Long-haul and hired auto sit outside standard appetite.",
+      },
+      {
+        heading: "Referral triggers",
+        body: "Refer before quoting when the fleet exceeds 25 power units, when any driver has a major conviction in three years, or when the requested limit exceeds the class authority for the account.",
+      },
+      {
+        heading: "Pricing guidance",
+        body: "Rate from the filed plan, then apply schedule credits or debits within the documented range. Every deviation from the guidance price is recorded with its reason on the submission file.",
+      },
+    ],
+  },
+  "DOC-1019": {
+    summary:
+      "The agreement under which Apex Insurance Brokers places business with Northstar: what the broker may and may not do on Northstar's behalf, how commission is earned, and how either side ends the arrangement.",
+    sections: [
+      {
+        heading: "Appointment and authority",
+        body: "Apex is appointed to submit applications and collect premiums as agent for Northstar. The broker has no authority to bind coverage, alter policy terms, or settle claims.",
+      },
+      {
+        heading: "Commission",
+        body: "Commission is paid at the rates in Schedule B on collected premium, monthly in arrears. Commission on returned premium is repayable in the month the return is processed.",
+      },
+      {
+        heading: "Term and termination",
+        body: "Either party may terminate on 90 days written notice. Run-off obligations for in-force policies survive termination, and Northstar retains audit rights over broker records for three years.",
+      },
+    ],
+  },
+  "DOC-1012": {
+    summary:
+      "The Q3 2026 reserve review: where reserves stand by line, how they developed in the quarter, and what the actuarial team recommends holding into year end.",
+    sections: [
+      {
+        heading: "Summary of results",
+        body: "Total incurred claims for the year to date are $29.2M. Older accident years developed favourably; AY 2025 developed adversely and remains the least mature year in the triangle.",
+      },
+      {
+        heading: "Method",
+        body: "Development is calculated from the AY 2021 to 2025 triangles using Chain Ladder, with Bornhuetter-Ferguson blending for immature years. The method is unchanged from Q2 so movements reflect experience.",
+      },
+      {
+        heading: "Key movements",
+        body: "Commercial Property severity accounts for most of the adverse AY 2025 movement. The report recommends no change to the selected ultimates for Personal lines this quarter.",
+      },
+    ],
+  },
+  "DOC-1008": {
+    summary:
+      "The paid and incurred loss history for ABC Holdings from 2023 to 2026, supplied for renewal underwriting. Three losses account for most of the incurred total.",
+    sections: [
+      {
+        heading: "Coverage of this run",
+        body: "The run covers all claims reported under the insured's Commercial Property and Liability policies from Jan 1, 2023 to Oct 31, 2026, valued at Oct 31, 2026.",
+      },
+      {
+        heading: "Largest losses",
+        body: "The largest single loss is a 2024 water damage claim at the insured's main warehouse. The remaining two large losses are a 2025 liability claim and a 2023 equipment breakdown, each described in the run with current status.",
+      },
+      {
+        heading: "Notes for underwriting",
+        body: "Frequency is in line with the class. Severity is concentrated in the property line, and the 2024 loss led to the sprinkler upgrade verified at the last inspection.",
+      },
+    ],
+  },
+  "DOC-1003": {
+    summary:
+      "The employee handbook for 2026: terms of employment, conduct expectations, confidentiality obligations, and the leave and benefits summary for all Northstar staff.",
+    sections: [
+      {
+        heading: "Employment basics",
+        body: "Standard hours, probation, and pay cycles are set out in this section together with the policy on remote and hybrid work. Role-specific terms live in each employee's offer letter.",
+      },
+      {
+        heading: "Conduct and confidentiality",
+        body: "Policyholder information is confidential and is accessed only for the work that requires it. The handbook sets out the rules for handling records, including in AI-assisted workflows, and the consequences of a breach.",
+      },
+      {
+        heading: "Leave",
+        body: "Vacation, sick leave, and parental leave entitlements are summarized here with the process for requesting each. Statutory entitlements apply where they are more generous than this summary.",
+      },
+    ],
+  },
+  "DOC-0991": {
+    summary:
+      "The audited financial statements of Northstar Mutual Insurance Company for the year ended December 31, 2025, prepared under IFRS 17 and filed with the regulator.",
+    sections: [
+      {
+        heading: "Basis of preparation",
+        body: "The statements are prepared under IFRS, including IFRS 17 for insurance contracts. Significant accounting policies and judgements are set out in Note 2.",
+      },
+      {
+        heading: "Results for the year",
+        body: "The statements present insurance revenue, insurance service expenses, and the net insurance service result for 2025, with comparatives for 2024 restated under the same basis.",
+      },
+      {
+        heading: "Notes to the statements",
+        body: "Notes cover risk management, capital adequacy, reinsurance arrangements, and related parties. The auditor's report appears at the front of the document and is unqualified.",
+      },
+    ],
+  },
+};
+
 export const documentCategories = [
   "All categories",
   "Policy Documents",

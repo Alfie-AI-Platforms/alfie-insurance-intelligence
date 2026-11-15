@@ -20,7 +20,7 @@ export function FinanceNav() {
   return (
     <nav
       aria-label="Finance sections"
-      className="scrollbar-thin -mx-1 flex gap-1 overflow-x-auto border-b border-border px-1"
+      className="scrollbar-none -mx-1 flex gap-1 overflow-x-auto border-b border-border px-1"
     >
       {tabs.map(([label, to]) => {
         const active =
@@ -62,7 +62,7 @@ export function FinanceHeader({
     <div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-medium text-muted-foreground">Finance</p>
+          {title !== "Finance" ? <p className="text-xs font-medium text-muted-foreground">Finance</p> : null}
           <h1 className="mt-1 text-2xl font-semibold tracking-tight">{title}</h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">{subtitle}</p>
         </div>
@@ -75,4 +75,4 @@ export function FinanceHeader({
 
 export const card = "rounded-2xl border border-border bg-card";
 export const selectCls =
-  "h-8 rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring";
+  "select-chevron h-8 rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring";

@@ -4,6 +4,7 @@ import {
   Bot,
   CheckCircle2,
   Clock3,
+  Eye,
   FileText,
   GitCompareArrows,
   History,
@@ -20,12 +21,14 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { WorkspaceStatusBadge } from "@/components/workspace-badges";
 import {
   documentCategories,
+  documentPreviews,
   ingestionSteps,
   orgDocuments,
   type OrgDocument,
@@ -102,10 +105,12 @@ function DocumentsPage() {
   const [uploadName, setUploadName] = useState<string | null>(null);
   const [uploadDone, setUploadDone] = useState(false);
   const [compareOpen, setCompareOpen] = useState(false);
+  const [viewOpen, setViewOpen] = useState(false);
   const [insight, setInsight] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const selected = docs.find((d) => d.id === selectedId) ?? docs[0]!;
+  const selectedPreview = documentPreviews[selected.id];
   const suggestion = uploadName ? suggestType(uploadName) : null;
   const duplicate = uploadName
     ? docs.find((d) =>
@@ -170,7 +175,7 @@ function DocumentsPage() {
 
   return (
     <AppShell>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-5 pb-12 pt-8 lg:px-10">
         <PageHeader title="Documents" description="The organization's permanent document repository. This is different from files attached to a chat: documents here are governed records with versions, classifications, approvals and retention. Alfie only retrieves documents your role is authorized to access." actions={<>
           <div>
             <input
@@ -306,7 +311,7 @@ function DocumentsPage() {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                className="select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
               >
                 {documentCategories.map((c) => (
                   <option key={c}>{c}</option>
@@ -315,7 +320,7 @@ function DocumentsPage() {
               <select
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
-                className="h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                className="select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
               >
                 {departments.map((c) => (
                   <option key={c}>{c}</option>
@@ -324,7 +329,7 @@ function DocumentsPage() {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+                className="select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
               >
                 {["All statuses", "Draft", "Under Review", "Approved", "Published", "Archived"].map(
                   (c) => (
@@ -356,7 +361,17 @@ function DocumentsPage() {
                         <span className="flex items-start gap-2">
                           <FileText className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                           <span>
-                            <span className="block font-medium">{d.name}</span>
+                            <button
+                              type="button"
+                              className="block text-left font-medium hover:text-primary"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedId(d.id);
+                                setViewOpen(true);
+                              }}
+                            >
+                              {d.name}
+                            </button>
                             <span className="text-muted-foreground">
                               {d.type} · {d.id} · Owner {d.owner}
                             </span>
@@ -404,6 +419,9 @@ function DocumentsPage() {
                   </div>
                 ))}
               </dl>
+              <Button className="mt-4 w-full" onClick={() => setViewOpen(true)}>
+                <Eye className="size-4" /> View document
+              </Button>
               <div className="mt-4">
                 <p className="flex items-center gap-1.5 text-xs font-semibold">
                   <History className="size-3.5" /> Version history
@@ -542,6 +560,53 @@ function DocumentsPage() {
             <li>· One key date moved: the review date in the schedule.</li>
             <li>· A definitions paragraph added. No sections were removed.</li>
           </ul>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={viewOpen} onOpenChange={setViewOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{selected.name}</DialogTitle>
+            <DialogDescription>
+              {selected.id} · Version {selected.version} · {selected.classification} ·{" "}
+              {selected.pages ? `${selected.pages} pages` : "Pages processing"}
+            </DialogDescription>
+          </DialogHeader>
+          {selectedPreview ? (
+            <div className="max-h-[55vh] overflow-y-auto pr-1">
+              <div className="rounded-xl border border-border bg-card p-5">
+                <p className="font-display text-[15px] leading-7">{selectedPreview.summary}</p>
+                {selectedPreview.sections.map((s) => (
+                  <div key={s.heading}>
+                    <h3 className="mt-5 font-display text-base font-semibold">{s.heading}</h3>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{s.body}</p>
+                  </div>
+                ))}
+                <p className="mt-6 border-t border-border pt-3 text-[11px] leading-4 text-muted-foreground">
+                  Preview shows the opening sections of the document. The full text, versions and
+                  approval record stay on the governed record in this repository. Sample document
+                  content, shown until your systems are connected.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-xl border border-dashed border-border p-6 text-center">
+              <FileText className="mx-auto size-6 text-muted-foreground" />
+              <p className="mt-2 text-sm font-medium">No preview available for this document yet</p>
+              <p className="mx-auto mt-1 max-w-sm text-xs leading-5 text-muted-foreground">
+                The document is still being processed into the repository. In the meantime, Alfie
+                can summarize it from the Document intelligence panel on this page.
+              </p>
+            </div>
+          )}
+          <DialogFooter>
+            <span className="mr-auto text-[11px] text-muted-foreground">
+              Classification: {selected.classification}. Access: {selected.access}.
+            </span>
+            <Button variant="outline" onClick={() => setViewOpen(false)}>
+              Close
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </AppShell>

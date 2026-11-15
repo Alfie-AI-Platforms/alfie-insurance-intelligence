@@ -55,6 +55,15 @@ directly on the `main` branch.
   (`--font-display`) for headings and for Alfie's drafted output, so
   anything that reads like a document looks like one. Tabular numerals are
   on globally so figures align like a ledger.
+- Controls and tables: native selects never use the browser's own dropdown
+  arrow; they carry the `select-chevron` utility from `src/styles.css`
+  (chevron at a fixed inset, right padding reserved, left padding only on
+  the element itself, never `px-*`, which overrides the reserved space).
+  Table headers never wrap (`th` is nowrap in the base layer). Module
+  pages share one container rhythm: `px-5 pt-8 pb-12 lg:px-10` inside
+  their max-width wrapper. Reports and documents are read in place through
+  preview dialogs (content lives in `reportContent` in reports-data.ts and
+  `documentPreviews` in workspace-data.ts); exports are secondary.
 
 ## Conventions
 

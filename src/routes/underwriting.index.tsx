@@ -61,7 +61,7 @@ function UnderwritingPage() {
     setRows((r) => [{ id, insured: form.insured || "New Insured", line: form.line, status: "New", priority: "Medium", underwriter: "Unassigned", broker: form.broker, received: "Just now", receivedDays: 0, effective: "December 1, 2026", effectiveMonth: "Dec 2026", limit: Number(form.limit) || 1_000_000, premium: 0, inAppetite: "Within appetite", missing: 0 }, ...r]);
     setNewOpen(false); setForm({ insured: "", line: "Commercial Property", broker: "Apex Insurance Brokers", limit: "" });
   };
-  const sel = "h-8 rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring";
+  const sel = "select-chevron h-8 rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring";
 
   return <AppShell><div className="mx-auto max-w-6xl px-5 pb-12 pt-8 lg:px-10">
     <div className="flex flex-wrap items-end justify-between gap-4"><div><h1 className="text-2xl font-semibold tracking-tight">Underwriting</h1><p className="mt-2 text-sm text-muted-foreground">Evaluate risks, prioritize submissions, and make faster underwriting decisions with Alfie.</p></div><Button onClick={() => setNewOpen(true)}><Plus className="size-4" />New Submission</Button></div>
@@ -110,8 +110,8 @@ function UnderwritingPage() {
       <div className="grid gap-3">
         <label className="text-xs font-medium">Insured name<input value={form.insured} onChange={(e) => setForm({ ...form, insured: e.target.value })} className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus:border-ring" /></label>
         <label className="text-xs font-medium">Requested limit ($)<input value={form.limit} onChange={(e) => setForm({ ...form, limit: e.target.value })} className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus:border-ring" /></label>
-        <label className="text-xs font-medium">Line of business<select value={form.line} onChange={(e) => setForm({ ...form, line: e.target.value })} className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-sm">{["Commercial Property", "Commercial Auto", "General Liability", "Cyber", "Inland Marine", "Professional Liability"].map((x) => <option key={x}>{x}</option>)}</select></label>
-        <label className="text-xs font-medium">Broker<select value={form.broker} onChange={(e) => setForm({ ...form, broker: e.target.value })} className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-sm">{uniq("broker").map((x) => <option key={x}>{x}</option>)}</select></label>
+        <label className="text-xs font-medium">Line of business<select value={form.line} onChange={(e) => setForm({ ...form, line: e.target.value })} className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-sm">{["Commercial Property", "Commercial Auto", "General Liability", "Cyber", "Inland Marine", "Professional Liability"].map((x) => <option key={x}>{x}</option>)}</select></label>
+        <label className="text-xs font-medium">Broker<select value={form.broker} onChange={(e) => setForm({ ...form, broker: e.target.value })} className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-sm">{uniq("broker").map((x) => <option key={x}>{x}</option>)}</select></label>
       </div>
       <DialogFooter><Button variant="secondary" onClick={() => setNewOpen(false)}>Cancel</Button><Button onClick={create}>Create submission</Button></DialogFooter></DialogContent></Dialog>
   </div></AppShell>;

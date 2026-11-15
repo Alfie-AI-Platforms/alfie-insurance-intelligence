@@ -78,7 +78,7 @@ function ReportsPage() {
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring"
+                className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring"
               >
                 {reportTypes.map((t) => (
                   <option key={t}>{t}</option>
@@ -90,7 +90,7 @@ function ReportsPage() {
               <select
                 value={period}
                 onChange={(e) => setPeriod(e.target.value)}
-                className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring"
+                className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring"
               >
                 {["Oct 2026", "Q3 2026", "2026 YTD", "2025 Annual"].map((t) => (
                   <option key={t}>{t}</option>
@@ -100,7 +100,7 @@ function ReportsPage() {
             <label className="block text-[11px] text-muted-foreground">
               Financial entity
               <select
-                className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring"
+                className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring"
                 defaultValue="Northstar Mutual"
               >
                 <option>Northstar Mutual</option>
@@ -110,7 +110,7 @@ function ReportsPage() {
             <label className="block text-[11px] text-muted-foreground">
               Currency
               <select
-                className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring"
+                className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring"
                 defaultValue="USD"
               >
                 <option>USD</option>
@@ -122,7 +122,7 @@ function ReportsPage() {
               <select
                 value={line}
                 onChange={(e) => setLine(e.target.value)}
-                className="mt-1 h-9 w-full rounded-lg border border-border bg-background px-2 text-xs text-foreground outline-none focus:border-ring"
+                className="select-chevron mt-1 h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs text-foreground outline-none focus:border-ring"
               >
                 <option>All lines</option>
                 {lines.map((l) => (

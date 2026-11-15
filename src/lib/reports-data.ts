@@ -305,6 +305,128 @@ export const reportLibrary: LibraryReport[] = [
   },
 ];
 
+/*
+ * Readable content for the in-app report preview, keyed by report id.
+ * Opening a report shows its summary and headline figures in the workspace;
+ * exporting to PDF, Excel or CSV stays available for anyone who needs the
+ * file itself. Figures match the workspace KPI set above.
+ */
+export const reportContent: Record<
+  string,
+  { summary: string; figures: [string, string, string][] }
+> = {
+  "RPT-301": {
+    summary:
+      "Claims frequency is steady and severity is doing the moving, concentrated in Commercial Property water damage. Settlement cycle time shortened again this quarter, and the open inventory is aging better than it did in Q2.",
+    figures: [
+      ["Claims incurred", "$29.2M", "+8.7% vs last quarter"],
+      ["Claims paid", "$21.8M", "+9.1% vs last quarter"],
+      ["Average claim severity", "$8,420", "+3.2% vs last quarter"],
+      ["Claims frequency", "6.8 per 100 policies", "+0.5 vs last quarter"],
+    ],
+  },
+  "RPT-302": {
+    summary:
+      "Exceptions are concentrated in auto physical damage supplements and payments made close to authority limits. One payment was made below its approved settlement amount; it is flagged here for review and has not been corrected silently.",
+    figures: [
+      ["Payments reviewed", "12,480", "Q3 2026"],
+      ["Exceptions flagged", "37", "0.3% of payments"],
+      ["Payments above authority", "6", "Referred to Claims Manager"],
+      ["Duplicate indicators", "3", "Under investigation"],
+    ],
+  },
+  "RPT-303": {
+    summary:
+      "Acceptance held at 58% while referral volume rose, which points to more borderline submissions rather than a tighter appetite. Commercial Property converts best; Commercial Auto declines most often on incomplete information.",
+    figures: [
+      ["Underwriting acceptance rate", "58%", "Q3 2026"],
+      ["Referrals", "24%", "Of submissions received"],
+      ["Declines", "18%", "Of submissions received"],
+      ["New policies issued", "3,842", "+11.2% vs last quarter"],
+    ],
+  },
+  "RPT-304": {
+    summary:
+      "Retention slipped 0.8 points against last year, driven by price-led cancellations in Personal Auto. Commercial lines renewed strongly, and 126 policies fall due in the next 60 days with renewal preparation already under way.",
+    figures: [
+      ["Renewal retention", "91.2%", "-0.8 pts vs last year"],
+      ["Cancellations", "412", "+6.0% vs last quarter"],
+      ["Renewals due in 60 days", "126", "Preparation started"],
+      ["Average premium", "$576", "+2.1% vs last quarter"],
+    ],
+  },
+  "RPT-305": {
+    summary:
+      "Commercial Property remains the largest premium line and the fastest growing. Personal lines still provide the policy count, while commercial lines provide most of the premium per policy.",
+    figures: [
+      ["Gross written premium", "$48.6M", "+6.4% vs last quarter"],
+      ["Net written premium", "$44.9M", "+5.8% vs last quarter"],
+      ["Policies in force", "84,392", "+2,140 this quarter"],
+      ["Average premium", "$576", "+2.1% vs last quarter"],
+    ],
+  },
+  "RPT-306": {
+    summary:
+      "The portfolio loss ratio rose 2.4 points to 63.1%, with Commercial Property severity the main driver. Two lines are trending outside their target range and are named in the body of the report with the supporting development.",
+    figures: [
+      ["Loss ratio", "63.1%", "+2.4 pts vs last quarter"],
+      ["Combined ratio", "96.8%", "+1.6 pts vs last quarter"],
+      ["Claims incurred", "$29.2M", "+8.7% vs last quarter"],
+      ["Gross written premium", "$48.6M", "+6.4% vs last quarter"],
+    ],
+  },
+  "RPT-307": {
+    summary:
+      "Reserves developed favourably on older accident years and adversely on AY 2025, which is still immature. IBNR is held with the same method as last quarter so the movement shown is experience, not a method change.",
+    figures: [
+      ["Claims incurred", "$29.2M", "+8.7% vs last quarter"],
+      ["Claims paid", "$21.8M", "+9.1% vs last quarter"],
+      ["Accident quarters covered", "AY 2021 to 2026", "Development basis"],
+      ["Method", "Chain Ladder with BF blend", "Unchanged this quarter"],
+    ],
+  },
+  "RPT-308": {
+    summary:
+      "Premium growth of 6.4% outpaced expenses, and the net underwriting result improved to $6.4M despite claims paid rising faster than premium. Premium receivables need attention: $612K is overdue.",
+    figures: [
+      ["Gross written premium", "$48.6M", "+6.4% vs last period"],
+      ["Claims paid", "$21.8M", "+9.1% vs last period"],
+      ["Operating expenses", "$8.7M", "+3.8% vs last period"],
+      ["Net underwriting result", "$6.4M", "Margin 13.8%"],
+    ],
+  },
+  "RPT-309": {
+    summary:
+      "Apex Insurance Brokers remains the largest producing broker. Commission follows the configured agreement rates only, and receivables aging by broker is set out in the body of the report.",
+    figures: [
+      ["Premium receivables", "$4.2M", "All brokers"],
+      ["Receivables overdue", "$612K", "Aging in report body"],
+      ["Gross written premium", "$48.6M", "+6.4% vs last quarter"],
+      ["Brokers reporting", "214", "Active agreements"],
+    ],
+  },
+  "RPT-310": {
+    summary:
+      "The quarter in one view: growth is real, the combined ratio is drifting the wrong way on severity, and retention is the number to protect. Each section of the review ties back to the module report behind it.",
+    figures: [
+      ["Gross written premium", "$48.6M", "+6.4% vs last quarter"],
+      ["Combined ratio", "96.8%", "+1.6 pts vs last quarter"],
+      ["Renewal retention", "91.2%", "-0.8 pts vs last year"],
+      ["Net underwriting result", "$6.4M", "Margin 13.8%"],
+    ],
+  },
+  "RPT-311": {
+    summary:
+      "Concentration is within appetite overall. One line, Commercial Property, is trending outside its severity range, and the largest single locations are listed with their protection status in the body of the report.",
+    figures: [
+      ["Policies in force", "84,392", "+2,140 this quarter"],
+      ["New policies issued", "3,842", "+11.2% vs last quarter"],
+      ["Cancellations", "412", "+6.0% vs last quarter"],
+      ["Lines outside appetite trend", "1", "Commercial Property severity"],
+    ],
+  },
+};
+
 export const reportCategories = [
   "All categories",
   "Claims",

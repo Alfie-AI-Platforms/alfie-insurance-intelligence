@@ -19,6 +19,8 @@ export const Route = createFileRoute("/automations")({ component: AutomationsPag
 const card = "rounded-2xl border border-border bg-card p-5";
 const inputCls =
   "h-9 w-full rounded-lg border border-border bg-background px-2.5 text-xs outline-none focus:border-ring";
+const selectCls =
+  "select-chevron h-9 w-full rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring";
 const lifecycle = [
   "Draft",
   "Configuration",
@@ -122,7 +124,7 @@ function AutomationsPage() {
 
   return (
     <AppShell>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-5 pb-12 pt-8 lg:px-10">
         <PageHeader title="Automations" description="Repeatable workflows that connect triggers, conditions, specialist agents, data sources, actions, approvals and notifications. Automations are not Agents: agents define capabilities and responsibilities, automations define when work starts, which steps run, and where a human must approve." actions={<>
           <Button onClick={() => builderRef.current?.scrollIntoView({ behavior: "smooth" })}>
             <Plus className="size-4" /> New automation
@@ -164,7 +166,7 @@ function AutomationsPage() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+              className="select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
             >
               {automationCategories.map((c) => (
                 <option key={c}>{c}</option>
@@ -173,7 +175,7 @@ function AutomationsPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="h-9 rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-ring"
+              className="select-chevron h-9 rounded-lg border border-border bg-background pl-2.5 text-xs outline-none focus:border-ring"
             >
               {[
                 "All statuses",
@@ -359,7 +361,7 @@ function AutomationsPage() {
               <select
                 value={bCategory}
                 onChange={(e) => setBCategory(e.target.value)}
-                className={`${inputCls} mt-1`}
+                className={`${selectCls} mt-1`}
               >
                 {automationCategories.slice(1).map((c) => (
                   <option key={c}>{c}</option>
@@ -380,7 +382,7 @@ function AutomationsPage() {
               <select
                 value={bTrigger}
                 onChange={(e) => setBTrigger(e.target.value as Automation["trigger"])}
-                className={`${inputCls} mt-1`}
+                className={`${selectCls} mt-1`}
               >
                 {["Event", "Scheduled", "Condition", "Manual", "AI Suggested"].map((c) => (
                   <option key={c}>{c}</option>
@@ -392,7 +394,7 @@ function AutomationsPage() {
               <select
                 value={bApproval}
                 onChange={(e) => setBApproval(e.target.value)}
-                className={`${inputCls} mt-1`}
+                className={`${selectCls} mt-1`}
               >
                 {[
                   "Approval required for consequential actions",
@@ -437,7 +439,7 @@ function AutomationsPage() {
             <label className="block text-[11px] text-muted-foreground">
               Error handling and retries
               <select
-                className={`${inputCls} mt-1`}
+                className={`${selectCls} mt-1`}
                 defaultValue="Retry twice with delay, then pause and notify the owner"
               >
                 <option>Retry twice with delay, then pause and notify the owner</option>
@@ -448,7 +450,7 @@ function AutomationsPage() {
             <label className="block text-[11px] text-muted-foreground">
               Notifications
               <select
-                className={`${inputCls} mt-1`}
+                className={`${selectCls} mt-1`}
                 defaultValue="Owner and department channel, on completion, approval needed and failure"
               >
                 <option>
