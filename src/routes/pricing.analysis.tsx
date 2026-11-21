@@ -6,7 +6,7 @@ import { AlfieMark } from "@/components/alfie-ui";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AlfieComposer, AttachmentChip, type Attachment } from "@/components/alfie-composer";
-import { PricingNav, SampleDataNote } from "@/components/pricing-nav";
+import { PricingHeader, SampleDataNote } from "@/components/pricing-nav";
 import { baseScenario, dataSources, pricingAudit, runScenario } from "@/lib/pricing-data";
 
 export const Route = createFileRoute("/pricing/analysis")({
@@ -50,7 +50,8 @@ function AnalysisWorkspace() {
   const [lastFiles, setLastFiles] = useState<Attachment[]>([]);
   const [audit, setAudit] = useState(pricingAudit);
   const end = useRef<HTMLDivElement>(null);
-  useEffect(() => { end.current?.scrollIntoView({ behavior: "smooth", block: "end" }); }, [messages, thinking]);
+  const mounted = useRef(false);
+  useEffect(() => { if (!mounted.current) { mounted.current = true; return; } end.current?.scrollIntoView({ behavior: "smooth", block: "end" }); }, [messages, thinking]);
 
   const send = (text: string, files: Attachment[] = []) => {
     const t = text || "Analyze the attached files.";
@@ -73,10 +74,10 @@ function AnalysisWorkspace() {
     <Collapsible title="Audit Trail" defaultOpen={false}><ul className="space-y-2">{audit.slice().reverse().map((e, i) => <li key={i} className="text-[13px]"><p className="font-medium">{e.action} <span className="font-normal text-muted-foreground">· {e.actor}</span></p><p className="text-muted-foreground">{e.detail}</p><p className="text-[12px] text-muted-foreground">{e.time}</p></li>)}</ul></Collapsible>
   </aside> : null;
 
-  return <AppShell rightPanel={right}><div className="flex min-h-full flex-col">
-    <div className="border-b border-border px-5 pt-5 lg:px-8"><PricingNav /></div>
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-5 lg:px-8">
-      <header className="flex flex-wrap items-start justify-between gap-3 py-5"><div><h1 className="text-xl font-semibold">Commercial Property Rate Adequacy Analysis</h1><p className="mt-1 text-sm text-muted-foreground">Evaluating current premium levels against claims experience, risk exposure, and portfolio performance.</p><div className="mt-2"><SampleDataNote /></div></div>
+  return <AppShell rightPanel={right}><div className="mx-auto flex min-h-full w-full max-w-6xl flex-col px-5 pt-8 lg:px-10">
+    <PricingHeader title="Pricing Analysis" subtitle="Evaluate pricing adequacy against claims experience, risk exposure and portfolio performance with Alfie, with the evidence attached. Analysis is read-only: it never changes rates, models or rate reviews." />
+    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col">
+      <header className="flex flex-wrap items-start justify-between gap-3 py-5"><div><h2 className="text-xl font-semibold">Commercial Property Rate Adequacy Analysis</h2><p className="mt-1 text-sm text-muted-foreground">Evaluating current premium levels against claims experience, risk exposure, and portfolio performance.</p><div className="mt-2"><SampleDataNote /></div></div>
         <div className="flex gap-1"><Button variant="ghost" size="icon" aria-label="Share" title="Share"><Share2 className="size-4" /></Button><Button variant="ghost" size="icon" aria-label="Export" title="Export"><Download className="size-4" /></Button>{!panel ? <Button variant="ghost" size="icon" onClick={() => setPanel(true)} aria-label="Show context panel" className="hidden xl:inline-flex"><PanelRightOpen className="size-4" /></Button> : null}</div></header>
       <div className="flex-1 space-y-5 pb-6">{messages.map((m) => m.role === "user" ? <div key={m.id} className="ml-auto max-w-[85%] space-y-2"><div className="rounded-2xl bg-secondary px-4 py-2.5 text-sm">{m.text}</div>{m.files?.length ? <><div className="flex flex-wrap justify-end gap-2">{m.files.map((f) => <AttachmentChip key={f.id} file={f} />)}</div><p className="text-right text-[13px] text-muted-foreground">{m.files.length} attachment{m.files.length > 1 ? "s" : ""} ready for analysis</p></> : null}</div>
         : <div key={m.id} className="flex gap-3"><AlfieMark /><ReplyView reply={m.reply!} onAction={action} /></div>)}

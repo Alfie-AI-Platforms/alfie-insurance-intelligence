@@ -22,7 +22,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { AlfieComposer, AttachmentChip, type Attachment } from "@/components/alfie-composer";
-import { FinanceNav, SampleDataNote } from "@/components/finance-nav";
+import { FinanceHeader, SampleDataNote } from "@/components/finance-nav";
 import { financeAudit, financeSources } from "@/lib/finance-data";
 
 export const Route = createFileRoute("/finance/analysis")({
@@ -617,43 +617,45 @@ function FinanceAnalysis() {
 
   return (
     <AppShell rightPanel={rightPanel}>
-      <div className="mx-auto flex min-h-full max-w-4xl flex-col px-5 pb-8 pt-8 lg:px-10">
-        <div className="mb-4">
-          <FinanceNav />
-        </div>
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">Finance · FIN-2026-014</p>
-            <h1 className="mt-1 text-2xl font-semibold">Monthly Financial Performance Analysis</h1>
-            <p className="mt-1.5 text-sm text-muted-foreground">
-              Reviewing financial performance, premium receipts, claims payments, operating
-              expenses, and outstanding balances.
-            </p>
+      <div className="mx-auto flex min-h-full w-full max-w-6xl flex-col px-5 pt-8 lg:px-10">
+        <FinanceHeader
+          title="Financial Analysis"
+          subtitle="Review financial performance, premium receipts, claims payments, operating expenses and outstanding balances with Alfie, with the evidence attached. Analysis is read-only: it never changes financial records."
+        />
+        <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col">
+          <div className="flex items-start justify-between gap-4 pt-5">
+            <div>
+              <p className="text-xs font-medium text-muted-foreground">FIN-2026-014</p>
+              <h2 className="mt-1 text-xl font-semibold">Monthly Financial Performance Analysis</h2>
+              <p className="mt-1.5 text-sm text-muted-foreground">
+                Reviewing financial performance, premium receipts, claims payments, operating
+                expenses, and outstanding balances.
+              </p>
+            </div>
+            <div className="flex shrink-0 gap-2">
+              <Button variant="outline" size="sm" asChild>
+                <Link to="/finance/reports">
+                  <Download className="size-3.5" /> Export
+                </Link>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setRightOpen((v) => !v)}
+                className="xl:hidden"
+                aria-label="Toggle context panel"
+              >
+                {rightOpen ? (
+                  <PanelRightClose className="size-4" />
+                ) : (
+                  <PanelRightOpen className="size-4" />
+                )}
+              </Button>
+            </div>
           </div>
-          <div className="flex shrink-0 gap-2">
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/finance/reports">
-                <Download className="size-3.5" /> Export
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setRightOpen((v) => !v)}
-              className="xl:hidden"
-              aria-label="Toggle context panel"
-            >
-              {rightOpen ? (
-                <PanelRightClose className="size-4" />
-              ) : (
-                <PanelRightOpen className="size-4" />
-              )}
-            </Button>
+          <div className="mt-3">
+            <SampleDataNote />
           </div>
-        </div>
-        <div className="mt-3">
-          <SampleDataNote />
-        </div>
 
         <div className="mt-6 flex-1 space-y-5">
           {messages.length === 0 ? (
@@ -829,6 +831,7 @@ function FinanceAnalysis() {
             Payments Report.xlsx, Broker Commission Schedule.pdf, Bank Reconciliation.xlsx, General
             Ledger Export.csv
           </p>
+        </div>
         </div>
       </div>
 
