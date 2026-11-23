@@ -1,0 +1,78 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Enable SPA mode for the snapshot build
+        run: |
+          python3 - <<'PY'
+          p = 'vite.config.ts'
+          lines = open(p).read().split('\n')
+          for i, line in enumerate(lines):
+              if 'server: { entry: "server" }' in line:
+                  indent = line[:len(line) - len(line.lstrip())]
+                  lines.insert(i + 1, indent + 'spa: { enabled: true },')
+                  break
+          else:
+              raise SystemExit('server entry anchor not found in vite.config.ts')
+          open(p, 'w').write('\n'.join(lines))
+          print('SPA flag inserted')
+          PY
+
+      - name: Build the SPA snapshot
+        run: npm run build -- --base=/alfie-insurance-intelligence/
+
+      - name: Stage the snapshot
+        run: |
+          test -f .output/public/_shell.html
+          rm -rf snapshot && mkdir snapshot
+          cp -r .output/public/. snapshot/
+          cp snapshot/_shell.html snapshot/index.html
+          cp snapshot/_shell.html snapshot/404.html
+          touch snapshot/.nojekyll
+          rm -f snapshot/_headers
+
+      - name: Publish to the gh-pages branch
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+        run: |
+          git clone --quiet --branch gh-pages --depth 1 "https://x-access-token:${TOKEN}@github.com/${REPO}.git" publish
+          rsync -a --delete --exclude .git snapshot/ publish/
+          cd publish
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Snapshot unchanged, nothing to publish."
+          else
+            git commit --quiet -m "Deploy ${SHA} from main"
+            git push --quiet origin gh-pages
+            echo "Published ${SHA}."
+          fi
