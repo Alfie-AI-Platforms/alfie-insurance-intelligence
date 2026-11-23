@@ -21,7 +21,7 @@ export function PricingNav() {
 }
 
 export function SampleDataNote({ children }: { children?: ReactNode }) {
-  return <p className="flex items-center gap-1.5 text-[13px] text-muted-foreground"><Info className="size-3 shrink-0" />{children ?? "Illustrative sample data — not verified insurer data until connected to your systems."}</p>;
+  return <p className="flex items-center gap-1.5 text-[13px] text-muted-foreground"><Info className="size-3 shrink-0" />{children ?? "Illustrative sample data, not verified insurer data until connected to your systems."}</p>;
 }
 
 export function PricingHeader({ title, subtitle, actions }: { title: string; subtitle: string; actions?: ReactNode }) {
